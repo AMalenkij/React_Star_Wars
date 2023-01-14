@@ -5,7 +5,8 @@ import {API_PEOPLE} from "../../constants/Resources.js"
 import {useQuery} from 'react-query'
 import axios from "axios";
 import styles from './PersonPage.module.css'
-import {getPeopleImg} from "../../services/getPeopleData.js";
+import {getPeopleImg} from "../../services/getPeopleData.js"
+import {PersonLinkBack} from "../../components/PersonLinkBack/PersonLinkBack.jsx"
 
 function PersonPage () {
     const { id } = useParams()
@@ -26,7 +27,10 @@ function PersonPage () {
     if (error) return "An error has occurred: " + error.message;
 
     return(
+<>
+<PersonLinkBack />
             <div className={styles.wrapper__main}>
+
                 <span className={styles.person__name}>{data.name}</span>
                 <div className={styles.container__main}>
                     <div className={styles.container}>
@@ -47,6 +51,7 @@ function PersonPage () {
                 </div>
                 </div>
             </div>
+</>
         )
 }
 
