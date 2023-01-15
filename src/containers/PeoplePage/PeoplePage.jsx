@@ -7,7 +7,7 @@ import {withErrorApi} from "../../hoc-helpers/withErrorApi.jsx";
 import peopleList from "../../components/PeopleList/PeopleList.jsx";
 import Pagination from "./Pagination/Pagination.jsx";
 
-const PeoplePage = ({ setErrorApi }) => {
+const PeoplePage = ({setErrorApi}) => {
     const [people, setPeople] = useState(null)
     const [page, setPage] = useState(1)
     const [prevPage, setPrevPage] = useState(null);
@@ -16,7 +16,7 @@ const PeoplePage = ({ setErrorApi }) => {
     const getResource = async (url, page) => {
         const res = await getApiResource(url, page)
         if (res) {
-            const peopleList = res.results.map(({ name, url }) => {
+            const peopleList = res.results.map(({name, url}) => {
                 const id = getPeopleId(url)
                 const img = getPeopleImg(id)
 
@@ -41,11 +41,11 @@ const PeoplePage = ({ setErrorApi }) => {
     const prevPg = () => setPage(prev => prev - 1)
 
     return (
-            <>
+        <>
             < Pagination prevPg={prevPg} nextPg={nextPg} prevPage={prevPage} nextPage={nextPage}/>
-            {people && <PeopleList people={people} />}
-            </>
-            )
+            {people && <PeopleList people={people}/>}
+        </>
+    )
 }
 
 export default withErrorApi(PeoplePage);
