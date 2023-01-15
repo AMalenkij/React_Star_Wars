@@ -1,18 +1,11 @@
 import axios from 'axios';
 import {useQuery} from 'react-query';
 
-export function getAPIFilms(url) {
+export function getAPIFilms(links) {
     const {isLoading, error, data} = useQuery({
-        queryKey: ['film', url],
-        queryFn: () => axios(url).then((response) => {
-            const links = response.data.films;
-            const requests = links.map(link => axios.get(link));
-
-            return axios.all(requests).then(axios.spread((...responses) => {
-                return responses.map((response) => response.data.title);
-            }));
-        }),
-        enabled: Boolean(url),
+        queryKey: ['film', links],
+        queryFn: () => axios.all(links.map((link) => axios.get(link))),
+        enabled: Boolean(links),
     });
 
     if (isLoading) {
@@ -22,8 +15,7 @@ export function getAPIFilms(url) {
     if (error) {
         return `An error has occurred: ${error.message}`;
     }
-
-    return data;
+    return data.map((response) => response.data.title);
 }
 
 export default getAPIFilms;

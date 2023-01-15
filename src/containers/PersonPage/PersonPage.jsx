@@ -1,6 +1,4 @@
 import {useParams} from 'react-router';
-import {useQuery} from 'react-query';
-import axios from 'axios';
 import {getAPIResource} from '../../utils/getAPI.js';
 import {getAPIFilms} from '../../utils/getFilmsAPI';
 import {API_PEOPLE, BAASE_URL, SWAPI_PEOPLE} from '../../constants/Resources.js';
@@ -8,7 +6,11 @@ import styles from './PersonPage.module.css';
 import {getPeopleImg} from '../../services/getPeopleData.js';
 import {PersonLinkBack} from '../../components/PersonLinkBack/PersonLinkBack.jsx';
 
+import PersonFilms from "../../components/PersonFilms/PersonFilms.jsx";
+import {useState} from "react";
+
 function PersonPage() {
+
     const {id} = useParams();
 
     const urlPeople = `${SWAPI_PEOPLE}/${id}/`;
@@ -16,12 +18,19 @@ function PersonPage() {
     const personPhoto = getPeopleImg(id);
     const data = getAPIResource(BAASE_URL, urlPeople);
 
-    const getFilm = getAPIFilms('https://swapi.dev/api/people/10/');
-    console.log(getFilm)
 
+    const arr = [
+    "https://swapi.dev/api/films/1/",
+    "https://swapi.dev/api/films/2/",
+    "https://swapi.dev/api/films/3/",
+    "https://swapi.dev/api/films/6/",
+]
+    const results = getAPIFilms(arr)
+    console.log(results)
 
     return (
         <>
+            <PersonFilms urlFilms={arr}/>
             <PersonLinkBack/>
             <div className={styles.wrapper__main}>
                 <span className={styles.person__name}>{data.name}</span>
