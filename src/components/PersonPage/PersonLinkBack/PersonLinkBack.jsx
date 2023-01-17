@@ -20,4 +20,4 @@ export function PersonLinkBack() {
     )
 }
 
-export default PersonLinkBack
+export default PersonLinkBack;
