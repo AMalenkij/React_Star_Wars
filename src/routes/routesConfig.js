@@ -10,11 +10,11 @@ import PeoplePage from "../containers/PeoplePage/PeoplePage.jsx";
 const routesConfig = [
     {
         path: '/',
-        element: <HomePage />
+        element: <HomePage/>
     },
     {
         path: '/people',
-        element: <PeoplePage />
+        element: <PeoplePage/>
     },
 //    {
 //        path: '/people/:id',
@@ -40,6 +40,6 @@ const routesConfig = [
 //        path: '*',
 //        element: <NotFoundPage />
 //    },
-    ];
+];
 
 export default routesConfig
