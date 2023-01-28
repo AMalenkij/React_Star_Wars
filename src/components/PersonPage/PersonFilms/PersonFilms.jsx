@@ -19,8 +19,6 @@ export function PersonFilms ({urls, id}) {
         return `An error has occurred: ${error.message}`;
     }
 
-    console.log(data)
-
     return(
 <>
 <div className={styles.wrapper}>

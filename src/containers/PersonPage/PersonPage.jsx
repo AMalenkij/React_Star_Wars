@@ -1,15 +1,17 @@
 import {useParams} from 'react-router';
 import {useQuery} from 'react-query';
+import React, {Suspense} from 'react';
 
 import {SWAPI_PEOPLE} from '../../constants/Resources.js';
 import styles from './PersonPage.module.css';
 import {getPeopleImg} from '../../services/getPeopleData.js';
-
 import {getApi}  from '../../utils/api.js';
 import PersonInfo from '../../components/PersonPage/PersonInfo/PersonInfo.jsx';
 import PersonLinkBack from '../../components/PersonPage/PersonLinkBack/PersonLinkBack.jsx';
-import PersonFilms from '../../components/PersonPage/PersonFilms/PersonFilms.jsx';
 import PersonPhoto from '../../components/PersonPage/PersonPhoto/PersonPhoto.jsx';
+import UiLoading from '../../components/UI/UiLoading/UiLoading.jsx';
+
+const PersonFilms =  React.lazy (() => import ('../../components/PersonPage/PersonFilms/PersonFilms.jsx'));
 
 export function PersonPage() {
 
@@ -37,7 +39,9 @@ export function PersonPage() {
             <div className={styles.container}>
                 <PersonPhoto personPhoto={personPhoto} personName={data.name}/>
                 <PersonInfo data={data}/>
+                <Suspense fallback={<UiLoading />}>
                 <PersonFilms urls={data.films} id={id} />
+                </Suspense>
             </div>
         </div>
         </>
