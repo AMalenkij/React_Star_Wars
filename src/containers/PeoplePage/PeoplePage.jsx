@@ -22,8 +22,7 @@ export function PeoplePage () {
 
     if (error) return `An error has occurred: ${error.message}`;
 
-  
-    const imgId = data.results.map(({url, name}) => {
+    const people = data.results.map(({url, name}) => {
         const id = getPeopleId(url)
         const img = getPeopleImg(id)
 
@@ -33,7 +32,7 @@ export function PeoplePage () {
     return (
         <>
         <Pagination setPage={setPage} page={page} nextPage={data.next} isPrevDt={isPreviousData}/>
-        <ul className={styles.list__container}>{imgId}</ul>
+        <ul className={styles.list__container}>{people}</ul>
         </>
     )
 }
