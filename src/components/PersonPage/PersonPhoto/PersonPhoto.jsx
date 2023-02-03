@@ -3,25 +3,33 @@ import iconFavoriteFill from './img/favorite-fill.svg';
 import styles from './PersonPhoto.module.css';
 import {FavoriteContext} from '../../../utils/Context.jsx';
 
-import {useContext} from 'react'
+import {useContext, useEffect, useState} from 'react'
 
 export function PersonPhoto ({
      personPhoto, 
      personName, 
-     inFavorites, 
-     setInFavorites,
      id
 }) {
 
-     const {addToFavorites, delFromFavorites} = useContext(FavoriteContext)
+     const [boolFavorites, setboolFavorites] = useState()
+
+     const {addToFavorites, delFromFavorites, favorite} = useContext(FavoriteContext)
+
+     useEffect(() => {
+          if (favorite.some((item) => item.id === id)){
+               setboolFavorites(true)
+          } else {
+               setboolFavorites(false)
+          }
+     }, [favorite])
 
      const handlFavorites = () => {
-          if (!inFavorites){
+          if (!boolFavorites){
                addToFavorites(id, personPhoto, personName);
-               setInFavorites(true);
+               setboolFavorites(true);
           } else {
                delFromFavorites(id);
-               setInFavorites(false)
+               setboolFavorites(false)
           }
      }
 
@@ -30,7 +38,7 @@ export function PersonPhoto ({
           <img className={styles.photo} src={personPhoto} alt={personName}/>
           <img 
           className={styles.favorite}
-          src={!inFavorites ? iconFavorite : iconFavoriteFill } 
+          src={!boolFavorites ? iconFavorite : iconFavoriteFill } 
           onClick={handlFavorites}
           alt='favorites'
           />

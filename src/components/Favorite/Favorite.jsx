@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react';
-// import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import icon from './img/bookmark.svg';
