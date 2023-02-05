@@ -58,24 +58,25 @@ VARIABLES
     --theme-default-bgimage: var(--theme-bgimage);
     --theme-default-header: var(--theme-header);
 
-    /* --theme-neitral-header: #cccc46;
-    --theme-neitral-bgimage: url(../src/static/bg.jpg); */
 }
 
 /* THEMES */
 html[data-theme='dark']{
-    --theme-header:    #ca6c6f;
-    --theme-bgimage:    linear-gradient(to right bottom, #000000, #160b11, #20141e, #281b2e, #2b2440);
+    --theme-header:#ca6c6f;
+    --theme-bgimage:linear-gradient(to right bottom, #000000, #160b11, #20141e, #281b2e, #2b2440);
+    --theme-logo: url(../src/components/Header/img/space-station.svg);
 }
 
 html[data-theme='light']{
-    --theme-header:   #dfe2df;
+    --theme-header:#dfe2df;
     --theme-bgimage: linear-gradient(to right bottom, #051937, #162454, #312d70, #533389, #7a359f);
+    --theme-logo: url(../src/components/Header/img/lightsaber.svg);
 }
 
 html[data-theme='default']{
     --theme-header: #cccc46;
     --theme-bgimage: url(../src/static/bg.jpg);
+    --theme-logo:url(../src/components/Header/img/droid.svg);
 }
 
 /***************************************************
@@ -107,6 +108,71 @@ img {
     text-shadow: 0 0 2px var(--color-black);
     color: var(--theme-default-header);
     transition: color var(--transition);
+}
+.logo {
+    background: var(--theme-logo);
+    width: 60px;
+    height: 60px;
+    min-height: 60px;
+    min-width: 60px;
+    margin-right: var(--spacing-large);
+    object-position: center center;
+}
+
+
+
+/***************************************************
+COLOR THEME
+/***************************************************/
+
+
+.item__light {
+    text-shadow: 0 0 5px currentColor;
+    color: var(--color-light);
+}
+.item__dark {
+    text-shadow: 0 0 5px currentColor;
+    color: var(--color-dark);
+}
+.item__neitral {
+    text-shadow: 0 0 5px currentColor;
+    color: var(--color-neitral);
+}
+
+.item__light:hover {
+    box-shadow: 0 0 7px 2px var(--color-shadow-light);
+}
+.item__dark:hover {
+    box-shadow: 0 0 7px 2px var(--color-shadow-dark);
+}
+.item__neitral:hover {
+    box-shadow: 0 0 7px 2px var(--color-shadow-neitral);
+}
+
+.item {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 450px;
+    margin-right: var(--spacing-medium);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-black);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .item {
+        width: 200px;
+        height: 350px;
+    }
+}
+@media screen and (max-width: 750px) {
+    .item {
+        height: 300px;
+        margin: var(--spacing-small);
+    }
 }
 
 /***************************************************

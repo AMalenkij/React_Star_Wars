@@ -14,18 +14,7 @@
      flex-wrap: wrap;
      margin-top: 40px;
  }
- .item {
-     position: relative;
-     top: 0;
-     left: 0;
-     width: 250px;
-     height: 450px;
-     margin-right: var(--spacing-medium);
-     border-radius: var(--border-radius);
-     box-shadow: var(--box-shadow-black);
-     transition: var(--transition);
-     cursor: pointer;
- }
+
  .item__header {
      position: absolute;
      bottom: 10px;
@@ -69,15 +58,3 @@
      box-shadow: 0 0 7px 2px var(--color-shadow-neitral);
  }
  
- @media screen and (max-width: 900px) {
-     .item {
-         width: 200px;
-         height: 350px;
-     }
- }
- @media screen and (max-width: 750px) {
-     .item {
-         height: 300px;
-         margin: var(--spacing-small);
-     }
- }
