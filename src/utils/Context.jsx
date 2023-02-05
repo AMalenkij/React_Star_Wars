@@ -1,19 +1,9 @@
 import { useEffect } from "react";
-import { createContext, useContext, useState } from "react";
+import { createContext, useCotext, useState } from "react";
 
 export const FavoriteContext = createContext ();
 
 export function FavoriteProvider (props) {
-
-     // const initialFavorite = []	
-
-     // const getInitialState = () => {
-     //      const res = sessionStorage.getItem('favorite')
-     //      return res ? JSON.parse(res):initialFavorite;
-     // }
- 
-     // const res = sessionStorage.getItem('favorite')
-
 
      const [favorite, setFavorite] = useState([]);
      
@@ -27,7 +17,6 @@ export function FavoriteProvider (props) {
 
      useEffect(() => {
           const res = sessionStorage.getItem('favorite')
-          // console.log(JSON.parse(res))
           if (res) {
                setFavorite(JSON.parse(res))
           }
