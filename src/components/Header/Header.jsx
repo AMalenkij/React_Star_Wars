@@ -8,6 +8,17 @@ import Favorite from "../Favorite/Favorite";
 
 const Header = () => {
     const [icon, setIcon] = useState(imgSpaceStation);
+    const [theme, setTheme] = useState(localStorage.getItem('app-theme') || 'default');
+    
+    useEffect(() => {
+
+        switch (theme) {
+            case 'light': setIcon(imgLightsaber); break;
+            case 'dark': setIcon(imgSpaceStation); break;
+            case 'default': setIcon(imgDroid); break;
+            default: setIcon(imgSpaceStation);
+        }
+    }, []);
 
     return (
         <>
