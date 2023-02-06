@@ -1,13 +1,15 @@
 //common
 export const HTTPS = 'https://'
-export const HTTP = 'http://'
 
 // SWAPI
 export const SWAPI_ROOT = 'swapi.dev/api/'
 export const SWAPI_PEOPLE = 'people/'
+export const SWAPI_PARAM_PAGE = '?page=';
+export const SWAPI_PARAM_SEARCH = '?search='
 
-export const API_PEOPLE = HTTPS + SWAPI_ROOT + SWAPI_PEOPLE
+
 export const BASE_URL = HTTPS + SWAPI_ROOT
+export const API_SEARCH = SWAPI_PEOPLE+SWAPI_PARAM_SEARCH;
 
 //visualguide
 
