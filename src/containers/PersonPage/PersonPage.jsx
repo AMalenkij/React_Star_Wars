@@ -2,7 +2,7 @@ import {useParams} from 'react-router';
 import {useQuery} from 'react-query';
 import React, {Suspense} from 'react';
 
-import {SWAPI_PEOPLE} from '../../constants/Resources.js';
+import {API_PERSON} from '../../constants/Resources.js';
 import styles from './PersonPage.module.css';
 import {getPeopleImg} from '../../services/getPeopleData.js';
 import {getApi}  from '../../utils/api.js';
@@ -16,12 +16,11 @@ const PersonFilms =  React.lazy (() => import ('../../components/PersonPage/Pers
 export function PersonPage() {
 
     const {id} = useParams();
-    const urlPeople = `${SWAPI_PEOPLE}/${id}/`;
     const personPhoto = getPeopleImg(id);
 
     const {isLoading, error, data, isPreviousData} = useQuery({
         queryKey: ['people', id],
-        queryFn: () => getApi(urlPeople),
+        queryFn: () => getApi(`${API_PERSON}/${id}/`),
         keepPreviousData: true,
     });
 

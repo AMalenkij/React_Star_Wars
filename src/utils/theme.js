@@ -1,10 +1,10 @@
 import { useLayoutEffect } from "react"
 import { useState } from "react"
-import {initialTheme} from './initialTheme.js';
+import {getInitialTheme} from './getInitialTheme.js';
 
 export function useTheme () {
 
-     const [theme, setTheme] = useState(initialTheme());
+     const [theme, setTheme] = useState(getInitialTheme());
 
      useLayoutEffect(() => {
           document.documentElement.setAttribute('data-theme', theme)

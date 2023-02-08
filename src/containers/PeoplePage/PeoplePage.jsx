@@ -1,20 +1,21 @@
 import {useState} from "react";
 import {useQuery} from 'react-query';
 
-import {getApiResource} from "../../utils/api.js";
-import {SWAPI_PEOPLE} from "../../constants/Resources.js";
+import {getApi} from "../../utils/api.js";
+import {API_PEOPLE} from "../../constants/Resources.js";
 import {getPeopleId, getPeopleImg} from "../../services/getPeopleData.js";
 import PeopleList from "../../components/PeopleList/PeopleList.jsx";
-import Pagination from "./Pagination/Pagination.jsx";
+import Pagination from "../../components/UI/Pagination/Pagination.jsx";
 import styles from './PeoplePage.module.css'
 
 export function PeoplePage () { 
-    
+ 
     const [page, setPage] = useState(1)
+    const url = API_PEOPLE + page
  
     const {isLoading, error, data, isPreviousData} = useQuery({
         queryKey: ['people', page],
-        queryFn: () => getApiResource(SWAPI_PEOPLE, page),
+        queryFn: () => getApi(url),
         keepPreviousData: true,
     });
 
