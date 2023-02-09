@@ -3,7 +3,7 @@ import {BASE_URL} from '../constants/Resources.js';
 
 const swapiApi = axios.create({
      baseURL: BASE_URL,
-     timeout: 10000,
+     timeout: 60000,
    });
 
    export async function getApiResource (url, page = 1) {

@@ -1,0 +1,7 @@
+.video {
+     display: block;
+     margin: auto;
+     margin-top: var(--spacing-large);
+     border-radius: var(--border-radius-medium);
+     box-shadow: var(--box-shadow-white);
+ } 
