@@ -1,7 +1,7 @@
-import axios from 'axios';
 import {useQuery} from 'react-query';
-import { getConcurrentApi } from '../../../utils/api';
 
+import { getConcurrentApi } from '../../../utils/api';
+import UiLoading from '../../UI/UiLoading/UiLoading';
 import styles from './PersonFilms.module.css';
 
 export function PersonFilms ({urls, id}) {
@@ -11,14 +11,9 @@ export function PersonFilms ({urls, id}) {
         queryFn: () => getConcurrentApi(urls),
     });
 
-    if (isLoading) {
-        return 'Loading...';
-    }
-
-    if (error) {
-        return `An error has occurred: ${error.message}`;
-    }
-
+    if (isLoading) return <UiLoading/>
+    if (error) return `An error has occurred: ${error.message}`;
+    
     return(
 <>
 <div className={styles.wrapper}>
