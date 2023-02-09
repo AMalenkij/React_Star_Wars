@@ -1,17 +1,17 @@
-import { useLayoutEffect } from "react"
-import { useState } from "react"
+import {useLayoutEffect} from "react"
+import {useState} from "react"
 import {getInitialTheme} from './getInitialTheme.js';
 
-export function useTheme () {
+export function useTheme() {
 
-     const [theme, setTheme] = useState(getInitialTheme());
+    const [theme, setTheme] = useState(getInitialTheme());
 
-     useLayoutEffect(() => {
-          document.documentElement.setAttribute('data-theme', theme)
-          localStorage.setItem('app-theme', theme)
-     },[theme])
+    useLayoutEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme)
+        localStorage.setItem('app-theme', theme)
+    }, [theme])
 
-     return {theme, setTheme}
+    return {theme, setTheme}
 }
 
 export default useTheme;

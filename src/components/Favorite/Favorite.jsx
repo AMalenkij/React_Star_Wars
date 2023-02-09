@@ -1,14 +1,14 @@
-import { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import {useState, useEffect, useContext} from 'react';
+import {Link} from 'react-router-dom';
 
 import icon from './img/bookmark.svg';
 import styles from './Favorite.module.css';
 import {FavoriteContext} from '../../utils/Context.jsx';
 
 const Favorite = () => {
-     const {favorite} = useContext(FavoriteContext)
-     const [count, setCount] = useState(0);
-     
+    const {favorite} = useContext(FavoriteContext)
+    const [count, setCount] = useState(0);
+
 
     useEffect(() => {
         const length = favorite.length;
