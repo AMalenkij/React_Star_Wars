@@ -25,22 +25,22 @@ const App = () => {
     return (
         <QueryClientProvider client={queryClient}>
             <FavoriteProvider>
-            <BrowserRouter>
-                <div className={styles.wrapper}>
-                    <Header/>
-                    <Routes>
-                        <Route path="/" element={<HomePage/>}/>
-                        <Route path="/people" element={<PeoplePage/>}/>
-                        <Route path="/people/:id" element={<PersonPage/>}/>
-                        <Route path="*" element={<NotFoundPage/>}/>
-                        <Route path="/not-found" element={<NotFoundPage/>}/>
-                        <Route path="/favorites" element={<FavoritesPage/>}/>
-                        <Route path="/search" element={<SearchPage/>}/>
-                        <Route path="/fail" element={<ErrorMessage/>}/>
-                    </Routes>
-                </div>
-            </BrowserRouter>
-            <ReactQueryDevtools/>
+                <BrowserRouter>
+                    <div className={styles.wrapper}>
+                        <Header/>
+                        <Routes>
+                            <Route path="/" element={<HomePage/>}/>
+                            <Route path="/people" element={<PeoplePage/>}/>
+                            <Route path="/people/:id" element={<PersonPage/>}/>
+                            <Route path="*" element={<NotFoundPage/>}/>
+                            <Route path="/not-found" element={<NotFoundPage/>}/>
+                            <Route path="/favorites" element={<FavoritesPage/>}/>
+                            <Route path="/search" element={<SearchPage/>}/>
+                            <Route path="/fail" element={<ErrorMessage/>}/>
+                        </Routes>
+                    </div>
+                </BrowserRouter>
+                <ReactQueryDevtools/>
             </FavoriteProvider>
         </QueryClientProvider>
     )

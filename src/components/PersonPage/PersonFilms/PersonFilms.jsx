@@ -1,10 +1,10 @@
 import {useQuery} from 'react-query';
 
-import { getConcurrentApi } from '../../../utils/api';
+import {getConcurrentApi} from '../../../utils/api';
 import UiLoading from '../../UI/UiLoading/UiLoading';
 import styles from './PersonFilms.module.css';
 
-export function PersonFilms ({urls, id}) {
+export function PersonFilms({urls, id}) {
 
     const {isLoading, error, data} = useQuery({
         queryKey: ['film', id],
@@ -13,26 +13,25 @@ export function PersonFilms ({urls, id}) {
 
     if (isLoading) return <UiLoading/>
     if (error) return `An error has occurred: ${error.message}`;
-    
-    return(
-<>
-<div className={styles.wrapper}>
+
+    return (
+        <>
+            <div className={styles.wrapper}>
                 <ul className={styles.list__container}>
-                {data.sort((a, z) => a.episode_id - z.episode_id)
-                .map(({ title, episode_id }) =>
-                <li className={styles.list__item} key={episode_id}>
-                    <span className={styles.item__episode}>Episode {episode_id}</span>
-                    <span className={styles.item__colon}> : </span>
-                    <span className={styles.item__title}>{title}</span>
-                </li>
-                )
-                }
+                    {data.sort((a, z) => a.episode_id - z.episode_id)
+                        .map(({title, episode_id}) =>
+                            <li className={styles.list__item} key={episode_id}>
+                                <span className={styles.item__episode}>Episode {episode_id}</span>
+                                <span className={styles.item__colon}> : </span>
+                                <span className={styles.item__title}>{title}</span>
+                            </li>
+                        )
+                    }
                 </ul>
             </div>
-</>
-        )
+        </>
+    )
 }
-
 
 
 export default PersonFilms

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import '../index.css';
 import styles from './UiLoading.module.css';
 
-function UiLoading () {
+function UiLoading() {
 
     return (
         <span className={styles.loader}>L &nbsp; ading</span>
