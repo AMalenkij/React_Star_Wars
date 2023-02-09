@@ -1,13 +1,15 @@
 import { useState} from 'react';
+import {useQuery} from 'react-query';
+
 import SearchPageInfo from '../../components/SearchPage/SearchPageInfo/SearchPageInfo.jsx';
 import UiInput from '../../components/UI/UiInput/UiInput.jsx';
 import styles from './SearchPage.module.css';
-import {useQuery} from 'react-query';
-
 import {getApi} from "../../utils/api.js";
 import {useDebounce} from "../../utils/debounce.js";
 import {API_SEARCH} from "../../constants/Resources.js";
 import {getPeopleId, getPeopleImg} from "../../services/getPeopleData.js";
+import UiLoading from '../../components/UI/UiLoading/UiLoading.jsx';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx'
 
 function SearchPage () {
 
@@ -24,9 +26,8 @@ function SearchPage () {
           enabled:!!debounceValue
      });
  
-     // if (isLoading) return 'Loading...';
-     // if (isFetching) return 'Loading...';
-     // if (error) return `An error has occurred: ${error.message}`;
+     if (isLoading) return <UiLoading/>
+     if (error) return <ErrorMessage error={error.message}/>
     
      const handleInputChange = (value) => {
           setInputSearchValue(value)
