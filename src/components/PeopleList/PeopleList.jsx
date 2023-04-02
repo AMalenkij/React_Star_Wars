@@ -1,5 +1,7 @@
-import styles from './PeopleList.module.css'
 import {Link} from "react-router-dom";
+
+import styles from './PeopleList.module.css'
+
 
 
 function PeopleList ({ name, url, id }) {

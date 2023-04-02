@@ -6,3 +6,11 @@
      padding: 0;
      list-style-type: none;
  }
+
+ .text {
+    margin-top: var(--spacing-large);
+    font-size: var(--font-size-subheader);
+    color: var(--color-white);
+    text-align: center;
+    text-shadow: var(--text-shadow-blue);
+}

@@ -1,7 +1,7 @@
 import {NavLink} from "react-router-dom";
 import styles from './Header.module.css';
 import Favorite from "../Favorite/Favorite";
-
+import UiToggle from '../../components/UI/UiToggle/UiToggle.jsx';
 
 const Header = () => {
     return (
@@ -15,6 +15,7 @@ const Header = () => {
                 <li><NavLink to="/not-found">Not Found</NavLink></li>
                 <li><NavLink to="/fail">Fail</NavLink></li>
             </ul>
+            <UiToggle/> 
             <Favorite />
         </div>
         </>
