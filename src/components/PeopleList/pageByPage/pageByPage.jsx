@@ -2,17 +2,18 @@ import {useState} from "react";
 import {useQuery} from 'react-query';
 import {useLocation} from 'react-router-dom';
 
-import {getApi} from "../../utils/api.js";
-import {API_PEOPLE} from "../../constants/Resources.js";
-import {getPeopleId, getPeopleImg} from "../../services/getPeopleData.js";
-import PeopleList from "../../components/PeopleList/PeopleList.jsx";
-import Pagination from "../../components/PeopleList/Pagination/Pagination.jsx";
-import styles from './PeoplePage.module.css'
-import UiLoading from '../../components/UI/UiLoading/UiLoading.jsx';
-import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx'
+import {getApi} from "../../../utils/api.js";
+import {API_PEOPLE} from "../../../constants/Resources.js";
+import {getPeopleId, getPeopleImg} from "../../../services/getPeopleData.js";
+
+import PeopleList from "../../PeopleList/PeopleList.jsx";
+import Pagination from "../../PeopleList/Pagination/Pagination.jsx";
+import styles from './PageByPage.module.css'
+import UiLoading from '../../UI/UiLoading/UiLoading.jsx';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage.jsx'
 
 
-export function PeoplePage() {
+export function PageByPage() {
 
     const query = new URLSearchParams(useLocation().search);
     const queryPage = query.get('page') || 1;
@@ -44,4 +45,4 @@ export function PeoplePage() {
     )
 }
 
-export default PeoplePage;
+export default PageByPage

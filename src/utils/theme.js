@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react"
 import { useState } from "react"
+
 import {getInitialTheme} from './getInitialTheme.js';
 
 export function useTheme () {
