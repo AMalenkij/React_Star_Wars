@@ -1,26 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react'
 
-import UiToggle from '../../components/UI/UiToggle/UiToggle.jsx';
-import useToggleBtn from '../../hooks/useToggleBtn.js'
-import useTypeNavigation from '../../utils/writingToLocalstorageToggle.js'
-import LoadMore from '../../components/PeopleList/LoadMore/LoadMore.jsx'
-import PageByPage from '../../components/PeopleList/PageByPage/PageByPage.jsx'
+import UiToggle from '../../components/UI/UiToggle/UiToggle'
+import useToggleBtn from '../../hooks/useToggleBtn'
+import useTypeNavigation from '../../utils/writingToLocalstorageToggle'
+import LoadMore from '../../components/PeopleList/LoadMore/LoadMore'
+import PageByPage from '../../components/PeopleList/PageByPage/PageByPage'
 
 function PeoplePage() {
+  const { typeNavigation, setTypeNavigation } = useTypeNavigation()
+  const [isChecked, handleToggle] = useToggleBtn(typeNavigation)
 
-    const {typeNavigation ,setTypeNavigation} = useTypeNavigation()
-    const [isChecked, handleToggle] = useToggleBtn(typeNavigation)
+  useEffect(() => {
+    setTypeNavigation(isChecked)
+  }, [isChecked, setTypeNavigation])
 
-    useEffect(()=>{
-        setTypeNavigation(isChecked)
-    },[isChecked])
-
-    return (
+  return (
     <>
-    <UiToggle isChecked={isChecked} handleToggle={handleToggle} />
-    {isChecked ? <PageByPage /> : <LoadMore /> }
-    
+      <UiToggle isChecked={isChecked} handleToggle={handleToggle} />
+      {isChecked ? <PageByPage /> : <LoadMore />}
     </>
-    );
+  )
 }
-export default PeoplePage;
+export default PeoplePage

@@ -1,38 +1,38 @@
-import { useEffect } from "react";
-import { createContext, useCotext, useState } from "react";
+import { useEffect, createContext, useState, useMemo, useCallback } from 'react'
 
-export const FavoriteContext = createContext ();
+export const FavoriteContext = createContext()
 
-export function FavoriteProvider (props) {
+export function FavoriteProvider({ children }) {
+  const [favorite, setFavorite] = useState([])
 
-     const [favorite, setFavorite] = useState([]);
-     
-     const addToFavorites = (id, imgSrc, namePeople) => {
-          setFavorite((prev) => [...prev, {id, imgSrc, namePeople}]);
-     };
-     
-     const delFromFavorites = id => {
-          setFavorite(prev => prev.filter(p => p.id !== id));
-     };
+  const addToFavorites = useCallback((id, imgSrc, namePeople) => {
+    setFavorite((prev) => [...prev, { id, imgSrc, namePeople }])
+  }, [])
 
-     useEffect(() => {
-          const res = sessionStorage.getItem('favorite')
-          if (res) {
-               setFavorite(JSON.parse(res))
-          }
-     },[])
+  const delFromFavorites = useCallback((id) => {
+    setFavorite((prev) => prev.filter((p) => p.id !== id))
+  }, [])
 
+  useEffect(() => {
+    const res = sessionStorage.getItem('favorite')
+    if (res) {
+      setFavorite(JSON.parse(res))
+    }
+  }, [])
 
-     useEffect (() => {
-          sessionStorage.setItem('favorite', JSON.stringify(favorite))
-     },[favorite])
+  useEffect(() => {
+    sessionStorage.setItem('favorite', JSON.stringify(favorite))
+  }, [favorite])
 
-     return (
-     <FavoriteContext.Provider value={{favorite, addToFavorites, delFromFavorites}}>
-     {props.children}
-     </FavoriteContext.Provider>
-     )
+  const contextValue = useMemo(() => {
+    return { favorite, addToFavorites, delFromFavorites }
+  }, [favorite, addToFavorites, delFromFavorites])
 
+  return (
+    <FavoriteContext.Provider value={contextValue}>
+      {children}
+    </FavoriteContext.Provider>
+  )
 }
 
 export default FavoriteProvider

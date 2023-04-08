@@ -1,31 +1,31 @@
-import { useLayoutEffect } from "react"
-import { useState } from "react"
+import { useLayoutEffect, useState } from 'react'
 
-//rewrite to hook
-//don't repit himself 
+// rewrite to hook
+// don't repit himself
 
-function getInitialTypeNavigation () {
+function getInitialTypeNavigation() {
+  let TypeNavigation
 
-     let TypeNavigation;
+  if (localStorage.getItem('app-typeNavigation') !== null) {
+    TypeNavigation = localStorage.getItem('app-typeNavigation')
+  } else {
+    TypeNavigation = 'false'
+  }
 
-     if (localStorage.getItem('app-typeNavigation') !== null) 
-          TypeNavigation = localStorage.getItem('app-typeNavigation')
-     else 
-          TypeNavigation = "false"
-
-     return TypeNavigation
+  return TypeNavigation
 }
 
-export function useTypeNavigation () {
+export function useTypeNavigation() {
+  const [typeNavigation, setTypeNavigation] = useState(
+    getInitialTypeNavigation()
+  )
 
-     const [typeNavigation, setTypeNavigation] = useState(getInitialTypeNavigation());
+  useLayoutEffect(() => {
+    document.documentElement.setAttribute('app-typeNavigation', typeNavigation)
+    localStorage.setItem('app-typeNavigation', typeNavigation)
+  }, [typeNavigation])
 
-     useLayoutEffect(() => {
-          document.documentElement.setAttribute('app-typeNavigation', typeNavigation)
-          localStorage.setItem('app-typeNavigation', typeNavigation)
-     },[typeNavigation])
-
-     return {typeNavigation, setTypeNavigation}
+  return { typeNavigation, setTypeNavigation }
 }
 
 export default useTypeNavigation
