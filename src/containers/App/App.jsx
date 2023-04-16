@@ -30,6 +30,8 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/people" element={<PeoplePage />} />
               <Route path="/people/:id" element={<PersonPage />} />
+              <Route path="/planets" element={<PeoplePage />} />
+              <Route path="/planets/:id" element={<PersonPage />} />
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/not-found" element={<NotFoundPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />

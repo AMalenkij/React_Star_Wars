@@ -15,6 +15,9 @@ function Header() {
           <NavLink to="/people/?page=1">People</NavLink>
         </li>
         <li>
+          <NavLink to="/planets/?page=1">Planets</NavLink>
+        </li>
+        <li>
           <NavLink to="/search">Search</NavLink>
         </li>
         <li>
