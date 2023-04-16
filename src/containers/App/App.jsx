@@ -39,8 +39,12 @@ function App() {
               <Route path="/species" element={<SpeciesPage />} />
               <Route path="/starships" element={<StarshipsPage />} />
               <Route path="/vehicles" element={<VehiclesPage />} />
-              <Route path="/planets/:id" element={<PlanetsPage />} />
+              <Route path="/planets/:id" element={<PersonPage />} />
               <Route path="/people/:id" element={<PersonPage />} />
+              <Route path="/films/:id" element={<PersonPage />} />
+              <Route path="/vehicles/:id" element={<PersonPage />} />
+              <Route path="/starships/:id" element={<PersonPage />} />
+              <Route path="/species/:id" element={<PersonPage />} />
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/not-found" element={<NotFoundPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />

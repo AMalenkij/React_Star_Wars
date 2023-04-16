@@ -12,6 +12,11 @@ const getNumberFromUrl = (url) => {
 
 export const getPathname = (Pathname) => Pathname.split('/').pop()
 
+export const getRouteFromUrl = (url) => {
+  const [, route] = url.split('/')
+  return route
+}
+
 export const getPeopleId = (url) => getNumberFromUrl(url, SWAPI_PEOPLE)
 
 export const getImgUrl = (id, route) => {
