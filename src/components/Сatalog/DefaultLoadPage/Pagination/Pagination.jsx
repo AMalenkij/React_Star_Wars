@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom'
 
 import styles from './Pagination.module.css'
 
-function Pagination({ setPage, page, nextPage, isPrevDt }) {
+function Pagination({ setPage, page, nextPage, isPrevDt, pathname }) {
   return (
     <nav className={styles.nav}>
-      <Link to={`/people/?page=${page - 1}`}>
+      <Link to={`/${pathname}/?page=${page - 1}`}>
         <button
           type="button"
           className={styles.button}
@@ -15,7 +15,7 @@ function Pagination({ setPage, page, nextPage, isPrevDt }) {
           Prev Page
         </button>
       </Link>
-      <Link to={`/people/?page=${page + 1}`}>
+      <Link to={`/${pathname}/?page=${page + 1}`}>
         <button
           type="button"
           className={styles.button}

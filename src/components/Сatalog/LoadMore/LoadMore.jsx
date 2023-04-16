@@ -3,14 +3,16 @@ import { useInfiniteQuery } from 'react-query'
 import InfiniteScrollComponent from 'react-infinite-scroll-component'
 
 import { getApi } from '../../../utils/api'
-import { API_PEOPLE } from '../../../constants/Resources'
+import { SWAPI_PARAM_PAGE } from '../../../constants/Resources'
 import { getPeopleId, getImgUrl } from '../../../services/getData'
-import PeopleList from '../PeopleList'
+import ShowDataList from '../ShowDataList/ShowDataList'
 import styles from './LoadMore.module.css'
 import UiLoading from '../../UI/UiLoading/UiLoading'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
-function LoadMore() {
+function LoadMore({ urls }) {
+  const { urlSwapi, pathnameShort } = urls
+
   const {
     fetchNextPage,
     hasNextPage, // boolean indicating if there are more pages
@@ -19,8 +21,8 @@ function LoadMore() {
     status,
     error,
   } = useInfiniteQuery(
-    ['people'],
-    ({ pageParam = 1 }) => getApi(API_PEOPLE + pageParam),
+    ['pathname'],
+    ({ pageParam = 1 }) => getApi(urlSwapi + SWAPI_PARAM_PAGE + pageParam),
     {
       getNextPageParam: (lastPage, pages) =>
         lastPage.next === null ? undefined : pages.length + 1,
@@ -32,10 +34,20 @@ function LoadMore() {
 
   const people = data?.pages.flatMap((pg, i) => (
     <React.Fragment key={i}>
-      {pg.results.map(({ url, name }) => {
+      {pg.results.map(({ url, name, title }) => {
         const id = getPeopleId(url)
-        const img = getImgUrl(id)
-        return <PeopleList key={id} name={name} url={img} id={id} />
+        const img = getImgUrl(id, pathnameShort)
+        const swapiName = name || title
+
+        return (
+          <ShowDataList
+            key={id}
+            name={swapiName}
+            url={img}
+            id={id}
+            pathname={pathnameShort}
+          />
+        )
       })}
     </React.Fragment>
   ))
@@ -46,7 +58,9 @@ function LoadMore() {
       next={fetchNextPage}
       hasMore={hasNextPage}
       loader={isFetchingNextPage && <UiLoading />}
-      endMessage={<p className={styles.text}>All people have been loaded</p>}
+      endMessage={
+        <p className={styles.text}>All {pathnameShort} have been loaded</p>
+      }
     >
       <ul className={styles.list__container}>{people}</ul>
     </InfiniteScrollComponent>

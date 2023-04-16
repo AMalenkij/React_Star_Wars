@@ -3,23 +3,25 @@ import { useQuery } from 'react-query'
 import { useLocation } from 'react-router-dom'
 
 import { getApi } from '../../../utils/api'
-import { API_PEOPLE } from '../../../constants/Resources'
+import { SWAPI_PARAM_PAGE } from '../../../constants/Resources'
 import { getPeopleId, getImgUrl } from '../../../services/getData'
-import PeopleList from '../PeopleList'
-import Pagination from '../Pagination/Pagination'
-import styles from './PageByPage.module.css'
+import ShowDataList from '../ShowDataList/ShowDataList'
+import Pagination from './Pagination/Pagination'
+import styles from './DefaultLoadPage.module.css'
 import UiLoading from '../../UI/UiLoading/UiLoading'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
-export function PageByPage() {
+export function DefaultLoadPage({ urls }) {
+  const { urlSwapi, pathnameShort } = urls
+
   const query = new URLSearchParams(useLocation().search)
   const queryPage = query.get('page') || 1
 
   const [page, setPage] = useState(parseInt(queryPage, 10))
 
   const { isLoading, error, data, isPreviousData } = useQuery({
-    queryKey: ['people', queryPage],
-    queryFn: () => getApi(API_PEOPLE + page),
+    queryKey: [pathnameShort, queryPage],
+    queryFn: () => getApi(urlSwapi + SWAPI_PARAM_PAGE + page),
     keepPreviousData: true,
   })
 
@@ -28,14 +30,23 @@ export function PageByPage() {
 
   const people = data.results.map(({ url, name }) => {
     const id = getPeopleId(url)
-    const img = getImgUrl(id)
+    const img = getImgUrl(id, pathnameShort)
 
-    return <PeopleList key={id} name={name} url={img} id={id} />
+    return (
+      <ShowDataList
+        key={id}
+        name={name}
+        url={img}
+        id={id}
+        pathname={pathnameShort}
+      />
+    )
   })
 
   return (
     <>
       <Pagination
+        pathname={pathnameShort}
         setPage={setPage}
         page={page}
         nextPage={data.next}
@@ -46,4 +57,4 @@ export function PageByPage() {
   )
 }
 
-export default PageByPage
+export default DefaultLoadPage

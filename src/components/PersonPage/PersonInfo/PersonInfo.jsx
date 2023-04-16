@@ -5,7 +5,7 @@ export function PersonInfo({ data }) {
     <div className={styles.wrapper}>
       <ul className={styles.list__container}>
         <li className={styles.list__item}>
-          <span className={styles.item__title}> Height: </span>
+          <span className={styles.item__title}>Height: </span>
           {data.height}
         </li>
         <li className={styles.list__item}>
