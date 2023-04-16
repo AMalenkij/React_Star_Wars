@@ -49,6 +49,5 @@ export function PersonPage() {
       </div>
     </>
   )
-}
 
 export default PersonPage

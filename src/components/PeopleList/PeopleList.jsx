@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 import styles from './PeopleList.module.css'
 
+
 function PeopleList({ name, url, id }) {
   return (
     <li className={styles.list__item}>
