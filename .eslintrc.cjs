@@ -1,37 +1,24 @@
 module.exports = {
-	"env": {
-		"browser": true,
-		"es2021": true
-	},
-	"extends": [
-		"eslint:recommended",
-		"plugin:react/recommended"
-	],
-	"overrides": [
-	],
-	"parserOptions": {
-		"ecmaVersion": "latest",
-		"sourceType": "module"
-	},
-	"plugins": [
-		"react"
-	],
-	"rules": {
-		"indent": [
-			"error",
-			"4"
-		],
-		"linebreak-style": [
-			"error",
-			"unix"
-		],
-		"quotes": [
-			"error",
-			"double"
-		],
-		"semi": [
-			"error",
-			"never"
-		]
-	}
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
+  ],
+  overrides: [],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: ['react', 'prettier'],
+  rules: {
+    'react/react-in-jsx-scope': 0,
+    semi: ['error', 'never'],
+    'react/prop-types': 0,
+    'import/no-named-as-default': 0,
+  },
 }
