@@ -7,7 +7,7 @@ import styles from './SearchPage.module.css'
 import { getApi } from '../../utils/api'
 import { useDebounce } from '../../utils/debounce'
 import { API_SEARCH } from '../../constants/Resources'
-import { getPeopleId, getPeopleImg } from '../../services/getPeopleData'
+import { getPeopleId, getImgUrl } from '../../services/getData'
 import UiLoading from '../../components/UI/UiLoading/UiLoading'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 
@@ -37,7 +37,7 @@ function SearchPage() {
 
   const people = data?.results?.map(({ url, name }) => {
     const id = getPeopleId(url)
-    const img = getPeopleImg(id)
+    const img = getImgUrl(id)
 
     return <SearchPageInfo key={id} name={name} url={img} id={id} />
   })

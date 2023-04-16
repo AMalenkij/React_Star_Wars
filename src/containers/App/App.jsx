@@ -6,6 +6,11 @@ import Header from '../../components/Header/Header'
 import styles from './App.module.css'
 import HomePage from '../HomePage/HomePage'
 import PeoplePage from '../PeoplePage/PeoplePage'
+import PlanetsPage from '../PlanetsPage/PlanetsPage'
+import FilmsPage from '../FilmsPage/FilmsPage'
+import StarshipsPage from '../StarshipsPage/StarshipsPage'
+import VehiclesPage from '../VehiclesPage/VehiclesPage'
+import SpeciesPage from '../SpeciesPage/SpeciesPage'
 import NotFoundPage from '../NotFoundPage/NotFoundPage'
 import PersonPage from '../PersonPage/PersonPage'
 import FavoritesPage from '../FavoritesPage/FavoritesPage'
@@ -29,9 +34,13 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/people" element={<PeoplePage />} />
+              <Route path="/planets" element={<PlanetsPage />} />
+              <Route path="/films" element={<FilmsPage />} />
+              <Route path="/species" element={<SpeciesPage />} />
+              <Route path="/starships" element={<StarshipsPage />} />
+              <Route path="/vehicles" element={<VehiclesPage />} />
+              <Route path="/planets/:id" element={<PlanetsPage />} />
               <Route path="/people/:id" element={<PersonPage />} />
-              <Route path="/planets" element={<PeoplePage />} />
-              <Route path="/planets/:id" element={<PersonPage />} />
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/not-found" element={<NotFoundPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />

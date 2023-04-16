@@ -1,24 +1,8 @@
-import React, { useEffect } from 'react'
+import Catalog from '../../components/Сatalog/Сatalog'
 
-import UiToggle from '../../components/UI/UiToggle/UiToggle'
-import useToggleBtn from '../../hooks/useToggleBtn'
-import useTypeNavigation from '../../utils/writingToLocalstorageToggle'
-import LoadMore from '../../components/PeopleList/LoadMore/LoadMore'
-import PageByPage from '../../components/PeopleList/PageByPage/PageByPage'
+const url = new URL('people', 'https://swapi.dev/api/')
 
-function PeoplePage() {
-  const { typeNavigation, setTypeNavigation } = useTypeNavigation()
-  const [isChecked, handleToggle] = useToggleBtn(typeNavigation)
-
-  useEffect(() => {
-    setTypeNavigation(isChecked)
-  }, [isChecked, setTypeNavigation])
-
-  return (
-    <>
-      <UiToggle isChecked={isChecked} handleToggle={handleToggle} />
-      {isChecked ? <PageByPage /> : <LoadMore />}
-    </>
-  )
+function People() {
+  return <Catalog url={url} />
 }
-export default PeoplePage
+export default People

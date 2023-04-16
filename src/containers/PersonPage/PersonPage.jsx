@@ -4,7 +4,7 @@ import React, { Suspense } from 'react'
 
 import { API_PERSON } from '../../constants/Resources'
 import styles from './PersonPage.module.css'
-import { getPeopleImg } from '../../services/getPeopleData'
+import { getImgUrl } from '../../services/getData'
 import { getApi } from '../../utils/api'
 import PersonInfo from '../../components/PersonPage/PersonInfo/PersonInfo'
 import PersonLinkBack from '../../components/PersonPage/PersonLinkBack/PersonLinkBack'
@@ -18,7 +18,7 @@ const PersonFilms = React.lazy(() =>
 
 export function PersonPage() {
   const { id } = useParams()
-  const personPhoto = getPeopleImg(id)
+  const personPhoto = getImgUrl(id)
 
   const { isLoading, error, data } = useQuery({
     queryKey: ['people', id],

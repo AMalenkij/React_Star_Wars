@@ -18,6 +18,18 @@ function Header() {
           <NavLink to="/planets/?page=1">Planets</NavLink>
         </li>
         <li>
+          <NavLink to="/films/?page=1">Films</NavLink>
+        </li>
+        <li>
+          <NavLink to="/species/?page=1">Species</NavLink>
+        </li>
+        <li>
+          <NavLink to="/starships/?page=1">Starships</NavLink>
+        </li>
+        <li>
+          <NavLink to="/vehicles/?page=1">Vehicles</NavLink>
+        </li>
+        <li>
           <NavLink to="/search">Search</NavLink>
         </li>
         <li>
