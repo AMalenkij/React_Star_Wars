@@ -12,6 +12,7 @@ import PersonLinkBack from '../../components/PersonPage/PersonLinkBack/PersonLin
 import PersonPhoto from '../../components/PersonPage/PersonPhoto/PersonPhoto'
 import UiLoading from '../../components/UI/UiLoading/UiLoading'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
+import useRoute from '../../hooks/useRoute'
 
 // eslint-disable-next-line no-unused-vars
 const PersonFilms = React.lazy(() =>
@@ -20,20 +21,11 @@ const PersonFilms = React.lazy(() =>
 
 export function PersonPage() {
   const { id } = useParams()
-
-  const [routeUrl, setRouteUrl] = useState(window.location.pathname)
-
-  useEffect(() => {
-    const handlePathnameChange = () => setRouteUrl(window.location.pathname)
-    window.addEventListener('popstate', handlePathnameChange)
-    return () => window.removeEventListener('popstate', handlePathnameChange)
-  }, [])
-
-  const route = getRouteFromUrl(routeUrl)
+  const route = useRoute()
 
   const personPhoto = getImgUrl(id, route)
   const { isLoading, error, data } = useQuery({
-    queryKey: [routeUrl, id],
+    queryKey: [route, id],
     queryFn: () => getApi(`${BASE_URL}${route}/${id}/`),
     keepPreviousData: true,
   })
@@ -52,7 +44,7 @@ export function PersonPage() {
             personName={data.name}
             id={id}
           />
-          {/* <PersonInfo data={data} /> */}
+          <PersonInfo apiData={{ data, route }} />
           {/* <Suspense fallback={<UiLoading />}>
             <PersonFilms urls={data.films} id={id} />
           </Suspense> */}

@@ -1,39 +1,20 @@
 import styles from './PersonInfo.module.css'
+import attributes from '../../../constants/Attributes'
 
-export function PersonInfo({ data }) {
+export function PersonInfo({ apiData }) {
+  const { data, route } = apiData
   return (
     <div className={styles.wrapper}>
       <ul className={styles.list__container}>
-        <li className={styles.list__item}>
-          <span className={styles.item__title}>Height: </span>
-          {data.height}
-        </li>
-        <li className={styles.list__item}>
-          <span className={styles.item__title}>Mass: </span>
-          {data.mass}
-        </li>
-        <li className={styles.list__item}>
-          <span className={styles.item__title}>Hair Color: </span>
-          {data.hair_color}
-        </li>
-        <li className={styles.list__item}>
-          <span className={styles.item__title}>Skin Color: </span>
-          {data.skin_color}
-        </li>
-        <li className={styles.list__item}>
-          <span className={styles.item__title}>Eye Color: </span>
-          {data.eye_color}
-        </li>
-        <li className={styles.list__item}>
-          <span className={styles.item__title}>Birth Year: </span>
-          {data.birth_year}
-        </li>
-        <li className={styles.list__item}>
-          <span className={styles.item__title}>Gender: </span>
-          {data.gender}
-        </li>
+        {attributes[route].map((item) => (
+          <li className={styles.list__item} key={item.property}>
+            <span className={styles.item__title}>{item.title}</span>
+            {data[item.property]}
+          </li>
+        ))}
       </ul>
     </div>
   )
 }
+
 export default PersonInfo
