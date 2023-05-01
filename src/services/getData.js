@@ -23,3 +23,9 @@ export const getImgUrl = (id, route) => {
   const imgRoute = route === 'people' ? 'characters' : route
   return `${GUIDE_ROOT_IMG}${imgRoute}/${id}${GUIDE_IMG_EXTENSION}`
 }
+
+export function extractCategoryFromUrl(url) {
+  const urlParts = url.split('/')
+  const categoryIndex = urlParts.indexOf('api') + 1
+  return urlParts[categoryIndex]
+}
