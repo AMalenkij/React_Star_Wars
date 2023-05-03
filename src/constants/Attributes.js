@@ -2,7 +2,7 @@ const attributes = {
   people: {
     peopleArray: [
       { name: 'title' },
-      { array: ['starships', 'vehicles', 'characters', 'planets', 'films'] },
+      { array: ['starships', 'vehicles', 'planets', 'films'] },
     ],
     peopleString: [
       { title: 'Name:', property: 'name' },
@@ -18,7 +18,7 @@ const attributes = {
   films: {
     filmsArray: [
       { name: 'title' },
-      { array: ['species', 'starships', 'vehicles', 'characters', 'planets'] },
+      { array: ['species', 'starships', 'vehicles', 'planets', 'characters'] },
     ],
     filmsString: [
       { title: 'Title:', property: 'title' },
@@ -72,7 +72,7 @@ const attributes = {
     ],
   },
   planets: {
-    planetsArray: [{ name: 'name' }, { array: ['residents', 'films'] }],
+    planetsArray: [{ name: 'name' }, { array: ['films', 'residents'] }],
     planetsString: [
       { title: 'Name:', property: 'name' },
       { title: 'Diameter:', property: 'diameter' },

@@ -35,14 +35,20 @@ export function DetailPage() {
   const [name, array] = attributes[route][`${route}Array`]
 
   const addItionalInfo = array.array.map((routeInfo) => {
-    return (
-      <DetailRalated
-        key={id}
-        urls={data[routeInfo]}
-        id={id}
-        attributes={attributes}
-      />
-    )
+    if (
+      Object.prototype.hasOwnProperty.call(data, routeInfo) &&
+      data[routeInfo].length !== 0
+    ) {
+      return (
+        <DetailRalated
+          key={routeInfo}
+          categoryUrl={routeInfo}
+          urlArray={data[routeInfo]}
+          attributes={attributes}
+        />
+      )
+    }
+    return null
   })
 
   return (
