@@ -21,8 +21,8 @@ const DetailRalated = React.lazy(() =>
 export function DetailPage() {
   const { id } = useParams()
   const route = useRoute()
-
   const detailPhotoUrl = getImgUrl(id, route)
+
   const { isLoading, error, data } = useQuery({
     queryKey: [route, id],
     queryFn: () => getApi(`${BASE_URL}${route}/${id}/`),
