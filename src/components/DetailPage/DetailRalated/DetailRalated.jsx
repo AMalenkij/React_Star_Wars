@@ -2,41 +2,32 @@ import { useQuery } from 'react-query'
 
 import UiLoading from '../../UI/UiLoading/UiLoading'
 import styles from './DetailRalated.module.css'
-import { getApi } from '../../../utils/api'
+import { getConcurrentApi } from '../../../utils/api'
 import attributesSWApi from '../../../constants/attributesSWApi'
 
-export function DetailRalated({ categoryUrl, urlArray }) {
-  const results = urlArray?.map((url) => {
-    const category = [
-      'characters',
-      'pilots',
-      'residents',
-      'characters',
-    ].includes(categoryUrl)
-      ? 'people'
-      : categoryUrl
+function DetailRalated({ categoryUrl, urlArray }) {
+  const category = ['characters', 'pilots', 'residents'].includes(categoryUrl)
+    ? 'people'
+    : categoryUrl
 
-    const [title] = attributesSWApi[category]
+  const [categorySWApi] = attributesSWApi[category]
+  const { property, title } = categorySWApi
 
-    const { isLoading, error, data } = useQuery(url, () => getApi(url), {
-      keepPreviousData: true,
-    })
+  const { isLoading, error, data } = useQuery(category, () =>
+    getConcurrentApi(urlArray)
+  )
 
-    if (isLoading) return <UiLoading />
-    if (error) return `An error has occurred: ${error.message}`
+  if (isLoading) return <UiLoading />
+  if (error) return `An error has occurred: ${error.message}`
+  if (!data) return null
 
-    if (data) {
-      return (
-        <li className={styles.list__item} key={url}>
-          <span className={styles.item__episode}>{title.title}</span>
-          <span className={styles.item__colon}> : </span>
-          <span className={styles.item__title}>{data[title.property]}</span>
-        </li>
-      )
-    }
-
-    return null
-  })
+  const results = data.map((dataFromUrl) => (
+    <li className={styles.list__item} key={dataFromUrl[property]}>
+      <span className={styles.item__episode}>{title}</span>
+      <span className={styles.item__colon}> : </span>
+      <span className={styles.item__title}>{dataFromUrl[property]}</span>
+    </li>
+  ))
 
   return (
     <div className={styles.wrapper}>

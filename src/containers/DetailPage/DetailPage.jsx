@@ -13,42 +13,31 @@ import UiLoading from '../../components/UI/UiLoading/UiLoading'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import useRoute from '../../hooks/useRoute'
 import swApiProps from '../../constants/swApiProps'
+import DetailRalated from '../../components/DetailPage/DetailRalated/DetailRalated'
 
-const DetailRalated = React.lazy(() =>
-  import('../../components/DetailPage/DetailRalated/DetailRalated')
-)
-
-export function DetailPage() {
+function DetailPage() {
   const { id } = useParams()
   const route = useRoute()
   const detailPhotoUrl = getImgUrl(id, route)
 
-  const { isLoading, error, data } = useQuery({
-    queryKey: [route, id],
-    queryFn: () => getApi(`${BASE_URL}${route}/${id}/`),
-    keepPreviousData: true,
-  })
+  const { isLoading, error, data } = useQuery([route, id], () =>
+    getApi(`${BASE_URL}${route}/${id}/`)
+  )
 
   if (isLoading) return <UiLoading />
   if (error) return <ErrorMessage error={error.message} />
 
   const related = swApiProps[route]
 
-  const detailRelatedCategories = related.map((relatedСategory) => {
-    if (
-      Object.prototype.hasOwnProperty.call(data, relatedСategory) &&
-      data[relatedСategory].length !== 0
-    ) {
-      return (
-        <DetailRalated
-          key={relatedСategory}
-          categoryUrl={relatedСategory}
-          urlArray={data[relatedСategory]}
-        />
-      )
-    }
-    return null
-  })
+  const detailRelatedCategories = related
+    .filter((relatedCategory) => data[relatedCategory]?.length)
+    .map((relatedCategory) => (
+      <DetailRalated
+        key={relatedCategory}
+        categoryUrl={relatedCategory}
+        urlArray={data[relatedCategory]}
+      />
+    ))
 
   return (
     <>
