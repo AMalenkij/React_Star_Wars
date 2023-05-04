@@ -12,7 +12,7 @@ import DetailPhoto from '../../components/DetailPage/DetailPhoto/DetailPhoto'
 import UiLoading from '../../components/UI/UiLoading/UiLoading'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import useRoute from '../../hooks/useRoute'
-import attributes from '../../constants/Attributes'
+import swApiProps from '../../constants/swApiProps'
 
 const DetailRalated = React.lazy(() =>
   import('../../components/DetailPage/DetailRalated/DetailRalated')
@@ -32,19 +32,18 @@ export function DetailPage() {
   if (isLoading) return <UiLoading />
   if (error) return <ErrorMessage error={error.message} />
 
-  const [name, array] = attributes[route][`${route}Array`]
+  const related = swApiProps[route]
 
-  const addItionalInfo = array.array.map((routeInfo) => {
+  const detailRelatedCategories = related.map((relatedСategory) => {
     if (
-      Object.prototype.hasOwnProperty.call(data, routeInfo) &&
-      data[routeInfo].length !== 0
+      Object.prototype.hasOwnProperty.call(data, relatedСategory) &&
+      data[relatedСategory].length !== 0
     ) {
       return (
         <DetailRalated
-          key={routeInfo}
-          categoryUrl={routeInfo}
-          urlArray={data[routeInfo]}
-          attributes={attributes}
+          key={relatedСategory}
+          categoryUrl={relatedСategory}
+          urlArray={data[relatedСategory]}
         />
       )
     }
@@ -62,8 +61,10 @@ export function DetailPage() {
             personName={data.name}
             id={id}
           />
-          <DetailInfo apiData={{ data, route }} attributes={attributes} />
-          <Suspense fallback={<UiLoading />}>{addItionalInfo}</Suspense>
+          <DetailInfo apiData={{ data, route }} />
+          <Suspense fallback={<UiLoading />}>
+            {detailRelatedCategories}
+          </Suspense>
         </div>
       </div>
     </>

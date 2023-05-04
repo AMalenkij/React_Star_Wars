@@ -3,8 +3,9 @@ import { useQuery } from 'react-query'
 import UiLoading from '../../UI/UiLoading/UiLoading'
 import styles from './DetailRalated.module.css'
 import { getApi } from '../../../utils/api'
+import attributesSWApi from '../../../constants/attributesSWApi'
 
-export function DetailRalated({ categoryUrl, urlArray, attributes }) {
+export function DetailRalated({ categoryUrl, urlArray }) {
   const results = urlArray?.map((url) => {
     const category = [
       'characters',
@@ -15,8 +16,7 @@ export function DetailRalated({ categoryUrl, urlArray, attributes }) {
       ? 'people'
       : categoryUrl
 
-    const routeString = `${category}String`
-    const [title] = attributes[category][routeString]
+    const [title] = attributesSWApi[category]
 
     const { isLoading, error, data } = useQuery(url, () => getApi(url), {
       keepPreviousData: true,
