@@ -4,7 +4,7 @@ import {
   GUIDE_ROOT_IMG,
 } from '../constants/Resources'
 
-const getNumberFromUrl = (url) => {
+export const getNumberFromUrl = (url) => {
   const segments = url.split('/')
   const number = segments[segments.length - 2]
   return number
@@ -16,7 +16,7 @@ export const getRouteFromUrl = (url) => {
   const [, route] = url.split('/')
   return route
 }
-
+// This must be del
 export const getPeopleId = (url) => getNumberFromUrl(url, SWAPI_PEOPLE)
 
 export const getImgUrl = (id, route) => {
