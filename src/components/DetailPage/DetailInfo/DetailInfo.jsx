@@ -9,6 +9,12 @@ import {
 } from '../../../services/getData'
 
 export function DetailInfo({ apiData }) {
+  /**
+  DetailInfo that takes apiData as a prop. 
+  It extracts homeworld and species URLs from the character data, 
+  and fetches data for the homeworld and species using the useQuery hook from the react-query library. 
+  The component generates a list of attributes for the character using the attributesSWApi object and the character data.
+   */
   const { data, route } = apiData
 
   let homeworldUrl = null
@@ -20,6 +26,7 @@ export function DetailInfo({ apiData }) {
   let idFromUrlSpecies = null
   let CategoryFromUrSpecies = null
 
+  // If the route is 'people', extract the homeworld and species data from the API response
   if (route === 'people') {
     if (data?.homeworld) {
       homeworldUrl = data?.homeworld
@@ -33,7 +40,7 @@ export function DetailInfo({ apiData }) {
       CategoryFromUrSpecies = extractCategoryFromUrl(speciesUrl)
     }
   }
-
+  // Fetch the homeworld and species data using react-query
   const {
     isLoading: isDataLoading,
     data: [homeworld, species] = [],
@@ -52,7 +59,7 @@ export function DetailInfo({ apiData }) {
       enabled: route === 'people' && !!data,
     }
   )
-
+  // Generate a list of attributes and their values based on the data from the API and the fetched homeworld/species data
   const results = attributesSWApi[route].map(({ property, title }) => {
     let content = null
 
@@ -61,6 +68,7 @@ export function DetailInfo({ apiData }) {
         content = 'Loading...'
       } else {
         content = homeworld?.name ? (
+          // If the homeworld data is available, generate a link to the homeworld category page
           <a href={`/${CategoryFromUrlHomeworld}/${idFromUrlHomeworld}`}>
             {homeworld.name}
           </a>
