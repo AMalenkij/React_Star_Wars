@@ -38,7 +38,6 @@ function DetailPage() {
         urlArray={data[relatedCategory]}
       />
     ))
-
   return (
     <>
       <LinkBack />

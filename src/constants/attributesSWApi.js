@@ -1,6 +1,7 @@
 const attributesSWApi = {
   people: [
     { title: 'Name:', property: 'name' },
+    { title: 'Species:', property: 'species' },
     { title: 'Height:', property: 'height' },
     { title: 'Mass:', property: 'mass' },
     { title: 'Hair Color:', property: 'hair_color' },
@@ -8,6 +9,7 @@ const attributesSWApi = {
     { title: 'Eye Color:', property: 'eye_color' },
     { title: 'Birth Year:', property: 'birth_year' },
     { title: 'Gender:', property: 'gender' },
+    { title: 'Homeworld:', property: 'homeworld' },
   ],
   species: [
     { title: 'Name:', property: 'name' },
