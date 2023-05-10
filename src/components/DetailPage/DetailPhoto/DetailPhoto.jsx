@@ -2,44 +2,44 @@ import { useContext, useEffect, useState } from 'react'
 
 import iconFavorite from './img/favorite.svg'
 import iconFavoriteFill from './img/favorite-fill.svg'
-import styles from './PersonPhoto.module.css'
+import styles from './DetailPhoto.module.css'
 import { FavoriteContext } from '../../../utils/Context'
 
-export function PersonPhoto({ personPhoto, personName, id }) {
-  const [boolFavorites, setboolFavorites] = useState()
+export function DetailPhoto({ detailPhotoUrl, detailName, id }) {
+  const [isFavorite, setIsFavorite] = useState()
 
   const { addToFavorites, delFromFavorites, favorite } =
     useContext(FavoriteContext)
 
   useEffect(() => {
     if (favorite.some((item) => item.id === id)) {
-      setboolFavorites(true)
+      setIsFavorite(true)
     } else {
-      setboolFavorites(false)
+      setIsFavorite(false)
     }
   }, [favorite, id])
 
-  const handlFavorites = () => {
-    if (!boolFavorites) {
-      addToFavorites(id, personPhoto, personName)
-      setboolFavorites(true)
+  const handleFavorites = () => {
+    if (!isFavorite) {
+      addToFavorites(id, detailPhotoUrl, detailName)
+      setIsFavorite(true)
     } else {
       delFromFavorites(id)
-      setboolFavorites(false)
+      setIsFavorite(false)
     }
   }
 
   return (
     <div className={styles.container}>
-      <img className={styles.photo} src={personPhoto} alt={personName} />
-      <button onClick={handlFavorites} type="button">
+      <img className={styles.photo} src={detailPhotoUrl} alt={detailName} />
+      <button onClick={handleFavorites} type="button">
         <img
           className={styles.favorite}
-          src={!boolFavorites ? iconFavorite : iconFavoriteFill}
+          src={!isFavorite ? iconFavorite : iconFavoriteFill}
           alt="favorites"
         />
       </button>
     </div>
   )
 }
-export default PersonPhoto
+export default DetailPhoto

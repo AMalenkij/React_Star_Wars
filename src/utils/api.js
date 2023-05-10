@@ -6,7 +6,6 @@ async function getApi(url) {
     if (!response.ok) {
       throw new Error(`Could not fetch. Status code: ${response.status}`)
     }
-
     return data
   } catch (error) {
     throw new Error(`Could not fetch. Error: ${error.message}`)
