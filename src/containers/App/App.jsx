@@ -12,7 +12,7 @@ import StarshipsPage from '../StarshipsPage/StarshipsPage'
 import VehiclesPage from '../VehiclesPage/VehiclesPage'
 import SpeciesPage from '../SpeciesPage/SpeciesPage'
 import NotFoundPage from '../NotFoundPage/NotFoundPage'
-import PersonPage from '../PersonPage/PersonPage'
+import DetailPage from '../DetailPage/DetailPage'
 import FavoritesPage from '../FavoritesPage/FavoritesPage'
 import SearchPage from '../SearchPage/SearchPage'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
@@ -39,8 +39,12 @@ function App() {
               <Route path="/species" element={<SpeciesPage />} />
               <Route path="/starships" element={<StarshipsPage />} />
               <Route path="/vehicles" element={<VehiclesPage />} />
-              <Route path="/planets/:id" element={<PlanetsPage />} />
-              <Route path="/people/:id" element={<PersonPage />} />
+              <Route path="/planets/:id" element={<DetailPage />} />
+              <Route path="/people/:id" element={<DetailPage />} />
+              <Route path="/films/:id" element={<DetailPage />} />
+              <Route path="/vehicles/:id" element={<DetailPage />} />
+              <Route path="/starships/:id" element={<DetailPage />} />
+              <Route path="/species/:id" element={<DetailPage />} />
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/not-found" element={<NotFoundPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />

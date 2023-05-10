@@ -2,9 +2,9 @@
 import { useNavigate } from 'react-router'
 import iconBack from './img/back.svg'
 
-import styles from './PersonLinkBack.module.css'
+import styles from './LinkBack.module.css'
 
-export function PersonLinkBack() {
+export function LinkBack() {
   const navigation = useNavigate()
 
   const hanleGoBack = (e) => {
@@ -21,4 +21,4 @@ export function PersonLinkBack() {
   )
 }
 
-export default PersonLinkBack
+export default LinkBack
