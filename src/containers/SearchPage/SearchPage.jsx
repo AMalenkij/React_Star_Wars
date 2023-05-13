@@ -39,6 +39,10 @@ function SearchPage() {
     },
     {
       enabled: !!debounceValue,
+      refetchOnWindowFocus: false,
+      retry: false,
+      cacheTime: 60 * 1000,
+      staleTime: 5 * 60 * 1000,
     }
   )
 
@@ -50,7 +54,7 @@ function SearchPage() {
   }
 
   const dataForAllCategory = data?.map((dataCategory) =>
-    dataCategory.results?.map(({ url, name }) => {
+    dataCategory.results?.map(({ url, name, title }) => {
       const id = getNumberFromUrl(url)
       const getCategory = extractCategoryFromUrl(url)
       let img
@@ -64,7 +68,7 @@ function SearchPage() {
         <SearchPageInfo
           key={id}
           category={getCategory}
-          name={name}
+          attributes={{ name, title }}
           url={img}
           id={id}
         />
