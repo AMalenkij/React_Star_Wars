@@ -18,17 +18,19 @@ import {
   extractCategoryFromUrl,
 } from '../../services/getData'
 import UiLoading from '../../components/UI/UiLoading/UiLoading'
+import { CATEGORY } from '../../constants/swApiProps'
 
 function SearchPage() {
   const [inputSearchValue, setInputSearchValue] = useState('')
   const debounceValue = useDebounce(inputSearchValue, 500)
-  const category = useMemo(
-    () => ['people', 'species', 'films', 'starships', 'planets', 'vehicles'],
-    []
-  )
 
-  const urls = category.map(
-    (value) => HTTPS + SWAPI_ROOT + value + SWAPI_PARAM_SEARCH + debounceValue
+  const urls = useMemo(
+    () =>
+      CATEGORY.map(
+        (value) =>
+          HTTPS + SWAPI_ROOT + value + SWAPI_PARAM_SEARCH + debounceValue
+      ),
+    [debounceValue]
   )
 
   const { isLoading, error, data } = useQuery(
