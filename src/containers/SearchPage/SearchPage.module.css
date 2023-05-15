@@ -9,3 +9,13 @@
     padding: 0;
     list-style-type: none;
  }
+ .nav__container {
+   display: flex;
+ }
+
+ .input__container {
+   display: flex;
+   flex-direction: column;
+   padding-bottom: 12px;
+   margin-bottom: 12px;
+ }

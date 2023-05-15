@@ -8,3 +8,12 @@ const swApiProps = {
 }
 
 export default swApiProps
+
+export const CATEGORY = [
+  'people',
+  'species',
+  'films',
+  'starships',
+  'planets',
+  'vehicles',
+]
