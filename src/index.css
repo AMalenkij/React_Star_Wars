@@ -73,7 +73,7 @@ html[data-theme='light']{
     --theme-logo: url(../src/components/Header/img/lightsaber.svg);
 }
 
-html[data-theme='default']{
+html[data-theme='han-solo']{
     --theme-header: #cccc46;
     --theme-bgimage: url(../src/static/bg.jpg);
     --theme-logo:url(../src/components/Header/img/droid.svg);
@@ -199,4 +199,125 @@ SCROLL
 }
 ::-webkit-scrollbar-corner {
     background-color: rgba(0, 0, 0, .7);
+}
+
+/***************************************************
+FlexHoverSlider
+/***************************************************/
+
+.flex-container {
+  height: 550px;
+  width: 500px;
+  display: flex;
+  overflow: hidden;
+}
+
+/* @media screen and (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+} */
+
+.flex-title {
+  color: #f1f1f1;
+  position: relative;
+  font-size: 22px;
+  margin: auto;
+  text-align: center;
+  transform: rotate(90deg);
+  top: 30%;
+  transition: all 500ms ease;
+  
+
+  
+  @media screen and (max-width: 768px) {
+    transform: rotate(0deg) !important;
+  }
+}
+
+.flex-slide {
+  flex: 1;
+  cursor: pointer;
+  transition: all 500ms ease;
+
+  @media screen and (max-width: 768px) {
+    overflow: auto;
+    overflow-x: hidden;
+  }
+}
+
+.flex-slide:hover {
+  flex-grow: 3;
+}
+
+.flex-title-dark {
+  @media screen and (min-width: 768px) {
+    transform: rotate(90deg);
+    top: 15%;
+    animation: aboutFlexSlide 3s 1;
+    animation-delay: 0s;
+    
+
+  }
+}
+
+.flex-title-light {
+    @media screen and (min-width: 768px) {
+      transform: rotate(90deg);
+      top: 15%;
+      animation: aboutFlexSlide 3s 1;
+      animation-delay: 0s;
+      
+    }
+  }
+  
+
+  .flex-title-han-solo {
+    @media screen and (min-width: 768px) {
+      transform: rotate(90deg);
+      top: 15%;
+      animation: aboutFlexSlide 3s 1;
+      animation-delay: 0s;
+      
+    }
+  }
+
+.dark {
+    min-width: 140px;
+    /* height: 100vh; */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./components/HomePage/ChooseSide/img/dark-side.jpg);
+    background-size: cover;
+    background-position: center center;
+    /* background-attachment: fixed; */
+  
+    @media screen and (min-width: 768px) {
+      animation: aboutFlexSlide 3s 1;
+      animation-delay: 0s;
+    }
+  }
+
+.light {
+    min-width: 140px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./components/HomePage/ChooseSide/img/light-side.jpg);
+  background-size: cover;
+  background-position: center center;
+  /* background-attachment: fixed; */
+
+  @media screen and (min-width: 768px) {
+    animation: aboutFlexSlide 3s 1;
+    animation-delay: 0s;
+  }
+}
+
+.han-solo {
+ min-width: 140px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./components/HomePage/ChooseSide/img/falcon.jpg);
+  background-size: cover;
+  background-position: center center;
+  /* background-attachment: fixed; */
+  
+  @media screen and (min-width: 768px) {
+    animation: aboutFlexSlide 3s 1;
+    animation-delay: 0s;
+  }
 }
