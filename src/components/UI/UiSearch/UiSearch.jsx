@@ -26,8 +26,7 @@ export default function Search() {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute right-3/2 z-10 mt-3  -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
-                <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5" />
-                <Combobox />
+                {({ close }) => <Combobox closePopover={close} />}
               </Popover.Panel>
             </Transition>
           </>

@@ -5,31 +5,32 @@ import React, { useState, Fragment } from 'react'
 import styles from './Header.module.css'
 import Favorite from '../Favorite/Favorite'
 import Popover from '../UI/UiPopover/Popover'
+import Search from '../UI/UiSearch/UiSearch'
 
-import svgFilms from './img/menuIcons/films.svg'
-import svgCharacters from './img/menuIcons/characters.svg'
-import svgSpecies from './img/menuIcons/species.svg'
-import svgStarships from './img/menuIcons/starships.svg'
-import svgVehicles from './img/menuIcons/vehicles.svg'
-import svgPlanets from './img/menuIcons/planets.svg'
+// import svgFilms from './img/menuIcons/films.svg'
+// import svgCharacters from './img/menuIcons/characters.svg'
+// import svgSpecies from './img/menuIcons/species.svg'
+// import svgStarships from './img/menuIcons/starships.svg'
+// import svgVehicles from './img/menuIcons/vehicles.svg'
+// import svgPlanets from './img/menuIcons/planets.svg'
 
-const options = [
-  { value: 'people', label: 'People', icon: svgCharacters },
-  { value: 'planets', label: 'Planets', icon: svgPlanets },
-  { value: 'films', label: 'Films', icon: svgFilms },
-  { value: 'species', label: 'Species', icon: svgSpecies },
-  { value: 'starships', label: 'Starships', icon: svgStarships },
-  { value: 'vehicles', label: 'Vehicles', icon: svgVehicles },
-]
+// const options = [
+//   { value: 'people', label: 'People', icon: svgCharacters },
+//   { value: 'planets', label: 'Planets', icon: svgPlanets },
+//   { value: 'films', label: 'Films', icon: svgFilms },
+//   { value: 'species', label: 'Species', icon: svgSpecies },
+//   { value: 'starships', label: 'Starships', icon: svgStarships },
+//   { value: 'vehicles', label: 'Vehicles', icon: svgVehicles },
+// ]
 
 export default function Header() {
-  const [selectedOption, setSelectedOption] = useState('Select a category')
-  const navigate = useNavigate()
+  // const [selectedOption, setSelectedOption] = useState('Select a category')
+  // const navigate = useNavigate()
 
-  const handleOptionChange = (selected) => {
-    setSelectedOption(selected.value)
-    navigate(`/${selected.value}/?page=1`)
-  }
+  // const handleOptionChange = (selected) => {
+  //   setSelectedOption(selected.value)
+  //   navigate(`/${selected.value}/?page=1`)
+  // }
 
   return (
     <div className={styles.container}>
@@ -38,7 +39,7 @@ export default function Header() {
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
-        <li className={styles.selectContainer}>
+        {/* <li className={styles.selectContainer}>
           <Select
             defaultValue={options.find(
               (option) => option.value === selectedOption
@@ -65,9 +66,9 @@ export default function Header() {
               IndicatorSeparator: () => null,
             }}
           />
-        </li>
-        <li>
-          <NavLink to="/search">Search</NavLink>
+        </li> */}
+        <li className="ml-96">
+          <Search />
         </li>
       </ul>
       <div className="ml-auto flex gap-6">

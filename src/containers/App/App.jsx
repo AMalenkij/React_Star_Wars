@@ -48,7 +48,7 @@ function App() {
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/not-found" element={<NotFoundPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
-              <Route path="/search" element={<SearchPage />} />
+              <Route path="/search/:query" element={<SearchPage />} />
               <Route path="/fail" element={<ErrorMessage />} />
             </Routes>
           </div>
