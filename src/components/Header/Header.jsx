@@ -1,11 +1,12 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import Select from 'react-select'
+// import Select from 'react-select'
 import React, { useState, Fragment } from 'react'
 
 import styles from './Header.module.css'
 import Favorite from '../Favorite/Favorite'
 import Popover from '../UI/UiPopover/Popover'
-import Search from '../UI/UiSearch/UiSearch'
+// import Search from '../UI/UiSearch/UiSearch'
+import NavTabs from './NavTabs/NavTabs'
 
 // import svgFilms from './img/menuIcons/films.svg'
 // import svgCharacters from './img/menuIcons/characters.svg'
@@ -35,11 +36,11 @@ export default function Header() {
   return (
     <div className={styles.container}>
       <svg className="logo" alt="Star Wars" />
-      <ul className={styles.list__container}>
+      {/* <ul className={styles.list__container}>
         <li>
           <NavLink to="/">Home</NavLink>
-        </li>
-        {/* <li className={styles.selectContainer}>
+        </li> */}
+      {/* <li className={styles.selectContainer}>
           <Select
             defaultValue={options.find(
               (option) => option.value === selectedOption
@@ -67,10 +68,11 @@ export default function Header() {
             }}
           />
         </li> */}
-        <li className="ml-96">
+      {/* <li className="ml-96">
           <Search />
         </li>
-      </ul>
+      </ul> */}
+      <NavTabs/>
       <div className="ml-auto flex gap-6">
         <Popover />
         <Favorite />
