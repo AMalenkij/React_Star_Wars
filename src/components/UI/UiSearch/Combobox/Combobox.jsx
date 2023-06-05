@@ -24,6 +24,7 @@ const CATEGORIES_SELECTED = [
 // local storage key names
 const LOCAL_STORAGE_RECENT_QUESTS = 'recentQuests'
 
+// API
 function generateSearchUrls(inputValue, categories) {
   return categories.map(
     (value) => HTTPS + SWAPI_ROOT + value + SWAPI_PARAM_SEARCH + inputValue
