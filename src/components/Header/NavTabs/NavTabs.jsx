@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import useDebounceValueFormatted from '../../../hooks/useDebounceValueFormatted'
 import SearchResultsFromApi from '../../UI/UiSearch/SearchResultsFromApi/SearchResultsFromApi'
@@ -12,6 +12,8 @@ import {
 // -Settings
 const MAX_ENTRIES = 7
 
+const SEARCH_ENDPOINT = '/search/value'
+
 const CATEGORIES_SELECTED = [
   'people',
   'species',
@@ -20,18 +22,10 @@ const CATEGORIES_SELECTED = [
   'planets',
   'vehicles',
 ]
-
 // local storage key names
 const LOCAL_STORAGE_RECENT_QUESTS = 'recentQuests'
 
-export default function NavTabs() {
-  // In case of clicking on the link inside popover, popover will be closed
-  const navigate = useNavigate()
-
-  const [switchOn, setSwitchOn] = useState(false)
-  const [inputValue, setInputValue] = useState('')
-  const inputRef = useRef(null)
-
+function useHandleLocalStorageSearch(inputValue) {
   // storedData represents the data stored in the local storage.
   // It is initialized using the useState hook's initializer function.
   // Inside the function, we try to retrieve the data from the local storage using the key 'recentQuests'.
@@ -43,8 +37,7 @@ export default function NavTabs() {
       const data = localStorage.getItem(LOCAL_STORAGE_RECENT_QUESTS)
       return data ? JSON.parse(data) : []
     } catch (error) {
-      // Handle the error in an appropriate way
-      // For example, display an error message to the user or log it to an error tracking system
+      console.error(error)
       return []
     }
   })
@@ -53,7 +46,6 @@ export default function NavTabs() {
     return data.filter((entry) => entry !== value).slice(0, MAX_ENTRIES - 1)
   }
 
-  // можно бы это запрятать в инпут дебоунс там пусть и тормозит все это
   const debouncedValue = useDebounceValueFormatted(inputValue)
   // The filter method is applied to each entry in the storedData array, checking if the entry includes the useDebounceValueFormatted value.
   // This means it will keep only the entries that contain the debounced and formatted search value.
@@ -61,7 +53,7 @@ export default function NavTabs() {
   const filteredData = useMemo(() => {
     return storedData.filter((entry) => entry.includes(debouncedValue))
   }, [storedData, debouncedValue])
-  // When clicking on the trash icon
+
   const deleteItemFromLocalStorage = (itemToDelete) => {
     const updatedArray = storedData.filter((item) => item !== itemToDelete)
     localStorage.setItem(
@@ -70,11 +62,148 @@ export default function NavTabs() {
     )
     setStoredData(updatedArray)
   }
+
+  const urls = generateSearchUrls(debouncedValue, CATEGORIES_SELECTED)
+
+  let resultsFromApi = null
+  if (debouncedValue.length > 0) {
+    resultsFromApi = <SearchResultsFromApi input={debouncedValue} urls={urls} />
+  }
+
+  return {
+    filteredData,
+    resultsFromApi,
+    deleteItemFromLocalStorage,
+    filterEntries,
+    storedData,
+    setStoredData,
+  }
+}
+
+function useOutsideClick(
+  inputValue,
+  setInputValue,
+  htmlElementRef,
+  switchOn,
+  setSwitchOn,
+  hidePartOfSearchMenu,
+  setHidePartOfSearchMenu
+) {
+  const btnClickRef = useRef(false)
+  const btnClick = btnClickRef.current
+  const setBtnClick = (value) => {
+    btnClickRef.current = value
+  }
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        htmlElementRef.current &&
+        !htmlElementRef.current.contains(event.target)
+      ) {
+        if (hidePartOfSearchMenu) {
+          if (btnClickRef.current && switchOn) {
+            setBtnClick(false)
+            setSwitchOn(false)
+            if (inputValue.length > 0) setInputValue('')
+            if (!hidePartOfSearchMenu) setHidePartOfSearchMenu(false)
+          } else {
+            setBtnClick(true)
+          }
+        }
+      }
+    }
+
+    document.addEventListener('click', handleOutsideClick)
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick)
+    }
+  }, [
+    hidePartOfSearchMenu,
+    htmlElementRef,
+    inputValue.length,
+    setHidePartOfSearchMenu,
+    setInputValue,
+    setSwitchOn,
+    switchOn,
+  ])
+
+  return { btnClick, setBtnClick }
+}
+
+export default function NavTabs() {
+  const [inputValue, setInputValue] = useState('')
+  const {
+    filteredData,
+    resultsFromApi,
+    deleteItemFromLocalStorage,
+    filterEntries,
+    storedData,
+    setStoredData,
+  } = useHandleLocalStorageSearch(inputValue)
+  const [switchOn, setSwitchOn] = useState(false)
+
+  const [hidePartOfSearchMenu, setHidePartOfSearchMenu] = useState(true)
+  const inputRef = useRef(null)
+
+  // In case of clicking on the link inside popover, popover will be closed
+  const navigate = useNavigate()
+  const location = useLocation()
+  const prevPathnameRef = useRef(location.pathname)
+
+  const htmlElementRef = useRef(null)
+  const { setBtnClick } = useOutsideClick(
+    inputValue,
+    setInputValue,
+    htmlElementRef,
+    switchOn,
+    setSwitchOn,
+    hidePartOfSearchMenu,
+    setHidePartOfSearchMenu
+  )
+  useEffect(() => {
+    if (
+      location.pathname !== prevPathnameRef.current &&
+      location.pathname !== SEARCH_ENDPOINT
+    ) {
+      prevPathnameRef.current = location.pathname
+      if (inputValue.length > 0) setInputValue('')
+      if (!hidePartOfSearchMenu) setHidePartOfSearchMenu(true)
+      setSwitchOn(false)
+      setBtnClick(false)
+    }
+  }, [hidePartOfSearchMenu, inputValue.length, location.pathname, setBtnClick])
+
+  const prevInputRef = useRef(inputValue)
+
+  useEffect(() => {
+    if (inputValue !== prevInputRef.current) {
+      if (!hidePartOfSearchMenu) setHidePartOfSearchMenu(!hidePartOfSearchMenu)
+    }
+    prevInputRef.current = inputValue
+  }, [hidePartOfSearchMenu, inputValue])
+
+  const handleClearInput = (event) => {
+    setInputValue('')
+    inputRef.current.focus()
+    event.stopPropagation()
+    // if (!hidePartOfSearchMenu) setHidePartOfSearchMenu(!hidePartOfSearchMenu)
+  }
+
+  const handleSwitchToggle = () => {
+    setSwitchOn(!switchOn)
+    setBtnClick(false)
+  }
+
   // Escape
   useEffect(() => {
     const handleEscapeKeyPress = (e) => {
       if (e.key === 'Escape') {
         setSwitchOn(false)
+        setBtnClick(false)
+        // if (!hidePartOfSearchMenu) setHidePartOfSearchMenu(!hidePartOfSearchMenu)
+        setInputValue('')
       }
     }
 
@@ -83,7 +212,7 @@ export default function NavTabs() {
     return () => {
       document.removeEventListener('keydown', handleEscapeKeyPress)
     }
-  }, [])
+  }, [setBtnClick])
 
   // The `handleKeyDown` function captures the "Enter" key press event, adds the entered value to the stored data,
   // updates the state and local storage, and resets the input field value.
@@ -96,31 +225,14 @@ export default function NavTabs() {
       // and the `filterEntries` function is used to remove the duplicate value (if any) and limit the array length to `MAX_ENTRIES - 1`.
       const newData = [value, ...filterEntries(storedData, value)]
       setStoredData(newData)
-      // setSearchParams({post: newData})
-      localStorage.setItem(LOCAL_STORAGE_RECENT_QUESTS, JSON.stringify(newData))
-      // resetting the text field
-      setInputValue('')
-      // closePopover()
+      // setHidePartOfSearchMenu(false)
+      // if (location.pathname === '/search/value') setHidePartOfSearchMenu(false)
+      setHidePartOfSearchMenu(false)
       navigate(`/search/value?search=${value}`)
+      event.stopPropagation()
+      setSwitchOn(true)
     }
   }
-
-  const handleClearInput = () => {
-    setInputValue('')
-    inputRef.current.focus()
-  }
-
-  const handleSwitchToggle = () => {
-    setSwitchOn(!switchOn)
-  }
-
-  const urls = generateSearchUrls(debouncedValue, CATEGORIES_SELECTED)
-
-  let resultsFromApi = null
-  if (debouncedValue.length > 0) {
-    resultsFromApi = <SearchResultsFromApi input={debouncedValue} urls={urls} />
-  }
-
   return (
     <nav className="container mx-auto">
       <ul className="flex gap-6">
@@ -137,7 +249,7 @@ export default function NavTabs() {
         ) : null}
         <li>
           {switchOn ? (
-            <div className="fixed bg-slate-700 p-2x z-10">
+            <div ref={htmlElementRef} className="fixed bg-slate-700 p-2x z-10">
               <SearchInput
                 inputValue={inputValue}
                 setInputValue={setInputValue}
@@ -146,12 +258,16 @@ export default function NavTabs() {
                 inputRef={inputRef}
                 handleSwitchToggle={handleSwitchToggle}
               />
-              <ItemFromLocalStorage
-                filteredData={filteredData}
-                deleteItemFromLocalStorage={deleteItemFromLocalStorage}
-                setInputValue={setInputValue}
-              />
-              {resultsFromApi}
+              {hidePartOfSearchMenu ? (
+                <>
+                  <ItemFromLocalStorage
+                    filteredData={filteredData}
+                    deleteItemFromLocalStorage={deleteItemFromLocalStorage}
+                    setInputValue={setInputValue}
+                  />
+                  {resultsFromApi}
+                </>
+              ) : null}
             </div>
           ) : null}
         </li>
@@ -160,7 +276,7 @@ export default function NavTabs() {
   )
 }
 
-// API
+// - API
 function generateSearchUrls(inputValue, categories) {
   return categories.map(
     (value) => HTTPS + SWAPI_ROOT + value + SWAPI_PARAM_SEARCH + inputValue
@@ -169,8 +285,8 @@ function generateSearchUrls(inputValue, categories) {
 function ItemFromLocalStorage({
   filteredData,
   deleteItemFromLocalStorage,
-  setInputValue}
-) {
+  setInputValue,
+}) {
   const handleEntryClick = (entry) => {
     setInputValue(entry)
   }
@@ -180,6 +296,12 @@ function ItemFromLocalStorage({
       setInputValue(entry)
     }
   }
+
+  const handleButtonClick = (event, entry) => {
+    event.stopPropagation()
+    deleteItemFromLocalStorage(entry)
+  }
+
   return (
     <div className="mt-1">
       {filteredData?.map(
@@ -197,7 +319,7 @@ function ItemFromLocalStorage({
                 {entry}
               </div>
               <button
-                onClick={() => deleteItemFromLocalStorage(entry)}
+                onClick={(event) => handleButtonClick(event, entry)}
                 type="button"
               >
                 <RemoveIcon />
@@ -218,7 +340,7 @@ function SearchInput({
 }) {
   return (
     <div className="flex">
-      <button type="button" onClick={handleSwitchToggle}>
+      <button type="button" onClick={(handleClearInput, handleSwitchToggle)}>
         <CloseIcon />
       </button>
       <input
@@ -231,7 +353,7 @@ function SearchInput({
         placeholder="Search..."
       />
       {inputValue && (
-        <button type="button" onClick={(handleClearInput, handleSwitchToggle)}>
+        <button type="button" onClick={handleClearInput}>
           <ClearIcon />
         </button>
       )}
