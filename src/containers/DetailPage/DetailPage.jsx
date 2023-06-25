@@ -15,11 +15,10 @@ import useRoute from '../../hooks/useRoute'
 import swApiProps from '../../constants/swApiProps'
 import DetailRalated from '../../components/DetailPage/DetailRalated/DetailRalated'
 
-function DetailPage() {
+export default function DetailPage() {
   const { id } = useParams()
   const route = useRoute()
   const detailPhotoUrl = getImgUrl(id, route)
-
   const { isLoading, error, data } = useQuery([route, id], () =>
     getApi(`${BASE_URL}${route}/${id}/`)
   )
@@ -58,5 +57,3 @@ function DetailPage() {
     </>
   )
 }
-
-export default DetailPage

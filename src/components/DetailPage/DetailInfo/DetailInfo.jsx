@@ -8,7 +8,7 @@ import {
   extractCategoryFromUrl,
 } from '../../../services/getData'
 
-export function DetailInfo({ apiData }) {
+export default function DetailInfo({ apiData }) {
   /**
   DetailInfo that takes apiData as a prop. 
   It extracts homeworld and species URLs from the character data, 
@@ -114,5 +114,3 @@ export function DetailInfo({ apiData }) {
     </div>
   )
 }
-
-export default DetailInfo
