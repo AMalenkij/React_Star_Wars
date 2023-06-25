@@ -67,7 +67,13 @@ function useHandleLocalStorageSearch(inputValue) {
 
   let resultsFromApi = null
   if (debouncedValue.length > 0) {
-    resultsFromApi = <SearchResultsFromApi input={debouncedValue} urls={urls} />
+    resultsFromApi = (
+      <SearchResultsFromApi
+        input={debouncedValue}
+        urls={urls}
+        searchResultCount={4}
+      />
+    )
   }
 
   return {

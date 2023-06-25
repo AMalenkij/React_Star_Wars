@@ -13,7 +13,11 @@ import {
 
 import UiLoading from '../../UiLoading/UiLoading'
 
-export default function SearchResultsFromApi({ urls, input }) {
+export default function SearchResultsFromApi({
+  urls,
+  input,
+  searchResultCount = 20,
+}) {
   const { isLoading, error, data } = useQuery(
     {
       queryKey: ['search', input, urls],
@@ -32,27 +36,35 @@ export default function SearchResultsFromApi({ urls, input }) {
   if (isLoading) return <UiLoading />
   if (error) return `An error has occurred: ${error.message}`
 
-  const dataForAllCategory = data?.map((dataCategory) =>
-    dataCategory.results?.map(({ url, name, title }) => {
-      const id = getNumberFromUrl(url)
-      const getCategory = extractCategoryFromUrl(url)
-      let img
-      if (getCategory === 'people') {
-        img = `${GUIDE_ROOT_IMG}characters/${id}${GUIDE_IMG_EXTENSION}`
-      } else {
-        img = `${GUIDE_ROOT_IMG}${getCategory}/${id}${GUIDE_IMG_EXTENSION}`
-      }
+  const dataForAllCategory = data?.map((dataCategory) => {
+    if (searchResultCount > 0) {
+      return dataCategory.results?.map(({ url, name, title }) => {
+        if (searchResultCount > 0) {
+          searchResultCount -= 1
+          const id = getNumberFromUrl(url)
+          const getCategory = extractCategoryFromUrl(url)
+          let img
+          if (getCategory === 'people') {
+            img = `${GUIDE_ROOT_IMG}characters/${id}${GUIDE_IMG_EXTENSION}`
+          } else {
+            img = `${GUIDE_ROOT_IMG}${getCategory}/${id}${GUIDE_IMG_EXTENSION}`
+          }
 
-      return (
-        <SearchPageInfo
-          key={id}
-          category={getCategory}
-          attributes={{ name, title }}
-          url={img}
-          id={id}
-        />
-      )
-    })
-  )
+          return (
+            <SearchPageInfo
+              key={id}
+              category={getCategory}
+              attributes={{ name, title }}
+              url={img}
+              id={id}
+            />
+          )
+        }
+        return null
+      })
+    }
+    return null
+  })
+
   return <ul>{dataForAllCategory}</ul>
 }
