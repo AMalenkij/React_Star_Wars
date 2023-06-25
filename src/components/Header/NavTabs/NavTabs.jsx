@@ -25,6 +25,8 @@ const CATEGORIES_SELECTED = [
 // local storage key names
 const LOCAL_STORAGE_RECENT_QUESTS = 'recentQuests'
 
+const SEARCH_RESULT_COUNT = 4
+
 function useHandleLocalStorageSearch(inputValue) {
   // storedData represents the data stored in the local storage.
   // It is initialized using the useState hook's initializer function.
@@ -71,7 +73,7 @@ function useHandleLocalStorageSearch(inputValue) {
       <SearchResultsFromApi
         input={debouncedValue}
         urls={urls}
-        searchResultCount={4}
+        searchResultCount={SEARCH_RESULT_COUNT}
       />
     )
   }
