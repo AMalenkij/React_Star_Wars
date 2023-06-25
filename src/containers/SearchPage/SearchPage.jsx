@@ -1,5 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useQuery } from 'react-query'
+import { useLocation, useSearchParams, useNavigate } from 'react-router-dom'
 
 import SearchPageInfo from '../../components/SearchPage/SearchPageInfo/SearchPageInfo'
 import UiInput from '../../components/UI/UiInput/UiInput'
@@ -21,9 +22,16 @@ import UiLoading from '../../components/UI/UiLoading/UiLoading'
 import { CATEGORY } from '../../constants/swApiProps'
 
 function SearchPage() {
+  const location = useLocation()
+  const [prevPathname, setPrevPathname] = useState(location.pathname)
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const searchQuery = searchParams.get('search') || ''
+  // console.log(searchQuery)
   const [inputSearchValue, setInputSearchValue] = useState('')
   const [filteredCategory, setFilteredCategory] = useState([])
-  const [selectAll, setSelectAll] = useState(false)
+  const [selectAll, setSelectAll] = useState(true)
+  useEffect(() => setInputSearchValue(searchQuery), [searchQuery])
 
   const handleSelectAll = () => {
     if (selectAll) {
