@@ -8,13 +8,12 @@ import NavTabs from './NavTabs/NavTabs'
 import CATEGORY_DESCRIPTION from '../../constants/categoryDescription'
 import { getRouteFromUrl } from '../../services/getData'
 
-import SVGComponentFilms from './img/menuIcons/films'
-import SVGComponentCharacters from './img/menuIcons/characters'
-import SVGComponentSpecies from './img/menuIcons/species'
-import SVGComponentStarships from './img/menuIcons/starships'
-import SVGComponentPlanets from './img/menuIcons/planets'
-import SVGComponentVehicles from './img/menuIcons/vehicles'
-
+import SVGComponentFilms from './img/menuIcons/SVGComponentFilms'
+import SVGComponentCharacters from './img/menuIcons/SVGComponentCharacters'
+import SVGComponentSpecies from './img/menuIcons/SVGComponentSpecies'
+import SVGComponentStarships from './img/menuIcons/SVGComponentStarships'
+import SVGComponentPlanets from './img/menuIcons/SVGComponentPlanets'
+import SVGComponentVehicles from './img/menuIcons/SVGComponentVehicles'
 
 // dublacate
 const CATEGORIES_SELECTED = [
