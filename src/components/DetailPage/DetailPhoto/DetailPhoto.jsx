@@ -5,7 +5,7 @@ import iconFavoriteFill from './img/favorite-fill.svg'
 import styles from './DetailPhoto.module.css'
 import { FavoriteContext } from '../../../utils/Context'
 
-export function DetailPhoto({ detailPhotoUrl, detailName, id }) {
+export default function DetailPhoto({ detailPhotoUrl, detailName, id }) {
   const [isFavorite, setIsFavorite] = useState()
 
   const { addToFavorites, delFromFavorites, favorite } =
@@ -42,4 +42,3 @@ export function DetailPhoto({ detailPhotoUrl, detailName, id }) {
     </div>
   )
 }
-export default DetailPhoto

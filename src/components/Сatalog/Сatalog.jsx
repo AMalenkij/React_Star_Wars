@@ -7,12 +7,11 @@ import useTypeNavigation from '../../utils/writingToLocalstorageToggle'
 import LoadMore from './LoadMore/LoadMore'
 import DefaultLoadPage from './DefaultLoadPage/DefaultLoadPage'
 
-function Catalog({ url }) {
+export default function Catalog({ url }) {
   const { href, pathname } = url
 
   const urlSwapi = href
   const pathnameShort = getPathname(pathname)
-
   const { typeNavigation, setTypeNavigation } = useTypeNavigation()
   const [isChecked, handleToggle] = useToggleBtn(typeNavigation)
 
@@ -34,4 +33,3 @@ function Catalog({ url }) {
     </>
   )
 }
-export default Catalog
