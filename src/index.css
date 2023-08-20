@@ -2,6 +2,118 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/***************************************************
+VARIABLES
+/***************************************************/
+:root {
+/* COLORS */
+
+/* Color stiles */
+--color-white:        #fff;
+--color-black:        #000;
+--color-gold:         rgba(238, 191, 0, 1);
+--color-light-blue:   rgba(241, 245, 249, 1);
+--color-gray:         rgba(54, 54, 54, 0.25);
+--color-gray-dark:    rgba(235, 236, 240, 1);
+
+/* KNOB-colors */
+--color-knob-light-blue:rgba(241, 245, 249, 1);
+--color-knob-elevation:rgba(220, 223, 237, 1);
+
+--color-blue-knob-shadow-iner-drop:rgba(184, 204, 224, 1);
+--color-white-knob-shadow-iner-drop:rgba(255, 255, 255, 1);
+/* color shadow elevation */
+--color-gray-knob-shadow-drop: rgba(201, 217, 232, 1);
+--color-white-knob-shadow-drop: rgba(255, 255, 255, 1);
+
+/* Color linear gradient */
+--gradient-color-gold:rgba(255,212,34,0.1);
+--gradient-color-blue:rgba(184,204,224,0.1);
+
+/* Color  shadow inner */
+--inner-shadow-black: rgba(54, 54, 54, 0.25);
+
+/* Color shadow drop */
+--inner-shadow-black: rgba(0, 0, 0, 0.25);
+
+/* Color shadow drop neumorphism */
+--drop-shadow-neumorphism-black: rgba(0, 0, 0, 0.15);
+--drop-shadow-neumorphism-white: rgba(255, 255, 255, 0.85);
+
+/* Color shadow inner neumorphism */
+--inner-shadow-neumorphism-black: rgba(0, 0, 0, 0.12);
+--inner-shadow-neumorphism-white: rgba(255, 255, 255, 1);
+}
+
+
+
+.active {
+  background-color: #ae72c2;
+}
+.pending {
+  background-color: #cccc46;
+}
+
+.bg-knob-base {
+  background: var(--color-knob-light-blue)
+}
+
+.bg-header {
+  background: linear-gradient(90deg, var(--gradient-color-blue) 0%, var(--gradient-color-gold) 100%);
+}
+
+.drop-shadow {
+  box-shadow: inset 0px 4px 4px 0px var(--inner-shadow-black);
+}
+
+.neumorphism-drop-shadow {
+  box-shadow: 
+    8px 7px 21px var(--drop-shadow-neumorphism-black),
+    -6px -7px 11px var(--drop-shadow-neumorphism-white);
+}
+.neumorphism-inner-shadow {
+  box-shadow: 
+  inset -4px -4px 4px var(--inner-shadow-neumorphism-white),
+  inset 5px 5px 2px  var(--inner-shadow-neumorphism-black);
+}
+/* KNOB-base */
+.neumorphism-knob-shadow-inner-drop {
+  box-shadow: 
+    inset -1px -1px 0px var(--color-white-knob-shadow-iner-drop),
+    inset -2px -2px 2px var(--color-blue-knob-shadow-iner-drop),
+    -1px -1px 0px var(--color-white-knob-shadow-iner-drop),
+    -2px -2px 2px  var(--color-blue-knob-shadow-iner-drop);
+}
+
+.neumorphism-knob-elevation-shadow-drop {
+  box-shadow: 
+  8px 8px 16px var(--color-gray-knob-shadow-drop),
+  -8px -8px 16px  var(--color-white-knob-shadow-drop);
+}
+
+.neumorphism-inner-shadow {
+  box-shadow: 
+  inset -4px -4px 4px var(--inner-shadow-neumorphism-white),
+  inset 5px 5px 2px  var(--inner-shadow-neumorphism-black);
+}
+
+/* .text-iner-shadow {
+  text-shadow: inset 0px 4px 4px 0px var(--inner-shadow-black);
+} */
+
+
+.inner-shadow {
+  box-shadow: inset 0px 4px 4px 0px var(--inner-shadow-black);
+}
+
+.text-golden {
+  color: var(--color-gold);
+}
+
+
+
+
 /***************************************************
 VARIABLES
 /***************************************************/
@@ -12,7 +124,7 @@ VARIABLES
     --color-black:       #000;
     --color-yellow:      #ffff00;
     --color-blue-light:  #e1e9eb;
-    --color-dark-gray:   #10100e;
+    /* --color-dark-gray:   #10100e; */
 
     --color-blue:        #6a83fb;
     --color-violet:      #ae72c2;
@@ -63,13 +175,13 @@ VARIABLES
 /* THEMES */
 html[data-theme='dark']{
     --theme-header:#ca6c6f;
-    --theme-bgimage:linear-gradient(to right bottom, #000000, #160b11, #20141e, #281b2e, #2b2440);
+    /* --theme-bgimage:linear-gradient(to right bottom, #000000, #160b11, #20141e, #281b2e, #2b2440); */
     --theme-logo: url(../src/components/Header/img/space-station.svg);
 }
 
 html[data-theme='light']{
     --theme-header:#dfe2df;
-    --theme-bgimage: linear-gradient(to right bottom, #051937, #162454, #312d70, #533389, #7a359f);
+    /* --theme-bgimage: linear-gradient(to right bottom, #051937, #162454, #312d70, #533389, #7a359f); */
     --theme-logo: url(../src/components/Header/img/lightsaber.svg);
 }
 
