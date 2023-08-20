@@ -119,13 +119,11 @@ function Modal() {
                 <Dialog.Panel
                   className="
                 neumorphism-knob-shadow-inner-drop 
-                border-8
-              border-white
                 w-9/12 
                 transform 
                 overflow-hidden
                 rounded-3xl
-                bg-knob
+                bg-knob-base
                 p-6
                 text-left
                 align-middle

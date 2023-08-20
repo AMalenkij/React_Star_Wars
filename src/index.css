@@ -23,6 +23,7 @@ VARIABLES
 
 --color-blue-knob-shadow-iner-drop:rgba(184, 204, 224, 1);
 --color-white-knob-shadow-iner-drop:rgba(255, 255, 255, 1);
+
 /* color shadow elevation */
 --color-gray-knob-shadow-drop: rgba(201, 217, 232, 1);
 --color-white-knob-shadow-drop: rgba(255, 255, 255, 1);
@@ -64,7 +65,7 @@ VARIABLES
 }
 
 .drop-shadow {
-  box-shadow: inset 0px 4px 4px 0px var(--inner-shadow-black);
+  box-shadow: 0px 4px 4px 0px var(--inner-shadow-black);
 }
 
 .neumorphism-drop-shadow {
