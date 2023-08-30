@@ -245,15 +245,9 @@ export default function NavTabs() {
     <nav className="container mx-auto">
       <ul className="flex gap-6">
         {!switchOn ? (
-          <>
-            <li>Home</li>
-            <li>Explore</li>
-            <li>
-              <button type="button" onClick={handleSwitchToggle}>
-                {switchOn ? null : 'Search Off'}
-              </button>
-            </li>
-          </>
+          <button type="button" onClick={handleSwitchToggle}>
+            {switchOn ? null : 'Search Off'}
+          </button>
         ) : null}
         <li>
           {switchOn ? (
