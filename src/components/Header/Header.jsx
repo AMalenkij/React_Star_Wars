@@ -59,7 +59,7 @@ function Modal() {
       focus-visible:ring-2
       focus-visible:ring-white 
       focus-visible:ring-opacity-75
-      neumorphism-inner-shadow
+      shadow-inner
       rounded-3xl
       bg-gray-dark
       px-8 
@@ -118,7 +118,7 @@ function Modal() {
               >
                 <Dialog.Panel
                   className="
-                neumorphism-knob-shadow-inner-drop 
+                shadow-border
                 w-9/12 
                 transform 
                 overflow-hidden
@@ -127,11 +127,12 @@ function Modal() {
                 p-6
                 text-left
                 align-middle
-                transition-all"
+                transition-all
+                "
                 >
                   <div
                     className="
-                  neumorphism-knob-elevation-shadow-drop 
+                  shadow-drop-500 
                   p-6  
                   rounded-3xl
                   px-12"
@@ -169,22 +170,40 @@ const svgComponents = {
 }
 
 function CustomTab() {
+  const [hoveredStates, setHoveredStates] = useState(
+    Object.keys(CATEGORY_DESCRIPTION).map(() => false)
+  )
+
   return (
     <Tab.List className="flex justify-center">
-      {Object.keys(CATEGORY_DESCRIPTION).map((category) => (
-        <Tab key={category} className="w-full" selected>
+      {Object.keys(CATEGORY_DESCRIPTION).map((category, index) => (
+        <Tab key={category} className="w-full">
           {({ selected }) => {
             const SVGComponent = svgComponents[category]
             const svgProps = {
               selected,
-              color: selected ? '#EEBF00' : '#000000',
+              hovered: hoveredStates[index],
+              color: selected || hoveredStates[index] ? '#EEBF00' : '#000000',
             }
 
             return (
               <div>
-                <div className="flex mx-auto items-center h-20 w-20">
+                <div
+                  className="flex mx-auto items-center h-20 w-20"
+                  onMouseEnter={() => {
+                    const newHoveredStates = [...hoveredStates]
+                    newHoveredStates[index] = true
+                    setHoveredStates(newHoveredStates)
+                  }}
+                  onMouseLeave={() => {
+                    const newHoveredStates = [...hoveredStates]
+                    newHoveredStates[index] = false
+                    setHoveredStates(newHoveredStates)
+                  }}
+                >
                   <SVGComponent
                     selected={svgProps.selected}
+                    hovered={svgProps.hovered}
                     color={svgProps.color}
                   />
                 </div>
@@ -194,7 +213,7 @@ function CustomTab() {
                   justify-center 
                   items-center 
                   ui-selected:bg-gold
-                  ui-selected:shadow-iner
+                  ui-selected:shadow-inner
                   bg-black
                   h-1
                   mt-4 
@@ -226,30 +245,86 @@ function Tabs({ closeModal }) {
   return (
     <Tab.Group>
       <CustomTab />
-      <Tab.Panels className="mt-2 ">
-        {Object.entries(CATEGORY_DESCRIPTION).map(([categoryName, posts]) => (
-          <Tab.Panel key={posts[0].id}>
-            {posts.map((post) => (
-              <div key={post.id}>
-                <h3>{post.title}</h3>
-                <div>
-                  <p>{post.content}</p>
+      <div
+        className="
+      mt-4 
+      rounded-2xl
+      shadow-drop-300
+      bg-header
+      h-64
+      w-full
+      relative
+      overflow-hidden
+      "
+      >
+        <Tab.Panels />
+        <div />
+        <div className="absolute w-full h-full ">
+          <div className="absolute -bottom-1/4 -left-[6%] -z-10">
+            <GradientCircles circleSize={230} />
+          </div>
+          <div className="absolute top-1/3 left-1/4 -z-10">
+            <GradientCircles circleSize={90} />
+          </div>
+          <div className="absolute -top-[26%] right-0 -z-10">
+            <GradientCircles circleSize={300} />
+          </div>
+          <div className="absolute -top-[14%] right-[4%] -z-10">
+            <GradientCircles circleSize={220} />
+          </div>
+          <div className="absolute w-full h-full z-20 bg-header/10" />
+        </div>
+
+        <div
+          className="
+        shadow-drop-300
+        absolute 
+        z-40 
+        w-full 
+        h-full 
+        border-2 
+        border-white"
+        >
+          {Object.entries(CATEGORY_DESCRIPTION).map(([categoryName, posts]) => (
+            <Tab.Panel key={posts[0].id}>
+              {posts.map((post) => (
+                <div key={post.id} className="relative pt-10 px-8">
+                  <h3>{post.title}</h3>
+                  <div>
+                    <p>{post.content}</p>
+                  </div>
+                  <div className="mt-6 flex">
+                    {/* Generate the link from the categoryName */}
+                    <div className="py-4 px-6 rounded-2xl shadow-border mx-auto">
+                      <Link
+                        to={`/${categoryName.toLowerCase()}`}
+                        className="
+                        shadow-drop-300
+                         rounded-xl
+                         border 
+                         border-transparent 
+                         
+                         px-4 py-2 
+                         text-xl
+                         font-medium 
+                         text-gold
+                         hover:bg-blue-200
+                          focus:outline-none 
+                          focus-visible:ring-2 
+                          focus-visible:ring-blue-500 
+                          focus-visible:ring-offset-2"
+                        onClick={closeModal}
+                      >
+                        See more!
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-                <div className="mt-4">
-                  {/* Generate the link from the categoryName */}
-                  <Link
-                    to={`/${categoryName.toLowerCase()}`}
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={closeModal}
-                  >
-                    See more!
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </Tab.Panel>
-        ))}
-      </Tab.Panels>
+              ))}
+            </Tab.Panel>
+          ))}
+        </div>
+      </div>
     </Tab.Group>
   )
 }
@@ -258,7 +333,7 @@ export default function Header() {
   return (
     <nav
       className="
-    neumorphism-drop-shadow
+    shadow-drop-300
     container 
     flex
     border-2
@@ -330,7 +405,7 @@ function Toggle() {
       <span
         aria-hidden="true"
         className={`${enabled ? 'translate-x-10' : 'translate-x-1'}
-        neumorphism-drop-shadow
+        drop-shadow
         pointer-events-none 
         inline-block
         h-[30px] 
@@ -509,6 +584,58 @@ function SVGTitleDialog() {
           />
         </filter>
       </defs>
+    </svg>
+  )
+}
+
+function GradientCircles({ circleSize }) {
+  return (
+    <svg
+      width={circleSize}
+      height={circleSize}
+      viewBox={`0 0 ${circleSize * 2} ${circleSize * 2}`}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{
+        overflow: 'visible',
+      }}
+    >
+      <defs>
+        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="rgba(255, 255, 255, 1)" />
+          <stop offset="100%" stopColor="rgba(239, 239, 239, 1)" />
+        </linearGradient>
+        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="rgba(239, 239, 239, 1)" />
+          <stop offset="100%" stopColor="rgba(255, 255, 255, 1)" />
+        </linearGradient>
+        <radialGradient id="gradient3" cx="0.555" cy="0.555" r="0.3">
+          <stop stopColor="#fb66ff" stopOpacity=".62" />
+          <stop offset=".229" stopColor="#616161" stopOpacity=".75" />
+          <stop offset=".566" stopColor="#b5b5b5" stopOpacity=".385" />
+          <stop offset=".804" stopColor="#eaeaea" stopOpacity=".126" />
+          <stop offset=".92" stopColor="#fff" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle
+        cx={circleSize}
+        cy={circleSize}
+        r={circleSize * 4}
+        opacity=".7"
+        fill="url(#gradient3)"
+      />
+      <circle
+        cx={circleSize}
+        cy={circleSize}
+        r={circleSize}
+        fill="url(#gradient1)"
+      />
+      <circle
+        cx={circleSize}
+        cy={circleSize}
+        r={circleSize - 4}
+        fill="url(#gradient2)"
+      />
     </svg>
   )
 }
