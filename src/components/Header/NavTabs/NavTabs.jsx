@@ -8,24 +8,13 @@ import {
   HTTPS,
   SWAPI_ROOT,
 } from '../../../constants/Resources'
-
-// -Settings
-const MAX_ENTRIES = 7
-
-const SEARCH_ENDPOINT = '/search/value'
-
-const CATEGORIES_SELECTED = [
-  'people',
-  'species',
-  'films',
-  'starships',
-  'planets',
-  'vehicles',
-]
-// local storage key names
-const LOCAL_STORAGE_RECENT_QUESTS = 'recentQuests'
-
-const SEARCH_RESULT_COUNT = 4
+import {
+  MAX_ENTRIES,
+  SEARCH_ENDPOINT,
+  SEARCH_RESULT_COUNT,
+  CATEGORIES_SELECTED,
+  LOCAL_STORAGE_RECENT_QUESTS,
+} from '../../../constants/settings'
 
 function useHandleLocalStorageSearch(inputValue) {
   // storedData represents the data stored in the local storage.
