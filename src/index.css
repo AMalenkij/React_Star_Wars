@@ -70,10 +70,10 @@ SHADOWS
     var(--shadow-light-300) var(--color-light-shadow);
 }
 
-.shadow-drop-500 {
+.shadow-drop-400 {
   box-shadow: 
-  var(--shadow-dark-500) var(--color-dark-shadow),
-  var(--shadow-light-500) var(--color-light-shadow);
+  var(--shadow-dark-400) var(--color-dark-shadow),
+  var(--shadow-light-400) var(--color-light-shadow);
 }
 
 .shadow-border {

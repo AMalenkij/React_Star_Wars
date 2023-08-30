@@ -295,20 +295,21 @@ function Tabs({ closeModal }) {
                   </div>
                   <div className="mt-6 flex">
                     {/* Generate the link from the categoryName */}
-                    <div className="py-4 px-6 rounded-2xl shadow-border mx-auto">
+                    <div className="pb-4 pt-3 px-5 mb-4 rounded-2xl shadow-border mx-auto">
                       <Link
                         to={`/${categoryName.toLowerCase()}`}
                         className="
-                        shadow-drop-300
+                        flex
+                        shadow-drop-400
                          rounded-xl
                          border 
                          border-transparent 
-                         
-                         px-4 py-2 
+                         px-8 py-3
                          text-xl
                          font-medium 
                          text-gold
-                         hover:bg-blue-200
+                         transition: 0.2s ease-in-out
+                         hover:shadow-drop-300
                           focus:outline-none 
                           focus-visible:ring-2 
                           focus-visible:ring-blue-500 
