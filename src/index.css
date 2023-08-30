@@ -10,43 +10,91 @@ VARIABLES
 /* COLORS */
 
 /* Color stiles */
---color-white:        #fff;
---color-black:        #000;
 --color-gold:         rgba(238, 191, 0, 1);
 --color-light-blue:   rgba(241, 245, 249, 1);
 --color-gray:         rgba(54, 54, 54, 0.25);
 --color-gray-dark:    rgba(235, 236, 240, 1);
 
-/* KNOB-colors */
---color-knob-light-blue:rgba(241, 245, 249, 1);
---color-knob-elevation:rgba(220, 223, 237, 1);
-
---color-blue-knob-shadow-iner-drop:rgba(184, 204, 224, 1);
---color-white-knob-shadow-iner-drop:rgba(255, 255, 255, 1);
-
-/* color shadow elevation */
---color-gray-knob-shadow-drop: rgba(201, 217, 232, 1);
---color-white-knob-shadow-drop: rgba(255, 255, 255, 1);
-
 /* Color linear gradient */
 --gradient-color-gold:rgba(255,212,34,0.1);
 --gradient-color-blue:rgba(184,204,224,0.1);
 
-/* Color  shadow inner */
---inner-shadow-black: rgba(54, 54, 54, 0.25);
+/* color shadow */
+--color-dark-shadow: rgba(54, 54, 54, 0.25);
+--color-light-shadow: rgba(255, 255, 255, 1);
+--color-shadow:rgba(201, 217, 232, 1);
 
-/* Color shadow drop */
---inner-shadow-black: rgba(0, 0, 0, 0.25);
+/* bg-color*/
+--color-knob-light-blue:rgba(241, 245, 249, 1);
 
-/* Color shadow drop neumorphism */
---drop-shadow-neumorphism-black: rgba(0, 0, 0, 0.15);
---drop-shadow-neumorphism-white: rgba(255, 255, 255, 0.85);
+--shadow: 0px 4px 4px 0px;
 
-/* Color shadow inner neumorphism */
---inner-shadow-neumorphism-black: rgba(0, 0, 0, 0.12);
---inner-shadow-neumorphism-white: rgba(255, 255, 255, 1);
+--shadow-border-light: -1px -1px 0px;
+--shadow-border-dark: -2px -2px 2px;
+
+--shadow-dark-100: 2.5px 2.5px 5px;
+--shadow-light-100: -2.5px -2.5px 5px;
+
+--shadow-dark-200: 5px 5px 10px;
+--shadow-light-200: -5px -5px 10px;
+
+--shadow-dark-300: 10px 10px 20px;
+--shadow-light-300: -10px -10px 20px;
+
+--shadow-dark-400: 15px 15px 30px;
+--shadow-light-400: -15px -15px 30px;
+
 }
 
+/***************************************************
+SHADOWS
+/***************************************************/
+
+.inner-shadow {
+  box-shadow: inset var(--shadow) var(--color-dark-shadow);
+}
+
+.drop-shadow {
+  box-shadow: var(--shadow) var(--color-dark-shadow);
+}
+
+.shadow-inner-100 {
+  box-shadow: 
+  inset var(--shadow-light-100) var(--color-light-shadow),
+  inset var(--shadow-dark-100)  var(--color-dark-shadow);
+}
+
+.shadow-drop-300 {
+  box-shadow: 
+    var(--shadow-dark-300) var(--color-dark-shadow),
+    var(--shadow-light-300) var(--color-light-shadow);
+}
+
+.shadow-drop-500 {
+  box-shadow: 
+  var(--shadow-dark-500) var(--color-dark-shadow),
+  var(--shadow-light-500) var(--color-light-shadow);
+}
+
+.shadow-border {
+  box-shadow: 
+    inset var(--shadow-border-light) var(--color-light-shadow),
+    inset var(--shadow-border-dark) var(--color-shadow),
+    var(--shadow-border-light) var(--color-light-shadow),
+    var(--shadow-border-dark)  var(--color-shadow);
+}
+
+
+/***************************************************
+BG
+/***************************************************/
+
+.bg-knob-base {
+  background: var(--color-knob-light-blue)
+}
+.bg-header {
+  background: linear-gradient(90deg, var(--gradient-color-blue) 0%, var(--gradient-color-gold) 100%);
+}
 
 
 .active {
@@ -54,62 +102,6 @@ VARIABLES
 }
 .pending {
   background-color: #cccc46;
-}
-
-.bg-knob-base {
-  background: var(--color-knob-light-blue)
-}
-
-.bg-header {
-  background: linear-gradient(90deg, var(--gradient-color-blue) 0%, var(--gradient-color-gold) 100%);
-}
-
-.drop-shadow {
-  box-shadow: 0px 4px 4px 0px var(--inner-shadow-black);
-}
-
-.neumorphism-drop-shadow {
-  box-shadow: 
-    8px 7px 21px var(--drop-shadow-neumorphism-black),
-    -6px -7px 11px var(--drop-shadow-neumorphism-white);
-}
-.neumorphism-inner-shadow {
-  box-shadow: 
-  inset -4px -4px 4px var(--inner-shadow-neumorphism-white),
-  inset 5px 5px 2px  var(--inner-shadow-neumorphism-black);
-}
-/* KNOB-base */
-.neumorphism-knob-shadow-inner-drop {
-  box-shadow: 
-    inset -1px -1px 0px var(--color-white-knob-shadow-iner-drop),
-    inset -2px -2px 2px var(--color-blue-knob-shadow-iner-drop),
-    -1px -1px 0px var(--color-white-knob-shadow-iner-drop),
-    -2px -2px 2px  var(--color-blue-knob-shadow-iner-drop);
-}
-
-.neumorphism-knob-elevation-shadow-drop {
-  box-shadow: 
-  8px 8px 16px var(--color-gray-knob-shadow-drop),
-  -8px -8px 16px  var(--color-white-knob-shadow-drop);
-}
-
-.neumorphism-inner-shadow {
-  box-shadow: 
-  inset -4px -4px 4px var(--inner-shadow-neumorphism-white),
-  inset 5px 5px 2px  var(--inner-shadow-neumorphism-black);
-}
-
-/* .text-iner-shadow {
-  text-shadow: inset 0px 4px 4px 0px var(--inner-shadow-black);
-} */
-
-
-.inner-shadow {
-  box-shadow: inset 0px 4px 4px 0px var(--inner-shadow-black);
-}
-
-.text-golden {
-  color: var(--color-gold);
 }
 
 
