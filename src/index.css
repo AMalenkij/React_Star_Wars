@@ -26,7 +26,7 @@ VARIABLES
 
 /* bg-color*/
 --color-knob-light-blue:rgba(241, 245, 249, 1);
-
+--color-knob-elevation:rgba(241, 245, 249, 1);
 --shadow: 0px 4px 4px 0px;
 
 --shadow-border-light: -1px -1px 0px;
