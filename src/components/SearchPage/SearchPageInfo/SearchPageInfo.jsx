@@ -1,34 +1,31 @@
 import { Link } from 'react-router-dom'
-
-import styles from './SearchPageInfo.module.css'
 import NoPhoto from '../../Сatalog/ShowDataList/img/NoPhoto.svg'
 
-function SearchPageInfo({ attributes: { name, title }, category, url, id }) {
-  let attributTitle = null
-  if (category === 'films') {
-    attributTitle = title
-  } else {
-    attributTitle = name
-  }
+export default function SearchPageInfo({
+  attributes: { name, title },
+  category,
+  url,
+  id,
+}) {
+  const attributTitle = category === 'films' ? title : name
 
   return (
-    <li className={styles.list__item}>
-      <Link to={`/${category}/${id}`}>
-        <img
-          className={styles.person__photo}
-          src={url}
-          alt={name}
-          onError={(e) => {
-            e.target.src = NoPhoto
-          }}
-        />
-        <div className={styles.container__text}>
-          <p className={styles.category__name}>{category}</p>
-          <p className={styles.person__name}>{attributTitle}</p>
-        </div>
-      </Link>
-    </li>
+    <Link
+      to={`/${category}/${id}`}
+      className="flex items-center text-decoration-none cursor-pointer"
+    >
+      <img
+        className="w-16 h-16 object-cover object-top rounded-xl mb-2"
+        src={url}
+        alt={name}
+        onError={(e) => {
+          e.target.src = NoPhoto
+        }}
+      />
+      <div className="ml-2">
+        <p className="text-white text-shadow-blue">{category}</p>
+        <p className="text-white text-shadow-blue">{attributTitle}</p>
+      </div>
+    </Link>
   )
 }
-
-export default SearchPageInfo
