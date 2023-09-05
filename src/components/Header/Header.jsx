@@ -325,8 +325,10 @@ function Tabs({ closeModal }) {
 }
 
 export default function Header() {
+  const [turnOnNav, setTurnOnNav] = useState(true)
+
   return (
-    <nav
+    <header
       className="
     shadow-drop-300
     container 
@@ -340,34 +342,40 @@ export default function Header() {
     "
     >
       <SVGStarWars color={COLOR_GOLD} />
-      <ul className="flex mx-auto gap-6 items-center font-bold">
-        <li>
-          <NavLink
-            to="/"
-            className={({ isActive, isPending }) =>
-              isPending
-                ? 'pending'
-                : isActive
-                ? 'neumorphism-inner-shadow rounded-3xl bg-gray-dark px-8 py-3'
-                : ''
-            }
-            type="button"
-          >
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <Modal />
-        </li>
-        <NavTabs />
-      </ul>
+
+      <nav className="mx-auto">
+        <ul className="flex gap-6 font-bold">
+          {turnOnNav && (
+            <>
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? 'pending'
+                      : isActive
+                      ? 'shadow-inner rounded-3xl bg-gray-dark px-8 py-3'
+                      : ''
+                  }
+                  type="button"
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <Modal />
+              </li>
+            </>
+          )}
+          <NavTabs setTurnOnNav={setTurnOnNav} turnOnNav={turnOnNav} />
+        </ul>
+      </nav>
+
       <div className="ml-auto flex gap-6">
-        {/* <Popover /> */}
         <Favorite />
-        {/* <SVGFavorite /> */}
-        <Toggle />
+        {/* <Toggle /> */}
       </div>
-    </nav>
+    </header>
   )
 }
 
@@ -460,7 +468,7 @@ function SVGArrow() {
         />
       </g>
       <defs>
-      <ShadowFilter />
+        <ShadowFilter />
       </defs>
     </svg>
   )
@@ -538,7 +546,6 @@ function SVGTitleDialog() {
     </svg>
   )
 }
-
 function GradientCircles({ circleSize }) {
   return (
     <svg

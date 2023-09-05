@@ -14,9 +14,12 @@ import {
   SEARCH_RESULT_COUNT,
   CATEGORIES_SELECTED,
   LOCAL_STORAGE_RECENT_QUESTS,
+  COLOR_GOLD,
 } from '../../../constants/settings'
 
-function useHandleLocalStorageSearch(inputValue) {
+import ShadowFilter from '../../../constants/ShadowFilter'
+
+function useHandleLocalStorageSearch(inputValue, setTurnOnNav) {
   // storedData represents the data stored in the local storage.
   // It is initialized using the useState hook's initializer function.
   // Inside the function, we try to retrieve the data from the local storage using the key 'recentQuests'.
@@ -63,6 +66,7 @@ function useHandleLocalStorageSearch(inputValue) {
         input={debouncedValue}
         urls={urls}
         searchResultCount={SEARCH_RESULT_COUNT}
+        setTurnOnNav={setTurnOnNav}
       />
     )
   }
@@ -84,7 +88,8 @@ function useOutsideClick(
   switchOn,
   setSwitchOn,
   hidePartOfSearchMenu,
-  setHidePartOfSearchMenu
+  setHidePartOfSearchMenu,
+  setTurnOnNav
 ) {
   const btnClickRef = useRef(false)
   const btnClick = btnClickRef.current
@@ -102,6 +107,7 @@ function useOutsideClick(
           if (btnClickRef.current && switchOn) {
             setBtnClick(false)
             setSwitchOn(false)
+            setTurnOnNav(true)
             if (inputValue.length > 0) setInputValue('')
             if (!hidePartOfSearchMenu) setHidePartOfSearchMenu(false)
           } else {
@@ -124,12 +130,13 @@ function useOutsideClick(
     setInputValue,
     setSwitchOn,
     switchOn,
+    setTurnOnNav,
   ])
 
   return { btnClick, setBtnClick }
 }
 
-export default function NavTabs() {
+export default function NavTabs({ setTurnOnNav, turnOnNav }) {
   const [inputValue, setInputValue] = useState('')
   const {
     filteredData,
@@ -157,7 +164,9 @@ export default function NavTabs() {
     switchOn,
     setSwitchOn,
     hidePartOfSearchMenu,
-    setHidePartOfSearchMenu
+    setHidePartOfSearchMenu,
+    setTurnOnNav,
+    turnOnNav
   )
   useEffect(() => {
     if (
@@ -190,6 +199,7 @@ export default function NavTabs() {
 
   const handleSwitchToggle = () => {
     setSwitchOn(!switchOn)
+    setTurnOnNav(!turnOnNav)
     setBtnClick(false)
   }
 
@@ -201,6 +211,7 @@ export default function NavTabs() {
         setBtnClick(false)
         // if (!hidePartOfSearchMenu) setHidePartOfSearchMenu(!hidePartOfSearchMenu)
         setInputValue('')
+        setTurnOnNav(true)
       }
     }
 
@@ -209,7 +220,7 @@ export default function NavTabs() {
     return () => {
       document.removeEventListener('keydown', handleEscapeKeyPress)
     }
-  }, [setBtnClick])
+  }, [setBtnClick, setTurnOnNav])
 
   // The `handleKeyDown` function captures the "Enter" key press event, adds the entered value to the stored data,
   // updates the state and local storage, and resets the input field value.
@@ -240,24 +251,49 @@ export default function NavTabs() {
         ) : null}
         <li>
           {switchOn ? (
-            <div ref={htmlElementRef} className="fixed bg-slate-700 p-2x z-10">
-              <SearchInput
-                inputValue={inputValue}
-                setInputValue={setInputValue}
-                handleKeyDown={handleKeyDown}
-                handleClearInput={handleClearInput}
-                inputRef={inputRef}
-                handleSwitchToggle={handleSwitchToggle}
-              />
+            <div
+              ref={htmlElementRef}
+              className="
+            absolute
+            "
+            >
+              <div
+                className="
+            rounded-3xl
+            shadow-inner
+            bg-gray
+            px-4 py-2
+            mb-4
+            "
+              >
+                <SearchInput
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
+                  handleKeyDown={handleKeyDown}
+                  handleClearInput={handleClearInput}
+                  handleSwitchToggle={handleSwitchToggle}
+                />
+              </div>
               {hidePartOfSearchMenu ? (
-                <>
+                <div
+                  className="
+                bg-knob_elevation
+                border-2
+                border-white
+                rounded-3xl
+                shadow-drop-300
+                px-4 py-3
+                "
+                >
                   <ItemFromLocalStorage
                     filteredData={filteredData}
                     deleteItemFromLocalStorage={deleteItemFromLocalStorage}
                     setInputValue={setInputValue}
+                    htmlElementRef={htmlElementRef}
                   />
+
                   {resultsFromApi}
-                </>
+                </div>
               ) : null}
             </div>
           ) : null}
@@ -277,6 +313,7 @@ function ItemFromLocalStorage({
   filteredData,
   deleteItemFromLocalStorage,
   setInputValue,
+  htmlElementRef,
 }) {
   const handleEntryClick = (entry) => {
     setInputValue(entry)
@@ -294,22 +331,38 @@ function ItemFromLocalStorage({
   }
 
   return (
-    <div className="mt-1">
+    <div ref={htmlElementRef} className='mb-2'>
       {filteredData?.map(
         (entry) =>
           entry && (
-            <div key={entry} className="flex justify-between">
-              <div
-                className="py-2 px-3 text-gray-200 cursor-default select-none relative hover:bg-sky-700 flex justify-between"
+            <div key={entry} className="flex justify-between mb-3">
+              <button
+                type="button"
                 onClick={() => handleEntryClick(entry)}
                 onKeyDown={(e) => handleEntryKeyDown(e, entry)}
-                role="button"
                 tabIndex={0}
+                className="
+                h-12 w-12 
+                flex 
+                justify-center 
+                items-center
+                shadow-drop-400
+                rounded-xl
+                hover:shadow-drop-300
+                "
               >
-                <ClockRotateLeftIcon />
-                {entry}
-              </div>
+                <BookmarkIcon />
+              </button>
+              <div className="pt-4 text-lg pr-24">{entry}</div>
               <button
+                className="
+              h-12 w-12 
+              flex 
+              justify-center 
+              items-center
+              shadow-drop-400
+              rounded-xl
+              hover:shadow-drop-300"
                 onClick={(event) => handleButtonClick(event, entry)}
                 type="button"
               >
@@ -326,97 +379,154 @@ function SearchInput({
   setInputValue,
   handleKeyDown,
   handleClearInput,
-  inputRef,
   handleSwitchToggle,
 }) {
   return (
     <div className="flex">
       <button type="button" onClick={(handleClearInput, handleSwitchToggle)}>
-        <CloseIcon />
+        <SearchIcon />
       </button>
       <input
-        ref={inputRef}
         type="text"
-        className="combobox-input w-full border py-2 px-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+        className="
+        bg-gray
+        combobox-input
+        w-full 
+        py-2 px-3 
+        text-gray-900 
+        placeholder-gray-500 
+        focus:outline-none 
+        focus:ring-2 
+        focus:ring-teal-500 
+        focus:border-transparent
+        "
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Search..."
       />
-      {inputValue && (
-        <button type="button" onClick={handleClearInput}>
-          <ClearIcon />
+      {inputValue ? (
+        <button className="ml-2" type="button" onClick={handleClearInput}>
+          <CloseIconX color={COLOR_GOLD} />
+        </button>
+      ) : (
+        <button
+          className="ml-2"
+          type="button"
+          onClick={handleClearInput}
+          disabled
+        >
+          <CloseIconX />
         </button>
       )}
     </div>
   )
 }
 // - SVG
-function CloseIcon() {
+function CloseIconX({ color }) {
   return (
     <svg
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
-      preserveAspectRatio="xMidYMid meet"
-      focusable="false"
-      className="w-14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <g className="style-scope tp-yt-iron-icon">
+      <g filter="url(#shadow)">
+        <rect width="24" height="24" rx="12" fill={color} />
         <path
-          d="M21,11v1H5.64l6.72,6.72l-0.71,0.71L3.72,11.5l7.92-7.92l0.71,0.71L5.64,11H21z"
-          className="style-scope tp-yt-iron-icon"
+          d="M8.5 14.71a.876.876 0 0 0 0 1.242.884.884 0 0 0 1.247 0l2.478-2.467 2.511 2.5a.885.885 0 0 0 1.247 0 .876.876 0 0 0 0-1.242l-2.51-2.5 2.51-2.501a.876.876 0 0 0 0-1.242.885.885 0 0 0-1.247 0L12.225 11 9.747 8.534a.885.885 0 0 0-1.247 0 .876.876 0 0 0 0 1.242l2.478 2.468L8.5 14.71Z"
+          fill="#fff"
         />
       </g>
+      <ShadowFilter />
     </svg>
   )
 }
-function ClearIcon() {
+function SearchIcon() {
   return (
     <svg
-      viewBox="0 0 24 24"
-      preserveAspectRatio="xMidYMid meet"
-      focusable="false"
-      className="w-14"
+      width="28"
+      height="28"
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <g className="style-scope tp-yt-iron-icon">
+      <g filter="url(#filter0_i_32_438)">
         <path
-          d="M12.7,12l6.6,6.6l-0.7,0.7L12,12.7l-6.6,6.6l-0.7-0.7l6.6-6.6L4.6,5.4l0.7-0.7l6.6,6.6l6.6-6.6l0.7,0.7L12.7,12z"
-          className="style-scope tp-yt-iron-icon"
+          d="M19.0607 19.0815L26 26M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+          stroke="#EEBF00"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
+      <defs>
+        <filter
+          id="filter0_i_32_438"
+          x="0.5"
+          y="0.5"
+          width="27"
+          height="31"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy="4" />
+          <feGaussianBlur stdDeviation="2" />
+          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="shape"
+            result="effect1_innerShadow_32_438"
+          />
+        </filter>
+      </defs>
+    </svg>
+  )
+}
+function BookmarkIcon() {
+  return (
+    <svg
+      width="12"
+      height="16"
+      viewBox="0 0 12 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10.18.5c.442 0 .82.17 1.133.508.338.338.507.729.507 1.172V15.5L6 13 .18 15.5V2.18c0-.443.156-.834.468-1.172C.987.669 1.378.5 1.82.5h8.36Z"
+        fill="#EEBF00"
+      />
     </svg>
   )
 }
 function RemoveIcon() {
   return (
     <svg
-      viewBox="0 0 24 24"
-      preserveAspectRatio="xMidYMid meet"
-      focusable="false"
-      className="w-12"
+      width="12"
+      height="2"
+      viewBox="0 0 12 2"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <g className="w-12">
-        <path
-          d="M11,17H9V8h2V17z M15,8h-2v9h2V8z M19,4v1h-1v16H6V5H5V4h4V3h6v1H19z M17,5H7v15h10V5z"
-          className=""
-        />
-      </g>
-    </svg>
-  )
-}
-function ClockRotateLeftIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      preserveAspectRatio="xMidYMid meet"
-      focusable="false"
-      className="w-12"
-    >
-      <g className="style-scope tp-yt-iron-icon">
-        <path
-          d="M14.97,16.95L10,13.87V7h2v5.76l4.03,2.49L14.97,16.95z M22,12c0,5.51-4.49,10-10,10S2,17.51,2,12h1c0,4.96,4.04,9,9,9 s9-4.04,9-9s-4.04-9-9-9C8.81,3,5.92,4.64,4.28,7.38C4.17,7.56,4.06,7.75,3.97,7.94C3.96,7.96,3.95,7.98,3.94,8H8v1H1.96V3h1v4.74 C3,7.65,3.03,7.57,3.07,7.49C3.18,7.27,3.3,7.07,3.42,6.86C5.22,3.86,8.51,2,12,2C17.51,2,22,6.49,22,12z"
-          className="w-12"
-        />
-      </g>
+      <path d="M11.82 1.82H.18V.18h11.64v1.64Z" fill="#EEBF00" />
     </svg>
   )
 }
