@@ -2,6 +2,7 @@ import Favorite from '../../components/Favorites/Favorites'
 import Logo from '../../components/Header/Logo/Logo'
 import PopUpBox from '../../components/Header/PopUpBox/PopUpBox'
 import Library from '../../components/Header/Library/Library'
+import Search from '../../components/Header/Search/Search'
 
 export default function Header() {
   return (
@@ -27,9 +28,11 @@ export default function Header() {
           <li>
             <Library />
           </li>
-          <li>Search</li>
         </ul>
       </nav>
+      <div className="">
+        <Search />
+      </div>
       <div className="md:hidden">
         <PopUpBox />
       </div>

@@ -84,13 +84,10 @@ export default function SearchResultsFromApi({
   }
 
   return (
-    <>
-      <div className="h-0.5 shadow-border bg-knob_base mx-4 my-2"> </div>
-      <ul>
-        {data?.map((dataCategory) => (
-          <SearchResultItem key={dataCategory.id} dataCategory={dataCategory} />
-        ))}
-      </ul>
-    </>
+    <ul>
+      {data?.map((dataCategory) => (
+        <SearchResultItem key={dataCategory.id} dataCategory={dataCategory} />
+      ))}
+    </ul>
   )
 }
