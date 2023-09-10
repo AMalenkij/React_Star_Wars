@@ -2,6 +2,111 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/***************************************************
+VARIABLES
+/***************************************************/
+:root {
+/* COLORS */
+
+/* Color stiles */
+--color-gold:         rgba(238, 191, 0, 1);
+--color-light-blue:   rgba(241, 245, 249, 1);
+--color-gray:         rgba(54, 54, 54, 0.25);
+--color-gray-dark:    rgba(235, 236, 240, 1);
+
+/* Color linear gradient */
+--gradient-color-gold:rgba(255,212,34,0.1);
+--gradient-color-blue:rgba(184,204,224,0.1);
+
+/* color shadow */
+--color-dark-shadow: rgba(54, 54, 54, 0.25);
+--color-light-shadow: rgba(255, 255, 255, 1);
+--color-shadow:rgba(201, 217, 232, 1);
+
+/* bg-color*/
+--color-knob-light-blue:rgba(241, 245, 249, 1);
+--color-knob-elevation:rgba(241, 245, 249, 1);
+--shadow: 0px 4px 4px 0px;
+
+--shadow-border-light: -1px -1px 0px;
+--shadow-border-dark: -2px -2px 2px;
+
+--shadow-dark-100: 2.5px 2.5px 5px;
+--shadow-light-100: -2.5px -2.5px 5px;
+
+--shadow-dark-200: 5px 5px 10px;
+--shadow-light-200: -5px -5px 10px;
+
+--shadow-dark-300: 10px 10px 20px;
+--shadow-light-300: -10px -10px 20px;
+
+--shadow-dark-400: 15px 15px 30px;
+--shadow-light-400: -15px -15px 30px;
+
+}
+
+/***************************************************
+SHADOWS
+/***************************************************/
+
+.inner-shadow {
+  box-shadow: inset var(--shadow) var(--color-dark-shadow);
+}
+
+.drop-shadow {
+  box-shadow: var(--shadow) var(--color-dark-shadow);
+}
+
+.shadow-inner-100 {
+  box-shadow: 
+  inset var(--shadow-light-100) var(--color-light-shadow),
+  inset var(--shadow-dark-100)  var(--color-dark-shadow);
+}
+
+.shadow-drop-300 {
+  box-shadow: 
+    var(--shadow-dark-300) var(--color-dark-shadow),
+    var(--shadow-light-300) var(--color-light-shadow);
+}
+
+.shadow-drop-400 {
+  box-shadow: 
+  var(--shadow-dark-400) var(--color-dark-shadow),
+  var(--shadow-light-400) var(--color-light-shadow);
+}
+
+.shadow-border {
+  box-shadow: 
+    inset var(--shadow-border-light) var(--color-light-shadow),
+    inset var(--shadow-border-dark) var(--color-shadow),
+    var(--shadow-border-light) var(--color-light-shadow),
+    var(--shadow-border-dark)  var(--color-shadow);
+}
+
+
+/***************************************************
+BG
+/***************************************************/
+
+.bg-knob-base {
+  background: var(--color-knob-light-blue)
+}
+.bg-header {
+  background: linear-gradient(90deg, var(--gradient-color-blue) 0%, var(--gradient-color-gold) 100%);
+}
+
+
+.active {
+  background-color: #ae72c2;
+}
+.pending {
+  background-color: #cccc46;
+}
+
+
+
+
 /***************************************************
 VARIABLES
 /***************************************************/
@@ -12,7 +117,7 @@ VARIABLES
     --color-black:       #000;
     --color-yellow:      #ffff00;
     --color-blue-light:  #e1e9eb;
-    --color-dark-gray:   #10100e;
+    /* --color-dark-gray:   #10100e; */
 
     --color-blue:        #6a83fb;
     --color-violet:      #ae72c2;
@@ -63,13 +168,13 @@ VARIABLES
 /* THEMES */
 html[data-theme='dark']{
     --theme-header:#ca6c6f;
-    --theme-bgimage:linear-gradient(to right bottom, #000000, #160b11, #20141e, #281b2e, #2b2440);
+    /* --theme-bgimage:linear-gradient(to right bottom, #000000, #160b11, #20141e, #281b2e, #2b2440); */
     --theme-logo: url(../src/components/Header/img/space-station.svg);
 }
 
 html[data-theme='light']{
     --theme-header:#dfe2df;
-    --theme-bgimage: linear-gradient(to right bottom, #051937, #162454, #312d70, #533389, #7a359f);
+    /* --theme-bgimage: linear-gradient(to right bottom, #051937, #162454, #312d70, #533389, #7a359f); */
     --theme-logo: url(../src/components/Header/img/lightsaber.svg);
 }
 
