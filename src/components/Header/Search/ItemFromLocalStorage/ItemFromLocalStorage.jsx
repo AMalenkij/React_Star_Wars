@@ -1,19 +1,14 @@
+import UiSmallBtnNeumorphism from '../../../UI/UiSmallBtnNeumorphism/UiSmallBtnNeumorphism'
+
 export default function ItemFromLocalStorage({
   filteredData,
   deleteItemFromLocalStorage,
   inputValue,
   setInputValue,
-
   resultsFromApi,
 }) {
   const handleEntryClick = (entry) => {
     setInputValue(entry)
-  }
-
-  const handleEntryKeyDown = (e, entry) => {
-    if (e.key === 'Enter') {
-      setInputValue(entry)
-    }
   }
 
   const handleDeleteFromLocalStorage = (event, entry) => {
@@ -38,40 +33,17 @@ export default function ItemFromLocalStorage({
           (entry) =>
             entry && (
               <div key={entry} className="flex justify-between mb-3">
-                <button
-                  type="button"
+                <UiSmallBtnNeumorphism
+                  svg={<BookmarkIcon />}
                   onClick={() => handleEntryClick(entry)}
-                  onKeyDown={(e) => handleEntryKeyDown(e, entry)}
-                  tabIndex={0}
-                  className="
-                      h-12 w-12 
-                      flex 
-                      justify-center 
-                      items-center
-                      shadow-drop-400
-                      rounded-xl
-                      hover:shadow-drop-300
-                      "
-                >
-                  <BookmarkIcon />
-                </button>
+                />
                 <div className="pt-4 text-lg pr-24">{entry}</div>
-                <button
-                  className="
-                    h-12 w-12 
-                    flex 
-                    justify-center 
-                    items-center
-                    shadow-drop-400
-                    rounded-xl
-                    hover:shadow-drop-300"
+                <UiSmallBtnNeumorphism
+                  svg={<RemoveIcon />}
                   onClick={(event) =>
                     handleDeleteFromLocalStorage(event, entry)
                   }
-                  type="button"
-                >
-                  <RemoveIcon />
-                </button>
+                />
               </div>
             )
         )}
