@@ -7,11 +7,10 @@ import { SWAPI_PARAM_PAGE } from '../../../constants/Resources'
 import { getPeopleId, getImgUrl } from '../../../services/getData'
 import ShowDataList from '../ShowDataList/ShowDataList'
 import Pagination from './Pagination/Pagination'
-import styles from './DefaultLoadPage.module.css'
 import UiLoading from '../../UI/UiLoading/UiLoading'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
-export function DefaultLoadPage({ urls }) {
+export default function DefaultLoadPage({ urls }) {
   const { urlSwapi, pathnameShort } = urls
 
   const query = new URLSearchParams(useLocation().search)
@@ -45,6 +44,7 @@ export function DefaultLoadPage({ urls }) {
 
   return (
     <>
+      <ul className="flex flex-wrap justify-center">{people}</ul>
       <Pagination
         pathname={pathnameShort}
         setPage={setPage}
@@ -52,9 +52,6 @@ export function DefaultLoadPage({ urls }) {
         nextPage={data.next}
         isPrevDt={isPreviousData}
       />
-      <ul className={styles.list__container}>{people}</ul>
     </>
   )
 }
-
-export default DefaultLoadPage
