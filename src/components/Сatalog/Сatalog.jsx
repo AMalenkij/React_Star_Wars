@@ -18,8 +18,8 @@ export default function Catalog({ url }) {
     setTypeNavigation(radioChange)
   }, [radioChange, setTypeNavigation])
 
-  if (pathname === '/api/films')
-    return <LoadMore urls={{ urlSwapi, pathnameShort }} />
+  // if (pathname === '/api/films')
+  //   return <LoadMore urls={{ urlSwapi, pathnameShort }} />
   return (
     <div
       className="

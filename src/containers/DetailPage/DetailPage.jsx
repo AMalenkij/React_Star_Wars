@@ -22,7 +22,6 @@ export default function DetailPage() {
   const { isLoading, error, data } = useQuery([route, id], () =>
     getApi(`${BASE_URL}${route}/${id}/`)
   )
-
   if (isLoading) return <UiLoading />
   if (error) return <ErrorMessage error={error.message} />
 
@@ -47,6 +46,7 @@ export default function DetailPage() {
             detailPhotoUrl={detailPhotoUrl}
             personName={data.name}
             id={id}
+            pathname={route}
           />
           <DetailInfo apiData={{ data, route }} />
           <Suspense fallback={<UiLoading />}>
