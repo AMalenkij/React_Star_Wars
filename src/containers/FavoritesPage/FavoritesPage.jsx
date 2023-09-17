@@ -32,12 +32,20 @@ export default function FavoritesPage() {
       pt-1
     "
     >
-      <div className="shadow-drop-300 bg-knob-base rounded-2xl border-2 border-white">
+      <div
+        className="
+      shadow-drop-300 
+      bg-knob-base 
+      rounded-2xl 
+      border-2 
+      border-white
+      "
+      >
         <h1 className="text-lg text-center pt-6 pb-2">Favorites</h1>
         <div className="px-6 py-2">
           <LinkBack />
         </div>
-        <ul className="flex pb-6">{result}</ul>
+        <ul className="flex flex-wrap pb-6">{result}</ul>
       </div>
     </div>
   )
