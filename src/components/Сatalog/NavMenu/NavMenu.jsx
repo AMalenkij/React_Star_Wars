@@ -17,23 +17,30 @@ export default function NavMenu({
   const description = CATEGORY_DESCRIPTION[capitalizeFirstLetter(pathnameShort)]
 
   return (
-    <nav className="flex justify-between items-center px-16 py-4 pt-8">
-      <LinkBack />
-      {description && <h3>{description[0].title}</h3>}
-      <div className="flex items-center gap-8">
-        <UiRadio
-          name="Infinity scroll"
-          value="infinityScroll"
-          onChange={radioChangeHandler}
-          checked={radioChange}
-        />
-        <UiRadio
-          name="Pagination"
-          value="pagination"
-          onChange={radioChangeHandler}
-          checked={radioChange}
-        />
-      </div>
-    </nav>
+    <>
+      {description && (
+        <h3 className="sm:hidden block px-16 pt-8 ">{description[0].title}</h3>
+      )}
+      <nav className="flex justify-between items-center px-10 sm:px-16 py-4 pt-8">
+        <LinkBack />
+        {description && (
+          <h3 className="sm:block hidden">{description[0].title}</h3>
+        )}
+        <div className="flex items-center gap-8">
+          <UiRadio
+            name="Infinity scroll"
+            value="infinityScroll"
+            onChange={radioChangeHandler}
+            checked={radioChange}
+          />
+          <UiRadio
+            name="Pagination"
+            value="pagination"
+            onChange={radioChangeHandler}
+            checked={radioChange}
+          />
+        </div>
+      </nav>
+    </>
   )
 }
