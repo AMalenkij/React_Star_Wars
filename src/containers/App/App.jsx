@@ -17,6 +17,7 @@ import SearchPage from '../SearchPage/SearchPage'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { FavoriteProvider } from '../../utils/Context'
 import { useTheme } from '../../utils/theme'
+import Footer from '../Footer/Footer'
 
 const queryClient = new QueryClient()
 
@@ -49,6 +50,7 @@ function App() {
             <Route path="/search/:query" element={<SearchPage />} />
             <Route path="/fail" element={<ErrorMessage />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
         <ReactQueryDevtools />
       </FavoriteProvider>
