@@ -26,7 +26,6 @@ const attributesSWApi = {
     { title: 'Title:', property: 'title' },
     { title: 'Data Created:', property: 'data_created' },
     { title: 'Director:', property: 'director' },
-    { title: 'Opening Crawl:', property: 'opening_crawl' },
   ],
   starships: [
     { title: 'Model:', property: 'model' },
