@@ -11,7 +11,7 @@ export default function LinkBack() {
     navigation(-1)
   }
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 z-10 relative">
       <UiSmallBtnNeumorphism onClick={hanleGoBack} svg={<SVGBack />} />
       <span>Go back</span>
     </div>
