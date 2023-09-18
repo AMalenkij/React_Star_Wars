@@ -7,10 +7,7 @@ export default function Footer() {
   return (
     <footer
       className="
-      shadow-drop-300
-      container border-2
-     border-white
-     rounded-3xl
+      container 
      px-8 py-4 mt-6 mb-3
      mx-auto"
     >
@@ -21,7 +18,9 @@ export default function Footer() {
           items-center"
       >
         <div className="flex gap-2 items-center sm:text-lg">
-          <SVGStarWars />
+          <div className="w-24">
+            <SVGStarWars />
+          </div>
           Designed and developed by Anton Malenkyi ©2023
         </div>
         <div className="flex gap-2">
