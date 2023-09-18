@@ -1,14 +1,13 @@
 import ShadowFilter from '../../constants/ShadowFilter'
 import { COLOR_GOLD } from '../../constants/settings'
 
-export default function SVGStarWars({ color = COLOR_GOLD }) {
+export default function SVGStarWars({ color = COLOR_GOLD, className }) {
   return (
     <svg
-      width={108}
-      height={41}
       viewBox="0 0 108 41"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <g filter="url(#shadow)">
         <path
