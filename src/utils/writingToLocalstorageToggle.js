@@ -1,15 +1,12 @@
 import { useLayoutEffect, useState } from 'react'
 
-// rewrite to hook
-// don't repit himself
-
 function getInitialTypeNavigation() {
   let TypeNavigation
 
   if (localStorage.getItem('app-typeNavigation') !== null) {
     TypeNavigation = localStorage.getItem('app-typeNavigation')
   } else {
-    TypeNavigation = 'false'
+    TypeNavigation = 'infinityScroll'
   }
 
   return TypeNavigation

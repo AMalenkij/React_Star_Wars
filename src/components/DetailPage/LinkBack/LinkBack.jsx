@@ -1,10 +1,9 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useNavigate } from 'react-router'
-import iconBack from './img/back.svg'
 
-import styles from './LinkBack.module.css'
+import UiSmallBtnNeumorphism from '../../UI/UiSmallBtnNeumorphism/UiSmallBtnNeumorphism'
+import ShadowFilter from '../../../constants/ShadowFilter'
 
-export function LinkBack() {
+export default function LinkBack() {
   const navigation = useNavigate()
 
   const hanleGoBack = (e) => {
@@ -12,13 +11,30 @@ export function LinkBack() {
     navigation(-1)
   }
   return (
-    <div>
-      <a type="button" onClick={hanleGoBack} className={styles.link} href="#">
-        <img className={styles.link__img} src={iconBack} alt="Go back" />
-        <span>Go back</span>
-      </a>
+    <div className="flex items-center gap-2 z-10 relative">
+      <UiSmallBtnNeumorphism onClick={hanleGoBack} svg={<SVGBack />} />
+      <span>Go back</span>
     </div>
   )
 }
-
-export default LinkBack
+function SVGBack() {
+  return (
+    <svg
+      width="12"
+      height="23"
+      viewBox="0 0 12 23"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g filter="url(#shadow)">
+        <path
+          d="m2.069 11.143 9.68-9.68A.857.857 0 1 0 10.537.251L.251 10.537a.857.857 0 0 0 0 1.212l10.286 10.286a.857.857 0 0 0 1.212-1.212l-9.68-9.68Z"
+          fill="#EEBF00"
+        />
+      </g>
+      <defs>
+        <ShadowFilter />
+      </defs>
+    </svg>
+  )
+}

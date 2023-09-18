@@ -8,6 +8,7 @@ import { getRouteFromUrl } from '../../../services/getData'
 import { CATEGORIES_SELECTED } from '../../../constants/settings'
 import ShadowFilter from '../../../constants/ShadowFilter'
 
+
 export default function Library() {
   const [isOpen, setIsOpen] = useState(false)
 

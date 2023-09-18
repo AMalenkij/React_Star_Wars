@@ -4,7 +4,7 @@ export default function UiBgWithCircles({ circleSettings }) {
       {circleSettings.map((settings) => (
         <div
           key={settings.id}
-          className={`absolute ${settings.position} -z-10`}
+          className={`absolute ${settings.position}`}
           style={{
             left: settings.left,
             right: settings.right,
@@ -15,7 +15,7 @@ export default function UiBgWithCircles({ circleSettings }) {
           <SVGGradientCircles circleSize={settings.circleSize} />
         </div>
       ))}
-      <div className="absolute w-full h-full z-20 bg-header/10" />
+      <div className="absolute w-full h-full z-10 bg-header/10" />
     </div>
   )
 }

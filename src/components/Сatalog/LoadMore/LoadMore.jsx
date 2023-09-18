@@ -6,7 +6,6 @@ import { getApi } from '../../../utils/api'
 import { SWAPI_PARAM_PAGE } from '../../../constants/Resources'
 import { getPeopleId, getImgUrl } from '../../../services/getData'
 import ShowDataList from '../ShowDataList/ShowDataList'
-import styles from './LoadMore.module.css'
 import UiLoading from '../../UI/UiLoading/UiLoading'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
@@ -58,11 +57,9 @@ function LoadMore({ urls }) {
       next={fetchNextPage}
       hasMore={hasNextPage}
       loader={isFetchingNextPage && <UiLoading />}
-      endMessage={
-        <p className={styles.text}>All {pathnameShort} have been loaded</p>
-      }
+      endMessage={<p>All {pathnameShort} have been loaded</p>}
     >
-      <ul className={styles.list__container}>{people}</ul>
+      <ul className="flex flex-wrap justify-center">{people}</ul>
     </InfiniteScrollComponent>
   )
 }

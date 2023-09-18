@@ -1,6 +1,5 @@
 import { useQuery } from 'react-query'
 
-import styles from './DetailInfo.module.css'
 import attributesSWApi from '../../../constants/attributesSWApi'
 import { getApi } from '../../../utils/api'
 import {
@@ -101,16 +100,30 @@ export default function DetailInfo({ apiData }) {
     }
 
     return (
-      <li className={styles.list__item} key={property}>
-        <span className={styles.item__title}>{title}</span>
-        <span>{content}</span>
-      </li>
+      <div key={property} className="flex-col">
+        <p className="text-zinc-500 ">{title} </p>
+        <p className="text-black">{content}</p>
+      </div>
     )
   })
 
   return (
-    <div className={styles.wrapper}>
-      <ul className={styles.list__container}>{results}</ul>
+    <div
+      className="
+  grid 
+  2xl:grid-cols-6
+  xl:grid-cols-5
+  lg:grid-cols-4
+  sm:grid-cols-2
+  2xl:gap-3
+  xl:gap-3
+  lg:gap-2
+  grid-cols-2
+  gap-1
+  mb-6
+  "
+    >
+      {results}
     </div>
   )
 }

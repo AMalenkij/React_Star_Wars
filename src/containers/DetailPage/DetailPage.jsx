@@ -2,7 +2,6 @@ import { useParams } from 'react-router'
 import { useQuery } from 'react-query'
 import React, { Suspense } from 'react'
 
-import styles from './DetailPage.module.css'
 import { BASE_URL } from '../../constants/Resources'
 import { getImgUrl } from '../../services/getData'
 import { getApi } from '../../utils/api'
@@ -14,6 +13,8 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import useRoute from '../../hooks/useRoute'
 import swApiProps from '../../constants/swApiProps'
 import DetailRalated from '../../components/DetailPage/DetailRalated/DetailRalated'
+import UiBgWithCircles from '../../components/UI/UiBgWithCircles/UiBgWithCircles'
+import { CIRCLE_SETTINGS_FOR_DETAIL_PAGE } from '../../constants/settings'
 
 export default function DetailPage() {
   const { id } = useParams()
@@ -22,7 +23,6 @@ export default function DetailPage() {
   const { isLoading, error, data } = useQuery([route, id], () =>
     getApi(`${BASE_URL}${route}/${id}/`)
   )
-
   if (isLoading) return <UiLoading />
   if (error) return <ErrorMessage error={error.message} />
 
@@ -38,22 +38,47 @@ export default function DetailPage() {
       />
     ))
   return (
-    <>
-      <LinkBack />
-      <div className={styles.wrapper}>
-        <span className={styles.person__name}>{data.name}</span>
-        <div className={styles.container}>
+    <div
+      className="
+      shadow-border
+      container 
+      rounded-2xl
+      bg-white
+      mt-6
+      mx-auto
+      p-3
+      pt-1
+      "
+    >
+      <div
+        className=" 
+      shadow-drop-300 
+      bg-knob-base 
+      rounded-2xl 
+      border-2 
+      border-white
+      relative
+      overflow-clip
+      px-16 py-4 pt-8
+      "
+      >
+        <UiBgWithCircles circleSettings={CIRCLE_SETTINGS_FOR_DETAIL_PAGE} />
+        <LinkBack />
+        <div className="z-10 relative sm:flex justify-center gap-6 mt-6 mb-4">
           <DetailPhoto
             detailPhotoUrl={detailPhotoUrl}
-            personName={data.name}
+            detailName={data.name}
             id={id}
+            pathname={route}
           />
-          <DetailInfo apiData={{ data, route }} />
-          <Suspense fallback={<UiLoading />}>
-            {detailRelatedCategories}
-          </Suspense>
+          <div className="sm:w-1/2 mt-6 sm:mt-0 px-12 sm:px-0">
+            <DetailInfo apiData={{ data, route }} />
+            <Suspense fallback={<UiLoading />}>
+              {detailRelatedCategories}
+            </Suspense>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
