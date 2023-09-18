@@ -1,8 +1,10 @@
+import { NavLink } from 'react-router-dom'
+
 import Favorite from '../../components/Favorites/Favorites'
-import Logo from '../../components/Header/Logo/Logo'
 import PopUpBox from '../../components/Header/PopUpBox/PopUpBox'
 import Library from '../../components/Header/Library/Library'
 import Search from '../../components/Header/Search/Search'
+import SVGStarWars from '../../static/SVGIcon/SVGStarWars'
 
 export default function Header() {
   return (
@@ -21,10 +23,14 @@ export default function Header() {
        mx-auto
        "
     >
-      <Logo />
+      <NavLink to="/">
+        <SVGStarWars className="h-12" />
+      </NavLink>
       <nav className="hidden md:block">
         <ul className="flex gap-6 font-bold">
-          <li>Home</li>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
           <li>
             <Library />
           </li>
