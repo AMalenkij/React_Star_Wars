@@ -1,8 +1,4 @@
-import {
-  SWAPI_PEOPLE,
-  GUIDE_IMG_EXTENSION,
-  GUIDE_ROOT_IMG,
-} from '../constants/Resources'
+import { GUIDE_IMG_EXTENSION, GUIDE_ROOT_IMG } from '../constants/Resources'
 
 export const getNumberFromUrl = (url) => {
   const segments = url.split('/')
@@ -16,8 +12,6 @@ export const getRouteFromUrl = (url) => {
   const [, route] = url.split('/')
   return route
 }
-// This must be del
-export const getPeopleId = (url) => getNumberFromUrl(url, SWAPI_PEOPLE)
 
 export const getImgUrl = (id, route) => {
   const imgRoute = route === 'people' ? 'characters' : route

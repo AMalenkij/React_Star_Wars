@@ -4,14 +4,12 @@ import InfiniteScrollComponent from 'react-infinite-scroll-component'
 
 import { getApi } from '../../../utils/api'
 import { SWAPI_PARAM_PAGE } from '../../../constants/Resources'
-import { getPeopleId, getImgUrl } from '../../../services/getData'
+import { getImgUrl, getNumberFromUrl } from '../../../services/getData'
 import ShowDataList from '../ShowDataList/ShowDataList'
 import UiLoading from '../../UI/UiLoading/UiLoading'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
-function LoadMore({ urls }) {
-  const { urlSwapi, pathnameShort } = urls
-
+export default function LoadMore({ urlSwapi, pathnameShort }) {
   const {
     fetchNextPage,
     hasNextPage, // boolean indicating if there are more pages
@@ -31,13 +29,12 @@ function LoadMore({ urls }) {
   if (error) return <ErrorMessage error={error.message} />
   if (status === 'loading') return <UiLoading />
 
-  const people = data?.pages.flatMap((pg, i) => (
+  const dataResultFromAPI = data?.pages.flatMap((pg, i) => (
     <React.Fragment key={i}>
       {pg.results.map(({ url, name, title }) => {
-        const id = getPeopleId(url)
+        const id = getNumberFromUrl(url)
         const img = getImgUrl(id, pathnameShort)
         const swapiName = name || title
-
         return (
           <ShowDataList
             key={id}
@@ -53,14 +50,13 @@ function LoadMore({ urls }) {
   return (
     <InfiniteScrollComponent
       style={{ minHeight: '105vh' }}
-      dataLength={people.length}
+      dataLength={dataResultFromAPI.length}
       next={fetchNextPage}
       hasMore={hasNextPage}
       loader={isFetchingNextPage && <UiLoading />}
       endMessage={<p>All {pathnameShort} have been loaded</p>}
     >
-      <ul className="flex flex-wrap justify-center">{people}</ul>
+      <ul className="flex flex-wrap justify-center">{dataResultFromAPI}</ul>
     </InfiniteScrollComponent>
   )
 }
-export default LoadMore

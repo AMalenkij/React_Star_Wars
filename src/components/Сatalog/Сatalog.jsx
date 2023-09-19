@@ -17,8 +17,23 @@ export default function Catalog({ url }) {
     setTypeNavigation(radioChange)
   }, [radioChange, setTypeNavigation])
 
-  // if (pathname === '/api/films')
-  //   return <LoadMore urls={{ urlSwapi, pathnameShort }} />
+  let componentToRender = null
+
+  if (radioChange === 'pagination') {
+    componentToRender = (
+      <DefaultLoadPage urlSwapi={urlSwapi} pathnameShort={pathnameShort} />
+    )
+  } else if (radioChange === 'infinityScroll') {
+    if (pathname === '/api/films') {
+      componentToRender = (
+        <DefaultLoadPage urlSwapi={urlSwapi} pathnameShort={pathnameShort} />
+      )
+    } else {
+      componentToRender = (
+        <LoadMore urlSwapi={urlSwapi} pathnameShort={pathnameShort} />
+      )
+    }
+  }
   return (
     <div
       className="
@@ -35,12 +50,7 @@ export default function Catalog({ url }) {
         radioChange={radioChange}
         pathnameShort={pathnameShort}
       />
-      {radioChange === 'infinityScroll' && (
-        <LoadMore urls={{ urlSwapi, pathnameShort }} />
-      )}
-      {radioChange === 'pagination' && (
-        <DefaultLoadPage urls={{ urlSwapi, pathnameShort }} />
-      )}
+      {componentToRender}
     </div>
   )
 }
