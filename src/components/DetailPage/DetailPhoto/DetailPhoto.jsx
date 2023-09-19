@@ -36,9 +36,6 @@ export default function DetailPhoto({
   return (
     <div className="h-1/2 flex sm:static justify-center ">
       <div className=" sm:flex ">
-        <h2 className="sm:[writing-mode:sideways-lr] text-2xl xl:text-5xl sm:text-3xl  sm:pb-6  pb-1 text-start ">
-          {detailName}
-        </h2>
         <div className="relative">
           <img
             className="rounded-2xl shadow-card object-cover object-center "
@@ -60,6 +57,9 @@ export default function DetailPhoto({
             )}
           </button>
         </div>
+        <h2 className="sm:[writing-mode:vertical-lr] text-2xl xl:text-5xl sm:text-3xl  sm:pb-6  pb-1 text-start ">
+          {detailName}
+        </h2>
       </div>
     </div>
   )
