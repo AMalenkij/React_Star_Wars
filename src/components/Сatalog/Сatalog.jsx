@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 
 import useTypeNavigation from '../../utils/writingToLocalstorageToggle'
 import { getPathname } from '../../services/getData'
-
 import LoadMore from './LoadMore/LoadMore'
 import DefaultLoadPage from './DefaultLoadPage/DefaultLoadPage'
 import NavMenu from './NavMenu/NavMenu'

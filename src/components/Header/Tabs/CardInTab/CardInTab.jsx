@@ -9,9 +9,9 @@ import SVGPlanets from './img/SVGPlanets'
 import SVGVehicles from './img/SVGVehicles'
 
 const CATEGORY_SVG_COMPONENTS = {
-  Films: SVGFilms,
   People: SVGCharacters,
   Species: SVGSpecies,
+  Films: SVGFilms,
   Starships: SVGStarships,
   Planets: SVGPlanets,
   Vehicles: SVGVehicles,

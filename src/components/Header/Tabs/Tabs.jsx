@@ -15,7 +15,7 @@ export default function Tabs({ closeModal, cardInTab }) {
          rounded-2xl
          shadow-drop-300
          bg-header
-         h-64
+         h-[28vh]
          w-full
          relative
          overflow-hidden
@@ -27,7 +27,7 @@ export default function Tabs({ closeModal, cardInTab }) {
           className="
            shadow-drop-300
            absolute 
-           z-40 
+           z-10
            w-full 
            h-full 
            border-2 
