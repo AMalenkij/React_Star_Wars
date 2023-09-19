@@ -64,7 +64,7 @@ export default function DetailPage() {
       >
         <UiBgWithCircles circleSettings={CIRCLE_SETTINGS_FOR_DETAIL_PAGE} />
         <LinkBack />
-        <div className="z-10 relative sm:flex justify-center gap-6 mt-6 mb-4">
+        <div className="relative sm:flex justify-center gap-6 mt-6 mb-4">
           <DetailPhoto
             detailPhotoUrl={detailPhotoUrl}
             detailName={data.name}

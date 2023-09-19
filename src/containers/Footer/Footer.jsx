@@ -18,10 +18,10 @@ export default function Footer() {
           items-center"
       >
         <div className="flex gap-2 items-center sm:text-lg">
-          <div className="w-24">
-            <SVGStarWars />
-          </div>
-          Designed and developed by Anton Malenkyi ©2023
+          <SVGStarWars className="w-24 hidden sm:block" />
+          <p className="text-sm sm:text-base">
+            Designed and developed by Anton Malenkyi ©2023
+          </p>
         </div>
         <div className="flex gap-2">
           <a
@@ -40,7 +40,7 @@ export default function Footer() {
           </a>
         </div>
       </div>
-      <p className="text-center pt-2">
+      <p className="text-center pt-2 text-sm sm:text-base">
         Star Wars and all associated names and/or images are copyright Lucasfilm
         Ltd. Images were freely collected from Wookiepedia.
       </p>

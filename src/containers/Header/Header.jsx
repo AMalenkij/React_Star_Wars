@@ -10,21 +10,22 @@ export default function Header() {
   return (
     <header
       className="
-       shadow-drop-300
        container 
        flex
-       border-2
-       border-white
-       rounded-3xl
-       bg-header
-       px-8 py-4 mt-6
+       sm:border-2
+       sm:border-white
+       sm:rounded-3xl
+       sm:bg-header
+       sm:px-8 sm:py-4 sm:mt-6
+       sm:shadow-drop-300
+       px-4 py-2 mt-2
        justify-between
        items-center
        mx-auto
        "
     >
       <NavLink to="/">
-        <SVGStarWars className="h-12" />
+        <SVGStarWars className="sm:h-12 h-10" />
       </NavLink>
       <nav className="hidden md:block">
         <ul className="flex gap-6 font-bold">
@@ -43,7 +44,7 @@ export default function Header() {
         <div className="hidden md:block">
           <Search />
         </div>
-        <div className="md:hidden">
+        <div className="md:hidden z-10 relative">
           <PopUpBox />
         </div>
         <div className="hidden md:block">

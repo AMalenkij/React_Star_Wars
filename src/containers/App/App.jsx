@@ -28,6 +28,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/planets" element={<PlanetsPage />} />
             <Route path="/films" element={<FilmsPage />} />

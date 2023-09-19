@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import UIBtnHamburger from '../../UI/UIBtnHamburger/UIBtnHamburger'
-
 import SVGFilms from '../Tabs/CardInTab/img/SVGFilms'
 import SVGCharacters from '../Tabs/CardInTab/img/SVGCharacters'
 import SVGSpecies from '../Tabs/CardInTab/img/SVGSpecies'
@@ -38,7 +37,9 @@ export default function PopUpBox() {
         top-0
         px-8 py-4
         ease-in-out 
-        duration-500 ${isShowing ? 'left-0 bg-knob-base ' : '-left-[100%]'}`}
+        duration-500
+        z-30
+         ${isShowing ? 'left-0 bg-knob-base' : ' -left-[100%]'}`}
       >
         <h3 className="mt-12 mb-4 text-3xl">Menu</h3>
         <nav>

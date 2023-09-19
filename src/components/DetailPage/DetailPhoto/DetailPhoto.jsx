@@ -38,7 +38,7 @@ export default function DetailPhoto({
       <div className=" sm:flex ">
         <div className="relative">
           <img
-            className="rounded-2xl shadow-card object-cover object-center "
+            className="rounded-2xl shadow-card object-cover object-center z-10"
             src={detailPhotoUrl}
             alt={detailName}
             onError={(e) => {
