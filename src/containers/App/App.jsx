@@ -16,15 +16,11 @@ import FavoritesPage from '../FavoritesPage/FavoritesPage'
 import SearchPage from '../SearchPage/SearchPage'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { FavoriteProvider } from '../../utils/Context'
-import { useTheme } from '../../utils/theme'
 import Footer from '../Footer/Footer'
 
 const queryClient = new QueryClient()
 
 function App() {
-  // eslint-disable-next-line no-unused-vars
-  const { theme } = useTheme()
-
   return (
     <QueryClientProvider client={queryClient}>
       <FavoriteProvider>
