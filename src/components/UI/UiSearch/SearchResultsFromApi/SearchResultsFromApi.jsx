@@ -55,7 +55,6 @@ export default function SearchResultsFromApi({
         }
 
         const attributTitle = getCategory === 'films' ? title : name
-
         return (
           <Link
             to={`/${getCategory}/${id}`}
@@ -73,8 +72,10 @@ export default function SearchResultsFromApi({
               }}
             />
             <div className="ml-2">
-              <p className="text-black text-shadow-blue">{getCategory}</p>
-              <p className="text-black text-shadow-blue">{attributTitle}</p>
+              <p className="text-black text-shadow-blue capitalize">
+                {getCategory}:
+              </p>
+              <p className="text-black text-shadow-blue ">{attributTitle}</p>
             </div>
           </Link>
         )

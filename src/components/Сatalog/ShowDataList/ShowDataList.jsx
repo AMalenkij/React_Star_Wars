@@ -17,6 +17,7 @@ export default function ShowDataList({ name, url, id, pathname }) {
           />
         </Link>
       </div>
+      <p className="text-center capitalize">{pathname}:</p>
       <p className="text-center">{name}</p>
     </li>
   )
