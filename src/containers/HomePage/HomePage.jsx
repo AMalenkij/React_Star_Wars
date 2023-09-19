@@ -3,6 +3,7 @@ import SVGStarWars from '../../static/SVGIcon/SVGStarWars'
 import Search from '../../components/Header/Search/Search'
 
 export default function HomePage() {
+  const disableDropdownMenu = false
   return (
     <div className="h-min-screen container mx-auto sm:mt-20 mt-6 mr-14 sm:flex">
       <div>
@@ -20,8 +21,8 @@ export default function HomePage() {
             welcome to the world of Star Wars.
           </p>
         </div>
-        <div className="p-6 ml-2 hidden sm:block">
-          <Search />
+        <div className="pt-3 hidden sm:block">
+          <Search disableDropdownMenu={disableDropdownMenu} />
         </div>
       </div>
       <img
@@ -35,7 +36,7 @@ export default function HomePage() {
         alt="R2D and C-3PO"
       />
       <div className="p-6 ml-2 sm:hidden block">
-        <Search />
+        <Search disableDropdownMenu={disableDropdownMenu} />
       </div>
     </div>
   )

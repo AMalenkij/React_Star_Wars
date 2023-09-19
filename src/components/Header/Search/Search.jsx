@@ -8,7 +8,7 @@ import ItemFromLocalStorage from './ItemFromLocalStorage/ItemFromLocalStorage'
 
 import { SEARCH_ENDPOINT } from '../../../constants/settings'
 
-export default function Search() {
+export default function Search({ classNameInput, disableDropdownMenu = true }) {
   const [inputValue, setInputValue] = useState('')
   const [dropdownVisible, setDropdownVisible] = useState(false)
 
@@ -87,7 +87,7 @@ export default function Search() {
     }
   }
   return (
-    <div ref={htmlElementRef} className="relative w-72 flex justify-center">
+    <div ref={htmlElementRef}>
       <SearchInput
         inputValue={inputValue}
         setInputValue={setInputValue}
@@ -95,8 +95,9 @@ export default function Search() {
         handleClearInput={handleClearInput}
         inputRef={inputRef}
         handleFocus={handleFocus}
+        className={classNameInput}
       />
-      {dropdownVisible ? (
+      {dropdownVisible && disableDropdownMenu ? (
         // pop up panel
         <ItemFromLocalStorage
           filteredData={filteredData}

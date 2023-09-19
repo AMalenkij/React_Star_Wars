@@ -8,53 +8,50 @@ export default function SearchInput({
   handleClearInput,
   inputRef,
   handleFocus,
+  className,
 }) {
   return (
     <div
       className="
-    rounded-2xl
-    shadow-inner
-    bg-gray
-    px-4 py-1
-    "
+        rounded-2xl
+        shadow-inner
+        bg-gray
+        flex 
+        items-center
+        justify-between
+        py-2 px-3 gap-2
+      "
     >
-      <div className="flex">
-        <SearchIcon />
-        <input
-          ref={inputRef}
-          onFocus={handleFocus}
-          type="text"
-          className="
+      <SearchIcon />
+      <input
+        ref={inputRef}
+        onFocus={handleFocus}
+        type="text"
+        className={`
+           flex-1
            bg-gray
-           combobox-input
-           py-2 px-3 
            text-gray-900 
            placeholder-gray-500 
-           focus:outline-none 
-           focus:ring-2 
-           focus:ring-teal-500 
-           focus:border-transparent
-           "
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Search..."
-        />
-        {inputValue ? (
-          <button className="ml-2" type="button" onClick={handleClearInput}>
-            <CloseIconX color={COLOR_GOLD} />
-          </button>
-        ) : (
-          <button
-            className="ml-2"
-            type="button"
-            onClick={handleClearInput}
-            disabled
-          >
-            <CloseIconX />
-          </button>
-        )}
-      </div>
+           focus:outline-none
+           focus:border-b-2
+           focus:border-b-gold
+           focus:-mb-0.5
+           ${className || ''}
+           `}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder="Find your favourite character"
+      />
+      {inputValue ? (
+        <button type="button" onClick={handleClearInput}>
+          <CloseIconX color={COLOR_GOLD} />
+        </button>
+      ) : (
+        <button type="button" onClick={handleClearInput} disabled>
+          <CloseIconX />
+        </button>
+      )}
     </div>
   )
 }

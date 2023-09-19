@@ -23,7 +23,7 @@ export default function ItemFromLocalStorage({
               border-white
               rounded-3xl
               shadow-drop-300
-              px-4 py-3 mt-20
+              px-4 py-3 mt-8
               absolute
               w-80
               "
@@ -65,7 +65,7 @@ export default function ItemFromLocalStorage({
                 border-white
                 rounded-3xl
                 shadow-drop-300
-                px-4 py-3 mt-20
+                px-4 py-3 mt-8
                 absolute
                 w-80
               "

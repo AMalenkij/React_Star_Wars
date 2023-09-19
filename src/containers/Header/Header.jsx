@@ -36,14 +36,19 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-      <div className="">
-        <Search />
+      <div className="block md:hidden">
+        <Search classNameInput="w-24" />
       </div>
-      <div className="md:hidden">
-        <PopUpBox />
-      </div>
-      <div className="hidden md:block">
-        <Favorite />
+      <div className="flex gap-10">
+        <div className="hidden md:block">
+          <Search />
+        </div>
+        <div className="md:hidden">
+          <PopUpBox />
+        </div>
+        <div className="hidden md:block">
+          <Favorite />
+        </div>
       </div>
     </header>
   )
