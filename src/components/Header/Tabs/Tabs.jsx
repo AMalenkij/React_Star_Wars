@@ -11,7 +11,7 @@ export default function Tabs({ closeModal, cardInTab }) {
       {cardInTab}
       <div
         className="
-         mt-4 
+         mt-4
          rounded-2xl
          shadow-drop-300
          bg-header
@@ -41,7 +41,7 @@ export default function Tabs({ closeModal, cardInTab }) {
                   <div>
                     <p>{post.content}</p>
                   </div>
-                  <div className="mt-6 flex">
+                  <div className="mt-2 flex">
                     <UiBtnNeumorphism
                       toLink={`/${categoryName.toLowerCase()}`}
                       onClick={closeModal}
