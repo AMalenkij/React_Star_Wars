@@ -9,9 +9,9 @@ import SVGPlanets from './img/SVGPlanets'
 import SVGVehicles from './img/SVGVehicles'
 
 const CATEGORY_SVG_COMPONENTS = {
-  Films: SVGFilms,
   People: SVGCharacters,
   Species: SVGSpecies,
+  Films: SVGFilms,
   Starships: SVGStarships,
   Planets: SVGPlanets,
   Vehicles: SVGVehicles,
@@ -27,9 +27,8 @@ export default function CardInTab() {
       {Object.keys(CATEGORY_SVG_COMPONENTS).map((category, index) => (
         <Tab key={category} className="w-full">
           {({ selected }) => {
-            const SVGComponent = CATEGORY_SVG_COMPONENTS[category] // Получаем компонент напрямую из объекта
+            const SVGComponent = CATEGORY_SVG_COMPONENTS[category]
             const svgProps = {
-              selected,
               hovered: hoveredStates[index],
               color: selected || hoveredStates[index] ? '#EEBF00' : '#000000',
             }
@@ -50,7 +49,6 @@ export default function CardInTab() {
                   }}
                 >
                   <SVGComponent
-                    selected={svgProps.selected}
                     hovered={svgProps.hovered}
                     color={svgProps.color}
                   />

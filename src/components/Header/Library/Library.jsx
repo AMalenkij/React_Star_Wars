@@ -8,7 +8,6 @@ import { getRouteFromUrl } from '../../../services/getData'
 import { CATEGORIES_SELECTED } from '../../../constants/settings'
 import ShadowFilter from '../../../constants/ShadowFilter'
 
-
 export default function Library() {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -43,11 +42,7 @@ export default function Library() {
           focus-visible:ring-2
           focus-visible:ring-white 
           focus-visible:ring-opacity-75
-          shadow-inner
-          rounded-3xl
-          bg-gray-dark
-          px-8 
-          py-3"
+  "
         >
           Library
           <div className="pt-1">

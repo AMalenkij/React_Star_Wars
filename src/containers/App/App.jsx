@@ -16,15 +16,11 @@ import FavoritesPage from '../FavoritesPage/FavoritesPage'
 import SearchPage from '../SearchPage/SearchPage'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { FavoriteProvider } from '../../utils/Context'
-import { useTheme } from '../../utils/theme'
 import Footer from '../Footer/Footer'
 
 const queryClient = new QueryClient()
 
 function App() {
-  // eslint-disable-next-line no-unused-vars
-  const { theme } = useTheme()
-
   return (
     <QueryClientProvider client={queryClient}>
       <FavoriteProvider>
@@ -32,6 +28,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/planets" element={<PlanetsPage />} />
             <Route path="/films" element={<FilmsPage />} />

@@ -1,10 +1,8 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useMemo } from 'react'
 import { useQuery } from 'react-query'
-import { useLocation, useSearchParams, useNavigate } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
-import SearchPageInfo from '../../components/SearchPage/SearchPageInfo/SearchPageInfo'
-import UiInput from '../../components/UI/UiInput/UiInput'
-import styles from './SearchPage.module.css'
+import LinkBack from '../../components/DetailPage/LinkBack/LinkBack'
 import { getConcurrentApi } from '../../utils/api'
 import { useDebounce } from '../../utils/debounce'
 import {
@@ -20,50 +18,21 @@ import {
 } from '../../services/getData'
 import UiLoading from '../../components/UI/UiLoading/UiLoading'
 import { CATEGORY } from '../../constants/swApiProps'
+import ShowDataList from '../../components/Сatalog/ShowDataList/ShowDataList'
 
-function SearchPage() {
-  const location = useLocation()
-  const [prevPathname, setPrevPathname] = useState(location.pathname)
-  const [searchParams, setSearchParams] = useSearchParams()
-
+export default function SearchPage() {
+  const [searchParams] = useSearchParams()
   const searchQuery = searchParams.get('search') || ''
-  // console.log(searchQuery)
-  const [inputSearchValue, setInputSearchValue] = useState('')
-  const [filteredCategory, setFilteredCategory] = useState([])
-  const [selectAll, setSelectAll] = useState(true)
-  useEffect(() => setInputSearchValue(searchQuery), [searchQuery])
+  const debounceValue = useDebounce(searchQuery, 500)
 
-  const handleSelectAll = () => {
-    if (selectAll) {
-      setFilteredCategory([])
-      setSelectAll(false)
-    } else {
-      setFilteredCategory(CATEGORY)
-      setSelectAll(true)
-    }
-  }
+  const urls = useMemo(() => {
+    if (!debounceValue) return []
 
-  const handleCategoryToggle = (value) => {
-    if (filteredCategory.includes(value)) {
-      setFilteredCategory(filteredCategory.filter((cat) => cat !== value))
-      setSelectAll(false)
-    } else {
-      setFilteredCategory([...filteredCategory, value])
-      if (filteredCategory.length + 1 === CATEGORY.length) {
-        setSelectAll(true)
-      }
-    }
-  }
-
-  const debounceValue = useDebounce(inputSearchValue, 500)
-  const urls = useMemo(
-    () =>
-      filteredCategory.map(
-        (value) =>
-          HTTPS + SWAPI_ROOT + value + SWAPI_PARAM_SEARCH + debounceValue
-      ),
-    [debounceValue, filteredCategory]
-  )
+    return CATEGORY.map(
+      (value) =>
+        `${HTTPS}${SWAPI_ROOT}${value}${SWAPI_PARAM_SEARCH}${debounceValue}`
+    )
+  }, [debounceValue])
 
   const { isLoading, error, data } = useQuery(
     {
@@ -83,79 +52,67 @@ function SearchPage() {
   if (isLoading) return <UiLoading />
   if (error) return `An error has occurred: ${error.message}`
 
-  const handleInputChange = (value) => {
-    setInputSearchValue(value)
-  }
-
   const dataForAllCategory = data?.map((dataCategory) =>
-    dataCategory.results?.map(({ url, name, title }) => {
+    dataCategory.results?.map(({ url, name }) => {
       const id = getNumberFromUrl(url)
       const getCategory = extractCategoryFromUrl(url)
-      let img
-      if (getCategory === 'people') {
-        img = `${GUIDE_ROOT_IMG}characters/${id}${GUIDE_IMG_EXTENSION}`
-      } else {
-        img = `${GUIDE_ROOT_IMG}${getCategory}/${id}${GUIDE_IMG_EXTENSION}`
-      }
+      const img =
+        getCategory === 'people'
+          ? `${GUIDE_ROOT_IMG}characters/${id}${GUIDE_IMG_EXTENSION}`
+          : `${GUIDE_ROOT_IMG}${getCategory}/${id}${GUIDE_IMG_EXTENSION}`
 
       return (
-        <SearchPageInfo
+        <ShowDataList
           key={id}
           category={getCategory}
-          attributes={{ name, title }}
+          name={name}
+          pathname={getCategory}
           url={img}
           id={id}
         />
       )
     })
   )
-  return (
-    <>
-      <h1 className={styles.header__text}>Search</h1>
-      <h2>{isLoading}</h2>
-      <div className={styles.nav__container}>
-        <div className={styles.input__container}>
-          <UiInput
-            value={inputSearchValue}
-            handleInputChange={handleInputChange}
-            placeholder="Input character's name"
-          />
-          <div>Selected categories: {filteredCategory.join(', ')}</div>
-        </div>
-        <nav>
-          <nav>
-            <ul>
-              <li>
-                <label htmlFor="select-all-checkbox">
-                  <input
-                    type="checkbox"
-                    checked={selectAll}
-                    onChange={handleSelectAll}
-                  />
-                  Select All
-                </label>
-              </li>
-              {CATEGORY.map((value) => (
-                <li key={value}>
-                  <label htmlFor={value}>
-                    <input
-                      id={value}
-                      type="checkbox"
-                      checked={filteredCategory.includes(value)}
-                      onClick={() => handleCategoryToggle(value)}
-                    />
-                    {value}
-                  </label>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </nav>
-      </div>
 
-      <ul className={styles.list__container}>{dataForAllCategory}</ul>
-    </>
+  return (
+    <div
+      className="
+      shadow-border
+      container 
+      rounded-2xl
+      bg-white
+      mt-6
+      mx-auto
+      p-3
+      pt-1"
+    >
+      <div
+        className="
+      shadow-drop-300 
+      bg-knob-base 
+      rounded-2xl 
+      border-2 
+      border-white
+      "
+      >
+        <h1 className="text-lg text-center pt-6 pb-2">Search</h1>
+        <div className="px-6 py-2">
+          <LinkBack />
+        </div>
+        {dataForAllCategory.length > 0 ? (
+          <ul
+            className="
+        flex 
+        flex-wrap
+        pb-6
+        "
+          >
+            {dataForAllCategory}
+          </ul>
+        ) : (
+          <p>No results found.</p>
+        )}
+      </div>
+    </div>
   )
 }
-
-export default SearchPage

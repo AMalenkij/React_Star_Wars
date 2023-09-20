@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 
 import useTypeNavigation from '../../utils/writingToLocalstorageToggle'
 import { getPathname } from '../../services/getData'
-
 import LoadMore from './LoadMore/LoadMore'
 import DefaultLoadPage from './DefaultLoadPage/DefaultLoadPage'
 import NavMenu from './NavMenu/NavMenu'
@@ -18,16 +17,31 @@ export default function Catalog({ url }) {
     setTypeNavigation(radioChange)
   }, [radioChange, setTypeNavigation])
 
-  // if (pathname === '/api/films')
-  //   return <LoadMore urls={{ urlSwapi, pathnameShort }} />
+  let componentToRender = null
+
+  if (radioChange === 'pagination') {
+    componentToRender = (
+      <DefaultLoadPage urlSwapi={urlSwapi} pathnameShort={pathnameShort} />
+    )
+  } else if (radioChange === 'infinityScroll') {
+    if (pathname === '/api/films') {
+      componentToRender = (
+        <DefaultLoadPage urlSwapi={urlSwapi} pathnameShort={pathnameShort} />
+      )
+    } else {
+      componentToRender = (
+        <LoadMore urlSwapi={urlSwapi} pathnameShort={pathnameShort} />
+      )
+    }
+  }
   return (
     <div
       className="
-        shadow-border
+        sm:shadow-border
+        sm:rounded-2xl
+      sm:bg-white
+        sm:mt-6
         container 
-        rounded-2xl
-        bg-white
-        mt-6
         mx-auto
       "
     >
@@ -36,12 +50,7 @@ export default function Catalog({ url }) {
         radioChange={radioChange}
         pathnameShort={pathnameShort}
       />
-      {radioChange === 'infinityScroll' && (
-        <LoadMore urls={{ urlSwapi, pathnameShort }} />
-      )}
-      {radioChange === 'pagination' && (
-        <DefaultLoadPage urls={{ urlSwapi, pathnameShort }} />
-      )}
+      {componentToRender}
     </div>
   )
 }

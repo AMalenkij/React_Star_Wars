@@ -15,7 +15,7 @@ export default function UiBgWithCircles({ circleSettings }) {
           <SVGGradientCircles circleSize={settings.circleSize} />
         </div>
       ))}
-      <div className="absolute w-full h-full z-10 bg-header/10" />
+      <div className="absolute w-full h-full bg-header/10" />
     </div>
   )
 }
