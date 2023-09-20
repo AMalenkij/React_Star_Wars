@@ -6,15 +6,15 @@ import NoPhoto from '../../Сatalog/ShowDataList/img/NoPhoto.svg'
 
 export default function DetailPhoto({
   detailPhotoUrl,
-  detailName,
+  name,
+  title,
   id,
   pathname,
 }) {
   const [isFavorite, setIsFavorite] = useState()
-
   const { addToFavorites, delFromFavorites, favorite } =
     useContext(FavoriteContext)
-
+  // console.log(swapiName)
   useEffect(() => {
     if (favorite.some((item) => item.id === id)) {
       setIsFavorite(true)
@@ -25,14 +25,13 @@ export default function DetailPhoto({
 
   const handleFavorites = () => {
     if (!isFavorite) {
-      addToFavorites(id, detailPhotoUrl, detailName, pathname)
+      addToFavorites(id, detailPhotoUrl, name || title, pathname)
       setIsFavorite(true)
     } else {
       delFromFavorites(id)
       setIsFavorite(false)
     }
   }
-
   return (
     <div className="h-1/2 flex sm:static justify-center ">
       <div className=" sm:flex ">
@@ -40,7 +39,7 @@ export default function DetailPhoto({
           <img
             className="rounded-2xl shadow-card object-cover object-center "
             src={detailPhotoUrl}
-            alt={detailName}
+            alt={name || title}
             onError={(e) => {
               e.target.src = NoPhoto
             }}
@@ -58,7 +57,7 @@ export default function DetailPhoto({
           </button>
         </div>
         <h2 className="sm:[writing-mode:vertical-lr] text-2xl xl:text-5xl sm:text-3xl  sm:pb-6  pb-1 text-start ">
-          {detailName}
+          {name || title}
         </h2>
       </div>
     </div>

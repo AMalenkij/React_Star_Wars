@@ -7,11 +7,11 @@ import ShowDataList from '../../components/Сatalog/ShowDataList/ShowDataList'
 export default function FavoritesPage() {
   const { favorite } = useContext(FavoriteContext)
 
-  const result = favorite.map(({ namePeople, imgSrc, id, pathname }) => {
+  const result = favorite.map(({ swapiName, imgSrc, id, pathname }) => {
     return (
       <ShowDataList
         key={id}
-        name={namePeople}
+        name={swapiName}
         url={imgSrc}
         id={id}
         pathname={pathname}

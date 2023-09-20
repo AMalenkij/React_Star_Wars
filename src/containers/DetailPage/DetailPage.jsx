@@ -67,7 +67,8 @@ export default function DetailPage() {
         <div className="relative sm:flex justify-center gap-6 mt-6 mb-4">
           <DetailPhoto
             detailPhotoUrl={detailPhotoUrl}
-            detailName={data.name}
+            name={data.name}
+            title={data.title}
             id={id}
             pathname={route}
           />

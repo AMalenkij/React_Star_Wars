@@ -5,8 +5,8 @@ export const FavoriteContext = createContext()
 export function FavoriteProvider({ children }) {
   const [favorite, setFavorite] = useState([])
 
-  const addToFavorites = useCallback((id, imgSrc, namePeople, pathname) => {
-    setFavorite((prev) => [...prev, { id, imgSrc, namePeople, pathname }])
+  const addToFavorites = useCallback((id, imgSrc, swapiName, pathname) => {
+    setFavorite((prev) => [...prev, { id, imgSrc, swapiName, pathname }])
   }, [])
 
   const delFromFavorites = useCallback((id) => {
