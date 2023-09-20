@@ -44,7 +44,7 @@ export default function Header() {
         <div className="hidden md:block">
           <Search />
         </div>
-        <div className="md:hidden z-10 relative">
+        <div className="md:hidden relative">
           <PopUpBox />
         </div>
         <div className="hidden md:block">

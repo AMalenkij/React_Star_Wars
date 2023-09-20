@@ -27,7 +27,7 @@ export default function ItemFromLocalStorage({
               absolute
               sm:w-80
               w-full
-              z-20
+              z-10
               left-0
               sm:left-auto
               "
@@ -73,7 +73,7 @@ export default function ItemFromLocalStorage({
                 absolute
                 sm:w-80
                 w-full
-                z-20
+                z-10
                 left-0
                 sm:left-auto
               "

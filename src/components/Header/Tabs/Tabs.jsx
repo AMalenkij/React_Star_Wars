@@ -27,7 +27,6 @@ export default function Tabs({ closeModal, cardInTab }) {
           className="
            shadow-drop-300
            absolute 
-           z-10
            w-full 
            h-full 
            border-2 

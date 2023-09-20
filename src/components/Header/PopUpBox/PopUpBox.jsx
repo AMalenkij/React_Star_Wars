@@ -38,7 +38,7 @@ export default function PopUpBox() {
         px-8 py-4
         ease-in-out 
         duration-500
-        z-30
+        z-10
          ${isShowing ? 'left-0 bg-knob-base' : ' -left-[100%]'}`}
       >
         <h3 className="mt-12 mb-4 text-3xl">Menu</h3>
