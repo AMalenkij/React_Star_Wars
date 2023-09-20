@@ -59,7 +59,7 @@ export default function DetailPage() {
       border-white
       relative
       overflow-clip
-      px-16 py-4 pt-8
+      sm:px-16 px-2 py-4 pt-8
       "
       >
         <UiBgWithCircles circleSettings={CIRCLE_SETTINGS_FOR_DETAIL_PAGE} />

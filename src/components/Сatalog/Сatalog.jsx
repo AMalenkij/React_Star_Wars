@@ -37,11 +37,11 @@ export default function Catalog({ url }) {
   return (
     <div
       className="
-        shadow-border
+        sm:shadow-border
+        sm:rounded-2xl
+      sm:bg-white
+        sm:mt-6
         container 
-        rounded-2xl
-        bg-white
-        mt-6
         mx-auto
       "
     >

@@ -8,7 +8,7 @@ export default function Footer() {
     <footer
       className="
       container 
-     px-8 py-4 mt-6 mb-3
+     sm:px-8 px-4 py-4 mt-6 mb-3
      mx-auto"
     >
       <div

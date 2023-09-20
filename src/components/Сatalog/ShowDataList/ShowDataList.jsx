@@ -8,7 +8,7 @@ export default function ShowDataList({ name, url, id, pathname }) {
       <div className="shadow-card rounded-md p-1 mb-2 m-3">
         <Link to={`/${pathname}/${id}`}>
           <img
-            className="w-full h-72 rounded-sm"
+            className="w-full sm:h-72 rounded-sm"
             src={url}
             alt={name}
             onError={(e) => {
