@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
 
 import UiLoading from '../../UI/UiLoading/UiLoading'
 import { getConcurrentApi } from '../../../utils/api'
@@ -12,7 +13,7 @@ export default function DetailRalated({ categoryUrl, urlArray }) {
 
   const idArray = urlArray.map((url) => getNumberFromUrl(url))
   const [categorySWApi] = attributesSWApi[category]
-  const { property, title } = categorySWApi
+  const { property } = categorySWApi
 
   const { isLoading, error, data } = useQuery(category, () =>
     getConcurrentApi(urlArray)
@@ -27,7 +28,7 @@ export default function DetailRalated({ categoryUrl, urlArray }) {
     const id = idArray[counter]
     return (
       <li key={dataFromUrl[property]}>
-        <a href={`/${category}/${id}`}>{dataFromUrl[property]}</a>
+        <Link href={`/${category}/${id}`}>{dataFromUrl[property]}</Link>
       </li>
     )
   })

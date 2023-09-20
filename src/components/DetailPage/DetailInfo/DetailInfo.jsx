@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
 
 import attributesSWApi from '../../../constants/attributesSWApi'
 import { getApi } from '../../../utils/api'
@@ -68,9 +69,9 @@ export default function DetailInfo({ apiData }) {
       } else {
         content = homeworld?.name ? (
           // If the homeworld data is available, generate a link to the homeworld category page
-          <a href={`/${CategoryFromUrlHomeworld}/${idFromUrlHomeworld}`}>
+          <Link href={`/${CategoryFromUrlHomeworld}/${idFromUrlHomeworld}`}>
             {homeworld.name}
-          </a>
+          </Link>
         ) : (
           <span>Unknown</span>
         )
@@ -84,9 +85,9 @@ export default function DetailInfo({ apiData }) {
         content = 'Loading...'
       } else {
         content = species?.name ? (
-          <a href={`/${CategoryFromUrSpecies}/${idFromUrlSpecies}`}>
+          <Link href={`/${CategoryFromUrSpecies}/${idFromUrlSpecies}`}>
             {species.name}
-          </a>
+          </Link>
         ) : (
           <span>Unknown</span>
         )
