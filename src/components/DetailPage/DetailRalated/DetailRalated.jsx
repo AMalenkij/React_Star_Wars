@@ -28,7 +28,7 @@ export default function DetailRalated({ categoryUrl, urlArray }) {
     const id = idArray[counter]
     return (
       <li key={dataFromUrl[property]}>
-        <Link href={`/${category}/${id}`}>{dataFromUrl[property]}</Link>
+        <Link to={`/${category}/${id}`}>{dataFromUrl[property]}</Link>
       </li>
     )
   })

@@ -69,7 +69,7 @@ export default function DetailInfo({ apiData }) {
       } else {
         content = homeworld?.name ? (
           // If the homeworld data is available, generate a link to the homeworld category page
-          <Link href={`/${CategoryFromUrlHomeworld}/${idFromUrlHomeworld}`}>
+          <Link to={`/${CategoryFromUrlHomeworld}/${idFromUrlHomeworld}`}>
             {homeworld.name}
           </Link>
         ) : (
@@ -85,7 +85,7 @@ export default function DetailInfo({ apiData }) {
         content = 'Loading...'
       } else {
         content = species?.name ? (
-          <Link href={`/${CategoryFromUrSpecies}/${idFromUrlSpecies}`}>
+          <Link to={`/${CategoryFromUrSpecies}/${idFromUrlSpecies}`}>
             {species.name}
           </Link>
         ) : (
