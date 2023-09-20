@@ -19,7 +19,7 @@ export default function NavMenu({
   return (
     <>
       {description && (
-        <h3 className="sm:hidden block px-16 sm:pt-8 pt-4 ">
+        <h3 className="sm:hidden block sm:px-16 px-4 sm:pt-8 pt-4 ">
           {description[0].title}
         </h3>
       )}
@@ -28,7 +28,7 @@ export default function NavMenu({
         {description && (
           <h3 className="sm:block hidden">{description[0].title}</h3>
         )}
-        <div className="flex items-center sm:gap-8">
+        <div className="flex items-center sm:gap-8 gap-2">
           <UiRadio
             name="Infinity scroll"
             value="infinityScroll"
