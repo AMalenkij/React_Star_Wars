@@ -18,11 +18,7 @@ export default function SearchResultsFromApi({
   urls,
   input,
   searchResultCount = 20,
-  setTurnOnNav,
 }) {
-  const handleSwitchToggle = () => {
-    setTurnOnNav(false)
-  }
   const { isLoading, error, data } = useQuery(
     {
       queryKey: ['search', input, urls],
@@ -42,12 +38,15 @@ export default function SearchResultsFromApi({
   if (error) return `An error has occurred: ${error.message}`
 
   const SearchResultItem = ({ dataCategory }) => {
+    let remainingCount = searchResultCount
+
     return dataCategory.results?.map(({ url, name, title }) => {
-      if (searchResultCount > 0) {
-        searchResultCount -= 1
+      if (remainingCount > 0) {
+        remainingCount -= 1
         const id = getNumberFromUrl(url)
         const getCategory = extractCategoryFromUrl(url)
         let img
+
         if (getCategory === 'people') {
           img = `${GUIDE_ROOT_IMG}characters/${id}${GUIDE_IMG_EXTENSION}`
         } else {
@@ -55,13 +54,12 @@ export default function SearchResultsFromApi({
         }
 
         const attributTitle = getCategory === 'films' ? title : name
+
         return (
           <Link
             to={`/${getCategory}/${id}`}
             key={id}
             className="flex items-center text-decoration-none cursor-pointer"
-            type="button"
-            onClick={handleSwitchToggle}
           >
             <img
               className="w-16 h-16 object-cover object-top rounded-xl mb-2"
