@@ -15,7 +15,7 @@ export default function Tabs({ closeModal, cardInTab }) {
          rounded-2xl
          shadow-drop-300
          bg-header
-         h-[28vh]
+         
          w-full
          relative
          overflow-hidden
@@ -26,7 +26,7 @@ export default function Tabs({ closeModal, cardInTab }) {
         <div
           className="
            shadow-drop-300
-           absolute 
+           relative 
            w-full 
            h-full 
            border-2 
@@ -35,7 +35,7 @@ export default function Tabs({ closeModal, cardInTab }) {
           {Object.entries(CATEGORY_DESCRIPTION).map(([categoryName, posts]) => (
             <Tab.Panel key={posts[0].id}>
               {posts.map((post) => (
-                <div key={post.id} className="relative pt-10 px-8">
+                <div key={post.id} className="pt-10 px-8">
                   <h3>{post.title}</h3>
                   <div>
                     <p>{post.content}</p>

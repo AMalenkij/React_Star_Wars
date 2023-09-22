@@ -41,7 +41,9 @@ export default function DefaultLoadPage({ urlSwapi, pathnameShort }) {
   })
   return (
     <>
-      <ul className="flex flex-wrap justify-center">{dataResultFromAPI}</ul>
+      <ul className="flex flex-wrap justify-center pb-4">
+        {dataResultFromAPI}
+      </ul>
       {pathnameShort === 'films' ? null : (
         <Pagination
           pathname={pathnameShort}

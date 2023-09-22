@@ -54,7 +54,11 @@ export default function LoadMore({ urlSwapi, pathnameShort }) {
       next={fetchNextPage}
       hasMore={hasNextPage}
       loader={isFetchingNextPage && <UiLoading />}
-      endMessage={<p>All {pathnameShort} have been loaded</p>}
+      endMessage={
+        <p className="text-center trxt-lg py-2">
+          All {pathnameShort} have been loaded
+        </p>
+      }
     >
       <ul className="flex flex-wrap justify-center">{dataResultFromAPI}</ul>
     </InfiniteScrollComponent>
