@@ -17,7 +17,7 @@ export default function DefaultLoadPage({ urlSwapi, pathnameShort }) {
   const [page, setPage] = useState(parseInt(queryPage, 10))
 
   const { isLoading, error, data, isPreviousData } = useQuery({
-    queryKey: [pathnameShort, queryPage, urlSwapi, page],
+    queryKey: [urlSwapi, page],
     queryFn: () => getApi(urlSwapi + SWAPI_PARAM_PAGE + page),
     keepPreviousData: true,
   })

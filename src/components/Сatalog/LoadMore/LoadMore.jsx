@@ -18,7 +18,7 @@ export default function LoadMore({ urlSwapi, pathnameShort }) {
     status,
     error,
   } = useInfiniteQuery(
-    ['pathname'],
+    [urlSwapi],
     ({ pageParam = 1 }) => getApi(urlSwapi + SWAPI_PARAM_PAGE + pageParam),
     {
       getNextPageParam: (lastPage, pages) =>
