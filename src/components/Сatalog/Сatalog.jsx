@@ -43,6 +43,7 @@ export default function Catalog({ url }) {
         sm:mt-6
         container 
         mx-auto
+        min-h-[75vh]
       "
     >
       <NavMenu

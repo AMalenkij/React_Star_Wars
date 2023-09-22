@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div className="h-min-screen container mx-auto sm:mt-20 mt-4 mr-14 sm:flex">
       <div>
-        <SVGStarWars className="sm:p-0 p-2" />
+        <SVGStarWars className="sm:p-0 p-2 max-h-[30vh]" />
         <div className=" mt-3 p-2 text-xl hidden sm:block">
           <p>
             Here, you&apos;ll discover characters, races, films, starships,
