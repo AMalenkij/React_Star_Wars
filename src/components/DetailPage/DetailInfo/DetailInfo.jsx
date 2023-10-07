@@ -59,6 +59,7 @@ export default function DetailInfo({ apiData }) {
       enabled: route === 'people' && !!data,
     }
   )
+
   // Generate a list of attributes and their values based on the data from the API and the fetched homeworld/species data
   const results = attributesSWApi[route].map(({ property, title }) => {
     let content = null
@@ -100,6 +101,9 @@ export default function DetailInfo({ apiData }) {
       content = data?.[property] || 'Unknown'
     }
 
+    if (property === 'opening_crawl' && route === 'films') {
+      return null
+    }
     return (
       <div key={property} className="flex-col">
         <p className="text-zinc-500 ">{title} </p>
@@ -109,22 +113,29 @@ export default function DetailInfo({ apiData }) {
   })
 
   return (
-    <div
-      className="
-  grid 
-  2xl:grid-cols-6
-  xl:grid-cols-5
-  lg:grid-cols-4
-  sm:grid-cols-2
-  2xl:gap-3
-  xl:gap-3
-  lg:gap-2
-  grid-cols-2
-  gap-1
-  mb-6
-  "
-    >
-      {results}
+    <div className="mb-6">
+      {data.opening_crawl && route === 'films' ? (
+        <div className="mb-6">
+          <p className="text-zinc-500 ">Opening Crawl:</p>
+          <p className="text-black">{data.opening_crawl}</p>
+        </div>
+      ) : null}
+      <div
+        className="
+          grid 
+          2xl:grid-cols-6
+          xl:grid-cols-5
+          lg:grid-cols-4
+          sm:grid-cols-2
+          2xl:gap-3
+          xl:gap-3
+          lg:gap-2
+          grid-cols-2
+          gap-1
+        "
+      >
+        {results}
+      </div>
     </div>
   )
 }
