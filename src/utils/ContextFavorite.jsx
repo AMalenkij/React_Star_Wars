@@ -2,7 +2,7 @@ import { useEffect, createContext, useState, useMemo, useCallback } from 'react'
 
 export const FavoriteContext = createContext()
 
-export function FavoriteProvider({ children }) {
+export default function FavoriteProvider({ children }) {
   const [favorite, setFavorite] = useState([])
 
   const addToFavorites = useCallback((id, imgSrc, swapiName, pathname) => {
@@ -34,5 +34,3 @@ export function FavoriteProvider({ children }) {
     </FavoriteContext.Provider>
   )
 }
-
-export default FavoriteProvider
