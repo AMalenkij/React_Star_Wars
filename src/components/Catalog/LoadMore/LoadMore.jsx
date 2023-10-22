@@ -6,10 +6,11 @@ import { getApi } from '../../../utils/api'
 import { SWAPI_PARAM_PAGE } from '../../../constants/Resources'
 import { getImgUrl, getNumberFromUrl } from '../../../services/getData'
 import ShowDataList from '../ShowDataList/ShowDataList'
-import UiLoading from '../../UI/UiLoading/UiLoading'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
+import { LoadingContext } from '../../../utils/ContextLoading'
 
 export default function LoadMore({ urlSwapi, pathnameShort }) {
+  const { loading, handleLoading } = React.useContext(LoadingContext)
   const {
     fetchNextPage,
     hasNextPage, // boolean indicating if there are more pages
@@ -26,8 +27,20 @@ export default function LoadMore({ urlSwapi, pathnameShort }) {
     }
   )
 
-  if (error) return <ErrorMessage error={error.message} />
-  if (status === 'loading') return <UiLoading />
+  React.useEffect(() => {
+    if ((status === 'loading' || isFetchingNextPage) && !loading) {
+      handleLoading()
+    } else if (data && !isFetchingNextPage && loading) {
+      handleLoading()
+    }
+  }, [status, loading, handleLoading, data, isFetchingNextPage])
+
+  if (status === 'loading') {
+    return null
+  }
+  if (error) {
+    return <ErrorMessage error={error.message} />
+  }
 
   const dataResultFromAPI = data?.pages.flatMap((pg, i) => (
     <React.Fragment key={i}>
@@ -53,7 +66,7 @@ export default function LoadMore({ urlSwapi, pathnameShort }) {
       dataLength={dataResultFromAPI.length}
       next={fetchNextPage}
       hasMore={hasNextPage}
-      loader={isFetchingNextPage && <UiLoading />}
+      loader={isFetchingNextPage}
       endMessage={
         <p className="text-center trxt-lg py-2">
           All {pathnameShort} have been loaded
