@@ -18,7 +18,7 @@ import {
 } from '../../services/getData'
 import UiLoading from '../../components/UI/UiLoading/UiLoading'
 import { CATEGORY } from '../../constants/swApiProps'
-import ShowDataList from '../../components/Сatalog/ShowDataList/ShowDataList'
+import ShowDataList from '../../components/Catalog/ShowDataList/ShowDataList'
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams()

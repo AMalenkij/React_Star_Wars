@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { FavoriteContext } from '../../../utils/Context'
+import { FavoriteContext } from '../../../utils/ContextFavorite'
 import ShadowFilter from '../../../constants/ShadowFilter'
-import NoPhoto from '../../Сatalog/ShowDataList/img/NoPhoto.svg'
+import NoPhoto from '../../Catalog/ShowDataList/img/NoPhoto.svg'
 
 export default function DetailPhoto({
   detailPhotoUrl,
@@ -14,7 +14,6 @@ export default function DetailPhoto({
   const [isFavorite, setIsFavorite] = useState()
   const { addToFavorites, delFromFavorites, favorite } =
     useContext(FavoriteContext)
-  // console.log(swapiName)
   useEffect(() => {
     if (favorite.some((item) => item.id === id)) {
       setIsFavorite(true)

@@ -12,7 +12,7 @@ import {
 } from '../../../../constants/Resources'
 
 import UiLoading from '../../UiLoading/UiLoading'
-import NoPhoto from '../../../Сatalog/ShowDataList/img/NoPhoto.svg'
+import NoPhoto from '../../../Catalog/ShowDataList/img/NoPhoto.svg'
 
 export default function SearchResultsFromApi({
   urls,

@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import LinkBack from '../../components/DetailPage/LinkBack/LinkBack'
 
-import { FavoriteContext } from '../../utils/Context'
-import ShowDataList from '../../components/Сatalog/ShowDataList/ShowDataList'
+import { FavoriteContext } from '../../utils/ContextFavorite'
+import ShowDataList from '../../components/Catalog/ShowDataList/ShowDataList'
 
 export default function FavoritesPage() {
   const { favorite } = useContext(FavoriteContext)

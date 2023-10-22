@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-import { FavoriteContext } from '../../utils/Context'
+import { FavoriteContext } from '../../utils/ContextFavorite'
 import ShadowFilter from '../../constants/ShadowFilter'
 import { COLOR_GOLD } from '../../constants/settings'
 

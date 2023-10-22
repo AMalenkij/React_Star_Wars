@@ -1,4 +1,4 @@
-import Catalog from '../../components/Сatalog/Сatalog'
+import Catalog from '../../components/Catalog/Сatalog'
 
 const url = new URL('vehicles', 'https://swapi.dev/api/')
 
