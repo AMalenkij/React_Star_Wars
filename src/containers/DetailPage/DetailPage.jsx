@@ -1,6 +1,6 @@
 import { useParams } from 'react-router'
 import { useQuery } from 'react-query'
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useContext } from 'react'
 
 import { BASE_URL } from '../../constants/Resources'
 import { getImgUrl } from '../../services/getData'
@@ -15,16 +15,31 @@ import swApiProps from '../../constants/swApiProps'
 import DetailRalated from '../../components/DetailPage/DetailRalated/DetailRalated'
 import UiBgWithCircles from '../../components/UI/UiBgWithCircles/UiBgWithCircles'
 import { CIRCLE_SETTINGS_FOR_DETAIL_PAGE } from '../../constants/settings'
+import { LoadingContext } from '../../utils/ContextLoading'
 
 export default function DetailPage() {
+  const { loading, handleLoading } = useContext(LoadingContext)
   const { id } = useParams()
   const route = useRoute()
   const detailPhotoUrl = getImgUrl(id, route)
   const { isLoading, error, data } = useQuery([route, id], () =>
     getApi(`${BASE_URL}${route}/${id}/`)
   )
-  if (isLoading) return <UiLoading />
-  if (error) return <ErrorMessage error={error.message} />
+  useEffect(() => {
+    if (isLoading && !loading) {
+      handleLoading()
+    }
+    if (data && loading) {
+      handleLoading()
+    }
+  }, [isLoading, loading, handleLoading, data])
+
+  if (isLoading) {
+    return null
+  }
+  if (error) {
+    return <ErrorMessage error={error.message} />
+  }
 
   const related = swApiProps[route]
 
