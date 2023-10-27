@@ -34,9 +34,8 @@ export default function DefaultLoadPage({ urlSwapi, pathnameShort }) {
     }
   }, [isLoading, loading, handleLoading, data])
 
-  if (isLoading) {
-    return null
-  }
+  if (isLoading) return null
+
   if (error) {
     return <ErrorMessage error={error.message} />
   }

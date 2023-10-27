@@ -33,24 +33,23 @@ export default function DetailPage() {
     }
   }, [isLoading, loading, handleLoading, data])
 
-  if (isLoading) {
-    return null
-  }
-  if (error) {
-    return <ErrorMessage error={error.message} />
-  }
+  if (error) return <ErrorMessage error={error.message} />
 
   const related = swApiProps[catalog]
+  let detailRelatedCategories = null
 
-  const detailRelatedCategories = related
-    .filter((relatedCategory) => data[relatedCategory]?.length)
-    .map((relatedCategory) => (
-      <DetailRalated
-        key={relatedCategory}
-        categoryUrl={relatedCategory}
-        urlArray={data[relatedCategory]}
-      />
-    ))
+  if (data) {
+    detailRelatedCategories = related
+      .filter((relatedCategory) => data[relatedCategory]?.length)
+      .map((relatedCategory) => (
+        <DetailRalated
+          key={relatedCategory}
+          categoryUrl={relatedCategory}
+          urlArray={data[relatedCategory]}
+        />
+      ))
+  }
+
   return (
     <div
       className="
@@ -78,20 +77,24 @@ export default function DetailPage() {
       >
         <UiBgWithCircles circleSettings={CIRCLE_SETTINGS_FOR_DETAIL_PAGE} />
         <LinkBack />
-        <div className="relative sm:flex justify-center gap-6 mt-6 mb-4">
-          <DetailPhoto
-            detailPhotoUrl={detailPhotoUrl}
-            name={data.name}
-            title={data.title}
-            id={id}
-            pathname={catalog}
-          />
-          <div className="sm:w-1/2 mt-6 sm:mt-0 px-12 sm:px-0">
-            <DetailInfo apiData={{ data, catalog }} />
-            <Suspense fallback={<UiLoading />}>
-              {detailRelatedCategories}
-            </Suspense>
-          </div>
+        <div className="relative sm:flex justify-center gap-6 mt-6 mb-4 min-h-[50vh] h-auto">
+          {data ? (
+            <>
+              <DetailPhoto
+                detailPhotoUrl={detailPhotoUrl}
+                name={data.name}
+                title={data.title}
+                id={id}
+                pathname={catalog}
+              />
+              <div className="sm:w-1/2 mt-6 sm:mt-0 px-12 sm:px-0">
+                <DetailInfo apiData={{ data, catalog }} />
+                <Suspense fallback={<UiLoading />}>
+                  {detailRelatedCategories}
+                </Suspense>
+              </div>
+            </>
+          ) : null}
         </div>
       </div>
     </div>
