@@ -10,7 +10,6 @@ import LinkBack from '../../components/DetailPage/LinkBack/LinkBack'
 import DetailPhoto from '../../components/DetailPage/DetailPhoto/DetailPhoto'
 import UiLoading from '../../components/UI/UiLoading/UiLoading'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
-import useRoute from '../../hooks/useRoute'
 import swApiProps from '../../constants/swApiProps'
 import DetailRalated from '../../components/DetailPage/DetailRalated/DetailRalated'
 import UiBgWithCircles from '../../components/UI/UiBgWithCircles/UiBgWithCircles'
@@ -19,11 +18,11 @@ import { LoadingContext } from '../../utils/ContextLoading'
 
 export default function DetailPage() {
   const { loading, handleLoading } = useContext(LoadingContext)
-  const { id } = useParams()
-  const route = useRoute()
-  const detailPhotoUrl = getImgUrl(id, route)
-  const { isLoading, error, data } = useQuery([route, id], () =>
-    getApi(`${BASE_URL}${route}/${id}/`)
+  const { catalog, id } = useParams()
+  const detailPhotoUrl = getImgUrl(id, catalog)
+
+  const { isLoading, error, data } = useQuery([catalog, id], () =>
+    getApi(`${BASE_URL}${catalog}/${id}/`)
   )
   useEffect(() => {
     if (isLoading && !loading) {
@@ -41,7 +40,7 @@ export default function DetailPage() {
     return <ErrorMessage error={error.message} />
   }
 
-  const related = swApiProps[route]
+  const related = swApiProps[catalog]
 
   const detailRelatedCategories = related
     .filter((relatedCategory) => data[relatedCategory]?.length)
@@ -85,10 +84,10 @@ export default function DetailPage() {
             name={data.name}
             title={data.title}
             id={id}
-            pathname={route}
+            pathname={catalog}
           />
           <div className="sm:w-1/2 mt-6 sm:mt-0 px-12 sm:px-0">
-            <DetailInfo apiData={{ data, route }} />
+            <DetailInfo apiData={{ data, catalog }} />
             <Suspense fallback={<UiLoading />}>
               {detailRelatedCategories}
             </Suspense>

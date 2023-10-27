@@ -15,7 +15,7 @@ export default function DetailInfo({ apiData }) {
   and fetches data for the homeworld and species using the useQuery hook from the react-query library. 
   The component generates a list of attributes for the character using the attributesSWApi object and the character data.
    */
-  const { data, route } = apiData
+  const { data, catalog } = apiData
 
   let homeworldUrl = null
   let speciesUrl = null
@@ -27,7 +27,7 @@ export default function DetailInfo({ apiData }) {
   let CategoryFromUrSpecies = null
 
   // If the route is 'people', extract the homeworld and species data from the API response
-  if (route === 'people') {
+  if (catalog === 'people') {
     if (data?.homeworld) {
       homeworldUrl = data?.homeworld
       idFromUrlHomeworld = getNumberFromUrl(homeworldUrl)
@@ -56,12 +56,12 @@ export default function DetailInfo({ apiData }) {
       return [homeworldData, speciesData]
     },
     {
-      enabled: route === 'people' && !!data,
+      enabled: catalog === 'people' && !!data,
     }
   )
 
   // Generate a list of attributes and their values based on the data from the API and the fetched homeworld/species data
-  const results = attributesSWApi[route].map(({ property, title }) => {
+  const results = attributesSWApi[catalog].map(({ property, title }) => {
     let content = null
 
     if (property === 'homeworld') {
@@ -101,7 +101,7 @@ export default function DetailInfo({ apiData }) {
       content = data?.[property] || 'Unknown'
     }
 
-    if (property === 'opening_crawl' && route === 'films') {
+    if (property === 'opening_crawl' && catalog === 'films') {
       return null
     }
     return (
@@ -114,7 +114,7 @@ export default function DetailInfo({ apiData }) {
 
   return (
     <div className="mb-6">
-      {data.opening_crawl && route === 'films' ? (
+      {data.opening_crawl && catalog === 'films' ? (
         <div className="mb-6">
           <p className="text-zinc-500 ">Opening Crawl:</p>
           <p className="text-black">{data.opening_crawl}</p>
